@@ -1,0 +1,38 @@
+/* Additional precision sizing, mobile mode controls and orientation refinement. */
+.v06-sendhead>button:first-child>svg{width:20px!important;height:20px!important;flex:0 0 20px!important;max-width:20px!important;max-height:20px!important}
+.v06-sendhead>button:first-child>span{flex:1;min-width:0}
+.v06-action-rail{position:absolute;top:46px;left:9px;display:flex;gap:6px;align-items:center;z-index:11;pointer-events:auto}
+.v06-action-rail .v06-tool{height:38px!important;max-width:158px!important;min-width:0!important;display:inline-flex!important;padding:7px 10px!important;white-space:nowrap;box-shadow:0 6px 16px #0009}
+.v06-action-rail .v06-tool svg{width:18px;height:18px;flex:0 0 18px}
+.v06-action-rail .v06-tool-label{display:inline!important;font-size:10px!important}
+.v06-pick-overlay{position:absolute;top:95px;left:12px;z-index:15;pointer-events:none;border:1px solid #dc9af7;border-radius:11px;background:#4a285deb;
+ padding:10px 14px;color:#fbe8ff;font-weight:900;font-size:11px;letter-spacing:.08em;box-shadow:0 8px 30px #0009}
+.v06-pick-overlay[hidden]{display:none!important}
+@media(max-width:650px){
+ .v06-action-rail{top:43px;left:6px;gap:5px}
+ .v06-action-rail .v06-tool{padding:6px 8px!important;height:34px!important;border-radius:9px!important}
+ .v06-action-rail .v06-tool-label{font-size:9px!important}
+ .v06-sendhead>button:first-child>svg{width:18px!important;height:18px!important;flex-basis:18px!important}
+ .v06-pick-overlay{top:88px;left:7px;font-size:10px}
+}
+@media(max-height:600px) and (orientation:landscape) {
+ .v06-action-rail{position:fixed!important;z-index:100;top:8px!important;left:auto!important;right:10px!important;bottom:auto!important}
+ .v06-action-rail .v06-tool{height:34px!important;padding:7px 8px!important;max-width:142px!important}
+ .v06-action-rail .v06-tool-label{font-size:10px!important}
+ .v06-sendbar:not(.v06-collapsed){max-height:55dvh}
+ .v06-pick-overlay{top:44px;left:5px}
+}
+/* Wide phones just above 900px previously fell into a too-wide desktop layout. */
+@media(min-width:901px) and (max-height:600px) and (orientation:landscape){
+ .workspace{min-width:0!important}
+ .panel--left{width:210px!important;flex:0 0 210px!important;min-width:0!important}
+ .panel--right{width:202px!important;flex:0 0 202px!important;min-width:0!important}
+ .stage{min-width:0!important;flex:1 1 auto!important}
+ .stage__controls .legend{display:none!important}
+ .topbar{min-height:92px!important;height:92px!important;align-items:flex-start!important;position:relative!important}
+ .topbar__right{padding-top:33px!important}
+ .v06-action-rail{top:10px!important;right:13px!important}
+ .v06-sendbar .sendbar__row--actions{flex-wrap:nowrap!important;gap:5px!important}
+ .v06-sendbar .sendbar__row--actions button{font-size:10px!important;padding:7px!important}
+ .v06-sendbar .sendbar__row select{min-width:0!important}
+}

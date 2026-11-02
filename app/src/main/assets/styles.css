@@ -1,0 +1,1212 @@
+/* =========================================================
+   TopoLab — stylesheet
+
+   1. Variables      6. Metrics + score ring
+   2. Reset          7. Inspector + tables
+   3. Topbar         8. Log
+   4. Buttons/fields 9. Stage (canvas, banner, legend)
+   5. Panels         10. Compare + responsive
+   ========================================================= */
+
+/* ---------- 1. VARIABLES ---------- */
+:root {
+  --bg:        #0b1020;
+  --bg-2:      #111a2e;
+  --surface:   #16203a;
+  --surface-2: #1d2a47;
+  --border:    #263353;
+  --text:      #e7edf8;
+  --muted:     #93a3c0;
+  --accent:    #6366f1;   /* indigo */
+  --accent-2:  #22d3ee;   /* cyan   */
+
+  --good:      #22c55e;
+  --warn:      #f59e0b;
+  --bad:       #f43f5e;
+
+  --radius: 12px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --topbar-h: 48px;
+  --panel-l: 262px;
+  --panel-r: 306px;
+}
+
+/* ---------- 2. RESET ---------- */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* [hidden] ko hamesha jeetne do.
+   Browser ka apna rule `[hidden] { display: none }` UA stylesheet me hota
+   hai, aur hamari koi bhi class jo `display` set karti hai use hara deti
+   hai (author styles UA se upar hoti hain). `.compare { display: flex }`
+   ne bilkul yahi kiya tha — overlay `hidden` hone ke bawajood poore app
+   ke upar chipka reh gaya aur Close button bekaar ho gaya. */
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+/* Body ek flex COLUMN hai: topbar upar, workspace neeche bachi hui saari
+   jagah me.
+
+   Pehle workspace ki height `calc(100vh - var(--topbar-h))` thi, yani
+   topbar ki height ek FIX number maani gayi thi (48px). Isi wajah se
+   topbar ko wrap hone ki ijazat nahi di ja sakti thi — wrap hote hi wo
+   48px se lamba ho jaata aur neeche ka hisaab bigad jaata.
+
+   Aur bina wrap ke 901px se 1250px ke beech topbar ka saaman (brand +
+   chhe chips + slider + teen buttons + panel toggles) 1209px maangta tha
+   aur poora page dayein se bahar nikal jaata tha — tablet landscape par
+   yahi ho raha tha.
+
+   Flex column me topbar jitna chahe utna lamba ho sakta hai aur workspace
+   apne aap bachi hui jagah le leta hai. Koi calc nahi, koi jaadui number
+   nahi. */
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(1200px 500px at 80% -10%, rgba(99,102,241,0.12), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+ul, ol { list-style: none; }
+button, select, input { font: inherit; color: inherit; }
+table { border-collapse: collapse; width: 100%; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; border-radius: 6px; }
+
+/* ---------- 3. TOPBAR ---------- */
+.topbar {
+  flex: 0 0 auto;
+  min-height: var(--topbar-h);
+  display: flex;
+  flex-wrap: wrap;                /* jagah kam pade to neeche wrap ho, bahar nahi nikle */
+  align-items: center;
+  align-content: center;
+  gap: 10px 18px;
+  padding: 6px 18px;
+  background: linear-gradient(180deg, rgba(29,42,71,0.75), rgba(17,26,46,0.55));
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+.brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.brand__logo { font-size: 26px; filter: drop-shadow(0 0 12px rgba(34,211,238,0.35)); }
+.brand h1 { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+.brand p  { font-size: 10.5px; color: var(--muted); letter-spacing: 0.04em; margin-top: 1px; }
+
+.topo-bar { display: flex; gap: 6px; flex: 1; }
+.topo {
+  display: flex; align-items: center; gap: 7px;
+  padding: 8px 13px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 12.5px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s var(--ease);
+}
+.topo__ico { color: var(--muted); font-size: 13px; transition: color 0.18s; }
+.topo:hover { background: var(--surface-2); border-color: #35477a; transform: translateY(-1px); }
+.topo.is-active {
+  background: linear-gradient(180deg, rgba(99,102,241,0.30), rgba(99,102,241,0.16));
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(99,102,241,0.30), 0 4px 14px rgba(99,102,241,0.20);
+}
+.topo.is-active .topo__ico { color: var(--accent-2); }
+
+.topbar__right { display: flex; align-items: center; gap: 14px; }
+
+/* ---------- 4. BUTTONS + FIELDS ---------- */
+.btn {
+  padding: 9px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 12.5px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s var(--ease);
+  white-space: nowrap;
+}
+.btn:hover { background: var(--surface-2); border-color: #35477a; }
+.btn:active { transform: translateY(1px); }
+.btn--primary {
+  background: linear-gradient(180deg, var(--accent), #4f46e5);
+  border-color: #4f46e5;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.32);
+}
+.btn--primary:hover { background: linear-gradient(180deg, #7c7ff5, var(--accent)); }
+.btn--ghost { background: transparent; }
+.btn--sm { padding: 7px 10px; font-size: 11.5px; }
+.btn--wide { width: 100%; }
+.btn--danger {
+  background: rgba(244,63,94,0.14);
+  border-color: rgba(244,63,94,0.4);
+  color: #fda4af;
+  width: 100%;
+  margin-top: 9px;
+}
+.btn--danger:hover { background: rgba(244,63,94,0.24); border-color: var(--bad); }
+
+.field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0; }
+.field > span { font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+.field select {
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.field select:hover { border-color: #35477a; }
+.field--range { min-width: 132px; flex: 0 0 auto; }
+.field--range > span { text-transform: none; font-size: 11px; }
+
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  height: 4px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--accent);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+input[type=range]::-moz-range-thumb {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--accent);
+}
+
+.rowpair { display: flex; gap: 8px; }
+.rowpair > * { flex: 1; min-width: 0; }
+
+/* ---------- 5. PANELS ---------- */
+.workspace {
+  flex: 1 1 auto;
+  min-height: 0;                  /* warna grid apne content se chhota nahi ho sakta */
+  display: grid;
+  grid-template-columns: var(--panel-l) 1fr var(--panel-r);
+}
+
+/* Panels band karne par unka column 0 ho jaata hai aur canvas poori bachi
+   hui jagah le leta hai. Canvas par laga ResizeObserver khud fire hota hai,
+   isliye diagram apne aap naye size ke hisaab se refit ho jaata hai.
+
+   Ye sirf badi screen ke liye hai. Chhoti screen par layout waise bhi ek
+   hi column me aa jaata hai aur `.stage { order: -1 }` canvas ko sabse
+   upar le jaata hai — tab teen columns force karne se stage pehle (0px
+   wale) column me chala jaata tha aur canvas ki chaudai 0 ho jaati thi. */
+@media (min-width: 901px) {
+  .workspace.is-left-collapsed  { grid-template-columns: 0 1fr var(--panel-r); }
+  .workspace.is-right-collapsed { grid-template-columns: var(--panel-l) 1fr 0; }
+  .workspace.is-left-collapsed.is-right-collapsed { grid-template-columns: 0 1fr 0; }
+  .workspace.is-left-collapsed  .panel--left  { border-right-width: 0; }
+  .workspace.is-right-collapsed .panel--right { border-left-width: 0; }
+}
+.panel {
+  display: flex; flex-direction: column;
+  gap: 2px;
+  min-width: 0;                 /* collapse hone par grid track 0 ho sake */
+  background: rgba(17,26,46,0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.panel--left  { border-right: 1px solid var(--border); }
+.panel--right { border-left: 1px solid var(--border); }
+.panel::-webkit-scrollbar { width: 8px; }
+.panel::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 4px; }
+.panel::-webkit-scrollbar-track { background: transparent; }
+
+.group { padding: 14px 15px; border-bottom: 1px solid rgba(38,51,83,0.6); }
+.panel .group:last-child { border-bottom: none; }
+
+/* Event log ko baaki sab ke baad bachi hui poori jagah milti hai. Repair
+   section stage me chala gaya, to wo space bhi isi ke hisse aata hai.
+
+   min-height jaan-boojh ke chhota hai. Bada rakha to chhoti screen par
+   panel ki kul height se zyada ho jaata hai, panel scroll karne lagta hai
+   aur log ulta CHHOTA dikhta hai — flex ko bharne ke liye jagah hi nahi
+   bachti. Chhota floor rakhne se dono taraf sahi rehta hai: badi screen
+   par log poori khaali jagah le leta hai, chhoti par scroll nahi aata. */
+.group--grow { flex: 1; min-height: 170px; display: flex; flex-direction: column; }
+
+/* ---------- INSPECT KARTE HI INSPECTOR SABSE UPAR ----------
+
+   Device par click karte hi is panel me Inspector pehle number par aa
+   jaata hai. DOM ka kram wahi rehta hai — sirf flex `order` badalta hai,
+   isliye HTML ka matlab (Resilience > Metrics > Inspector) aur screen
+   reader ka kram bhi wahi rehta hai.
+
+   flex 0 0 auto isliye: normally Inspector `group--grow` hai aur bachi
+   hui saari jagah kha jaata hai. Upar aane par wahi grow uske aur
+   Resilience ke beech ek badi khaali jagah chhod deta — isliye inspect
+   ke waqt use bas apni content jitni height milti hai.
+
+   Border wali do line: `.panel .group:last-child` DOM ke hisaab se
+   border hataata hai, aur DOM me aakhri Inspector hi hai. Upar jaate hi
+   uske neeche border chahiye, aur ab jo neeche dikhta hai (Metrics) uska
+   border hatana chahiye. */
+.panel--right.is-inspecting .group--inspector {
+  order: -1;
+  flex: 0 0 auto;
+  border-bottom: 1px solid rgba(38,51,83,0.6);
+}
+.panel--right.is-inspecting .group--metrics { border-bottom: none; }
+.group__title {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 11px;
+}
+
+/* tools */
+/* Chaar tools — 2×2 grid. Pehle teen columns the (paanch tools ke liye),
+   ab Cable Add me mil gaya to 3+1 lopsided lagta. */
+.tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.tool {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 9px 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 10.5px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s var(--ease);
+}
+.tool__ico { font-size: 15px; line-height: 1; }
+.tool:hover { background: var(--surface-2); transform: translateY(-1px); }
+.tool.is-active {
+  background: linear-gradient(180deg, rgba(99,102,241,0.32), rgba(99,102,241,0.15));
+  border-color: var(--accent);
+  color: #fff;
+}
+.tool--danger.is-active {
+  background: linear-gradient(180deg, rgba(244,63,94,0.30), rgba(244,63,94,0.14));
+  border-color: var(--bad);
+}
+
+.subgroup { margin-top: 11px; }
+.subgroup__label { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+.chip {
+  padding: 6px 9px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.chip:hover { background: var(--surface-2); }
+.chip.is-active { background: rgba(34,211,238,0.14); border-color: var(--accent-2); color: #a5f3fc; }
+
+/* Cable device nahi hai, isliye alag dikhta hai */
+.chip--cable { width: 100%; justify-content: center; letter-spacing: 0.03em; }
+.chips + .subgroup__label { display: block; margin-top: 11px; }
+
+/* topbar ke panel show/hide buttons */
+.panel-toggles { display: flex; gap: 4px; }
+.btn--icon { padding: 8px 10px; font-size: 14px; line-height: 1; }
+.btn--icon[aria-pressed="false"] { background: transparent; color: var(--muted); }
+
+/* Undo/Redo — Repair/Reset ke bagal me inline, chhote square buttons.
+   Inhe apni poori line nahi milti; sirf do chhote buttons ke liye ek row
+   khaali karna canvas ki jagah ki barbaadi hai. */
+.btn--sm.btn--icon { padding: 7px 9px; font-size: 13px; min-width: 32px; }
+.btn:disabled { opacity: 0.38; cursor: default; }
+.btn:disabled:hover { background: var(--surface); border-color: var(--border); }
+
+.group .field + .field,
+.group .rowpair + .field,
+.group .field + .btn,
+.group .rowpair + .rowpair { margin-top: 9px; }
+.group .btn--wide { margin-top: 10px; }
+.group .btn--wide + .rowpair { margin-top: 8px; }
+
+.hint {
+  margin-top: 10px;
+  font-size: 11px; line-height: 1.5;
+  color: var(--muted);
+  padding: 9px 10px;
+  background: rgba(99,102,241,0.07);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 7px 7px 0;
+}
+
+/* ---------- 6. METRICS + SCORE RING ---------- */
+.score { display: flex; gap: 14px; align-items: center; }
+.score__ring {
+  --pct: 0;
+  position: relative;
+  width: 76px; height: 76px; flex: 0 0 76px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background:
+    conic-gradient(var(--ring, var(--accent-2)) calc(var(--pct) * 1%), rgba(38,51,83,0.6) 0);
+  transition: --pct 0.4s var(--ease);
+}
+.score__ring::before {
+  content: '';
+  position: absolute; inset: 6px;
+  border-radius: 50%;
+  background: var(--bg-2);
+}
+.score__ring[data-grade=good] { --ring: var(--good); }
+.score__ring[data-grade=mid]  { --ring: var(--warn); }
+.score__ring[data-grade=bad]  { --ring: var(--bad); }
+.score__val { position: relative; font-size: 22px; font-weight: 700; line-height: 1; }
+.score__cap { position: relative; font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+.score__bars { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.bar { display: grid; grid-template-columns: 1fr auto; gap: 2px 6px; align-items: center; }
+.bar > span { font-size: 10px; color: var(--muted); font-weight: 600; }
+.bar > em { font-size: 10.5px; font-style: normal; font-weight: 600; }
+.bar > i {
+  grid-column: 1 / -1;
+  display: block; height: 5px;
+  background: rgba(38,51,83,0.8);
+  border-radius: 3px; overflow: hidden;
+}
+.bar > i > b {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 3px;
+  transition: width 0.45s var(--ease);
+}
+
+.weakest {
+  margin-top: 13px;
+  padding: 11px 12px;
+  background: rgba(244,63,94,0.08);
+  border: 1px solid rgba(244,63,94,0.25);
+  border-radius: 10px;
+}
+.weakest__head { font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #fda4af; }
+.weakest__name { font-size: 13px; margin-top: 4px; }
+.weakest__note { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+.weakest__none { font-size: 11.5px; line-height: 1.5; }
+
+/* Card ke teen roop: weak point mila (default laal), network mazboot
+   (hara), ya network pehle se toota hua (amber). */
+.weakest--safe   { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.22); }
+.weakest--safe   .weakest__none { color: #86efac; }
+.weakest--broken { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.26); }
+.weakest--broken .weakest__none { color: #fde68a; }
+
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.metric {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 9px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+.metric > span { font-size: 9.5px; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; }
+.metric > b { font-size: 15px; font-weight: 700; }
+
+/* ---------- 7. INSPECTOR + TABLES ---------- */
+.inspector { font-size: 12px; }
+.inspector__empty { color: var(--muted); font-size: 11.5px; line-height: 1.55; }
+
+.insp__head { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; margin-bottom: 11px; }
+.insp__head b { font-size: 14px; }
+.insp__type {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+  padding: 3px 6px; border-radius: 5px;
+  background: var(--surface-2); color: var(--muted);
+}
+.insp__type--switch { background: rgba(99,102,241,0.2); color: #c7d2fe; }
+.insp__type--router { background: rgba(167,139,250,0.2); color: #ddd6fe; }
+.insp__type--server { background: rgba(34,211,238,0.16); color: #a5f3fc; }
+
+.pill { font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 20px; letter-spacing: 0.05em; }
+.pill--good { background: rgba(34,197,94,0.16); color: #86efac; }
+.pill--bad  { background: rgba(244,63,94,0.16); color: #fda4af; }
+
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 5px 12px; font-size: 11px; }
+.kv dt { color: var(--muted); font-weight: 600; }
+.kv dd { text-align: right; word-break: break-all; }
+
+.insp__sub {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+  margin: 15px 0 7px;
+}
+
+.tbl { font-size: 10.5px; }
+.tbl th {
+  text-align: left; font-weight: 600; color: var(--muted);
+  font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 5px 6px; border-bottom: 1px solid var(--border);
+}
+.tbl td { padding: 5px 6px; border-bottom: 1px solid rgba(38,51,83,0.4); }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr.is-bad td { color: #fda4af; }
+
+/* ---------- PORTS ---------- */
+.portbar {
+  display: inline-block; vertical-align: middle;
+  width: 54px; height: 5px; margin-left: 7px;
+  background: var(--surface-2); border-radius: 3px; overflow: hidden;
+}
+.portbar b { display: block; height: 100%; background: var(--accent-2); border-radius: 3px; }
+.portbar--full b { background: var(--bad); }
+
+.btn--wide { width: 100%; margin-top: 10px; justify-content: center; }
+
+/* ---------- RECENT PACKETS ----------
+   <details> isliye — band haalat me ek line ki summary, khola to poora
+   frame. Aath entries me se har ek ko khula rakhte to panel bhar jaata. */
+.pkt {
+  border: 1px solid var(--border); border-radius: 8px;
+  background: rgba(11,16,32,0.5);
+  margin-bottom: 6px; overflow: hidden;
+}
+.pkt > summary {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 9px; cursor: pointer;
+  font-size: 10.5px; list-style: none;
+}
+.pkt > summary::-webkit-details-marker { display: none; }
+.pkt > summary::before {
+  content: '▸'; color: var(--muted); font-size: 9px; transition: transform 0.15s var(--ease);
+}
+.pkt[open] > summary::before { transform: rotate(90deg); }
+.pkt__dir { font-weight: 700; }
+.pkt__proto {
+  padding: 1px 6px; border-radius: 999px;
+  background: var(--surface-2); color: var(--muted);
+  font-size: 9px; font-weight: 700; letter-spacing: 0.04em;
+}
+.pkt__time { margin-left: auto; color: var(--muted); font-size: 9.5px; }
+.pkt .kv { padding: 2px 9px 9px; }
+.kv--tight { gap: 3px 10px; font-size: 10px; }
+
+.pkt--data  .pkt__proto { background: rgba(34,211,238,0.16); color: #a5f3fc; }
+.pkt--arp   .pkt__proto { background: rgba(245,158,11,0.16); color: #fde68a; }
+.pkt--reply .pkt__proto { background: rgba(34,197,94,0.16);  color: #bbf7d0; }
+
+.warnbox {
+  margin-top: 11px;
+  padding: 9px 10px;
+  background: rgba(244,63,94,0.09);
+  border: 1px solid rgba(244,63,94,0.24);
+  border-radius: 8px;
+  font-size: 11px; line-height: 1.5;
+}
+
+/* ---------- 8. LOG ---------- */
+.log { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; font-size: 10.5px; }
+.log::-webkit-scrollbar { width: 6px; }
+.log::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+.log__item {
+  padding: 6px 8px;
+  background: rgba(22,32,58,0.65);
+  border-left: 2px solid var(--border);
+  border-radius: 0 6px 6px 0;
+  line-height: 1.45;
+  animation: slideIn 0.22s var(--ease);
+  word-break: break-word;
+}
+.log__time { color: #5c6b8a; margin-right: 5px; }
+.log__item--good { border-left-color: var(--good); }
+.log__item--warn { border-left-color: var(--warn); }
+.log__item--bad  { border-left-color: var(--bad); background: rgba(244,63,94,0.08); }
+
+@keyframes slideIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 9. STAGE ---------- */
+/* Stage ek flex column hai: banner, canvas, legend — teeno apni jagah
+   lete hain. Pehle banner aur legend canvas ke UPAR absolute the, aur
+   neeche/upar ke devices unke peeche chhup jaate the. Flow me rakhne se
+   canvas ko bachi hui jagah milti hai, overlap ho hi nahi sakta. */
+.stage { position: relative; overflow: hidden; display: flex; flex-direction: column; }
+/* Browser ko canvas par apne touch gestures nahi karne dena.
+   Bina iske ungli rakhte hi wo page scroll/zoom shuru kar deta hai aur
+   hamare pointer events aate hi nahi — yani phone par canvas bekaar.
+   Page ab bhi scroll hota hai, bas canvas ke bahar se. */
+#canvas {
+  touch-action: none; flex: 1; min-height: 0; width: 100%; display: block; }
+
+/* Stage ka apna action bar — topbar ke theek neeche, right panel se pehle.
+   Ye bhi flow me hai (absolute nahi), isliye canvas ke upar kabhi nahi
+   chadhega — wahi galti pehle legend ke saath ho chuki hai.
+
+   Ek hi row me: banner (baayein), legend, zoom controls, phir
+   Repair/Reset/Undo/Redo (dayein). Jagah kam pade to controls apne aap
+   agli line me wrap ho jaate hain. */
+/* Sab kuch EK row me (nowrap) — isi se wo khaali patti nahi banti jo
+   wrap hone par bachti thi. align-items: flex-end se legend/zoom/Repair
+   hamesha banner ke bottom ke barabar rehte hain.
+
+   Yahan do cheezein zaroori hain, warna ye tootta hai:
+   1. banner ko min-width chahiye. Bina uske tang window me saara dabaav
+      usi par aata tha aur wo 50px chauda, 500px lamba ho jaata tha.
+   2. legend shrink hone layak honi chahiye (0 1 auto), taaki jagah kam
+      padne par pehle wo dabe, banner nahi. Aur agar phir bhi na aaye to
+      JS use chhupa deta hai — nowrap hone ki wajah se uski jagah banner
+      le leta hai, koi khaali patti nahi bachti. */
+.stage__bar {
+  flex: 0 0 auto;
+  /* stretch — banner aur controls column dono ek hi height ke rehte hain,
+     isliye Repair kabhi banner ke bottom edge se neeche nahi jaata. */
+  display: flex; align-items: stretch;
+  gap: 10px; flex-wrap: nowrap;
+  padding: 10px 14px 0;
+}
+
+/* Controls ka column. gap 8px se zyada kuch nahi — na space-between, na
+   stretch. Wahi do cheezein pehle legend aur zoom-row ke beech khaali
+   patti (wo red wala gap) bana rahi thi. */
+.stage__controls {
+  flex: 0 0 auto; margin-left: auto;
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 8px;
+}
+.stage__controls-row { display: flex; align-items: center; gap: 8px; }
+
+.zoom { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
+.zoom__btn { min-width: 30px; text-align: center; font-size: 14px; line-height: 1; padding: 7px 6px; }
+.zoom__level {
+  min-width: 44px; text-align: center;
+  font-size: 11px; font-weight: 600; color: var(--muted);
+  user-select: none;
+}
+.stage__actions { display: flex; gap: 8px; flex: 0 0 auto; }
+
+/* ---------- SEND BAR (canvas ke neeche) ----------
+   Ye section pehle left panel me khada tha. Yahan poori chaudai milti hai,
+   isliye sab kuch ek hi line me aa jaata hai aur left panel me event log
+   ke liye jagah khali ho jaati hai. */
+/* Do rows: upar action buttons (Send packet beech me, ARP baayein,
+   Collision dayein), neeche From/To/Routing. Dono rows center me hain,
+   isliye side panels khulne-band hone par buttons apni jagah nahi
+   badalte — wo hilna user ko sabse zyada khatakta hai. */
+.sendbar {
+  flex: 0 0 auto;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(17,26,46,0.55);
+}
+.sendbar__row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; flex-wrap: wrap;
+}
+/* Send packet ko theek beech me rakhne ke liye grid — flex ke center se
+   wo beech me nahi aata, kyunki ARP aur Collision ki chaudai alag hai. */
+.sendbar__row--actions {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 10px;
+}
+.sendbar__row--actions > :first-child { justify-self: end; }
+.sendbar__row--actions > :last-child  { justify-self: start; }
+.sendbar__arrow { color: var(--muted); font-size: 13px; }
+
+/* .field normally column me hota hai; bar me label aur select saath me */
+.field--inline {
+  flex: 0 0 auto;
+  flex-direction: row; align-items: center; gap: 7px;
+}
+.field--inline > span { text-transform: uppercase; }
+.field--inline select { min-width: 112px; }
+
+/* From/To ki chaudai FIX hai, content se nahi banti.
+
+   Kyun: device mare to uske option ka text "PC-1" se "PC-1 (down)" ho
+   jaata hai. Auto-width select turant chauda ho jaata tha, poori send
+   row do line me wrap ho jaati thi, aur canvas ki height ghat jaati thi
+   — matlab ek device kill karne se poora diagram chhota ho jaata tha.
+   Fix width se text badle to bhi layout nahi hilta.
+
+   124px kyun: "SRV-1 (down)" ki natural chaudai 122px naapi hai, to
+   itne me sabse lamba naam bhi poora dikhta hai. Purani min-width 112
+   thi, matlab row sirf 12px chaudi hui — jo tang layout me bhi surakshit
+   hai. Isse zyada rakhne par row hamesha wrap hone lagti thi. */
+#srcSelect, #dstSelect { width: 124px; min-width: 124px; }
+
+/* Bar ka lachila hissa: jitni chaudai bache le leta hai. Lambi line
+   apne aap agli line me chali jaati hai aur box ki HEIGHT badhti hai —
+   box khisakta nahi, kyunki ye flex row ka pehla item hai. 260px basis
+   se neeche jaane par ye poori row le leta hai aur baaki controls
+   neeche wrap ho jaate hain. */
+.banner {
+  /* grow 1 — banner bayein taraf ki saari jagah leta hai; controls column
+     apni content-width par fix hai, isliye banner use kabhi nahi dabata. */
+  flex: 1 1 auto;
+  min-width: 220px;
+  margin: 0;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: 12px; font-weight: 500; line-height: 1.45;
+  animation: dropIn 0.3s var(--ease);
+  text-align: left;
+  /* stretch hone par box lamba ho jaata hai — text beech me rahe.
+     Andar hamesha theek EK child (.banner__text) hota hai, warna har
+     text-node apna alag flex item ban kar row me lag jaata hai. */
+  display: flex; align-items: center;
+}
+.banner__text { min-width: 0; }
+.banner__text b { font-weight: 800; white-space: nowrap; }
+.banner--bad  { background: rgba(244,63,94,0.16); border: 1px solid rgba(244,63,94,0.4); color: #fecdd3; }
+.banner--warn { background: rgba(245,158,11,0.14); border: 1px solid rgba(245,158,11,0.36); color: #fde68a; }
+.banner--good { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #bbf7d0; }
+
+/* Sirf fade — koi transform nahi.
+   Pehle ye translateY(-12px) se shuru hota tha. Agar animation chal hi na
+   paaye (reduced-motion, chhupi hui tab, paused compositing), to banner
+   usi -12px par atak jaata tha aur topbar ke upar chadh jaata tha.
+   Opacity se aisa koi khatra nahi — jagah kabhi galat nahi hoti. */
+@keyframes dropIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Legend ab stage bar me hai (pehle canvas ke neeche thi). Ek hi line me
+   rehni chahiye — isliye naam chhote kar diye aur wrap band hai — warna
+   ye row banner se lambi ho jaati aur Repair neeche khisak jaata. */
+.legend {
+  /* Compact rakhi hai taaki har width par banner ke saath fit ho jaaye —
+     tabhi chhupane/JS ki zarurat hi nahi padti. */
+  flex: 0 0 auto;
+  display: flex; gap: 12px; align-items: center;
+  padding: 8px 12px;
+  background: rgba(11,16,32,0.6);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 10.5px; color: var(--muted);
+  white-space: nowrap;
+}
+.legend__item { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.dot { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+.dot--ok     { background: var(--surface-2); border: 1px solid #3a4a76; }
+.dot--spof   { background: rgba(244,63,94,0.35); border: 1px solid var(--bad); border-radius: 50%; }
+.dot--dead   { background: #2a1522; border: 1px solid var(--bad); }
+.dot--path   { background: var(--accent-2); box-shadow: 0 0 7px var(--accent-2); border-radius: 50%; }
+.dot--bridge { background: transparent; border-top: 2px dashed var(--warn); height: 0; width: 14px; border-radius: 0; }
+
+/* ---------- 10. COMPARE ---------- */
+.compare {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; flex-direction: column;
+  background: rgba(11,16,32,0.97);
+  backdrop-filter: blur(14px);
+  animation: fade 0.22s var(--ease);
+  /* chhoti screen par diagrams ko dabaane ke bajaye overlay scroll ho */
+  overflow-y: auto;
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+.compare__head {
+  display: flex; align-items: center; gap: 18px;
+  padding: 15px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.compare__head h2 { font-size: 16px; font-weight: 800; }
+.compare__picks { display: flex; align-items: center; gap: 11px; flex: 1; }
+.compare__picks select {
+  padding: 8px 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+.vs { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: 0.1em; }
+
+/* min-height se topology drawings ko hamesha asli jagah milti hai —
+   warna table aur verdict inhe patli patti bana dete the */
+.compare__body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  flex: 1 0 auto; min-height: 340px;
+  background: var(--border);
+}
+.compare__side { position: relative; background: var(--bg); min-height: 0; }
+.compare__side canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.compare__label {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  font-size: 11px; color: var(--muted);
+  background: rgba(11,16,32,0.8);
+  padding: 6px 12px; border-radius: 8px;
+  border: 1px solid var(--border);
+  white-space: nowrap; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis;
+}
+
+.compare__table { padding: 0 22px; flex: 0 0 auto; }
+.cmp { font-size: 12px; }
+.cmp thead th { padding: 10px 8px; font-size: 13px; font-weight: 700; border-bottom: 1px solid var(--border); }
+.cmp thead th:first-child { text-align: right; color: var(--accent-2); }
+.cmp thead th:last-child  { text-align: left;  color: #c4b5fd; }
+.cmp tbody th {
+  font-size: 10.5px; font-weight: 600; color: var(--muted);
+  text-align: center; padding: 7px 14px; white-space: nowrap;
+}
+.cmp tbody td { padding: 7px 8px; font-size: 12.5px; font-weight: 600; width: 34%; }
+.cmp tbody td:first-child { text-align: right; }
+.cmp tbody tr { border-bottom: 1px solid rgba(38,51,83,0.4); }
+.cmp .is-win  { color: #86efac; }
+.cmp .is-lose { color: var(--muted); }
+
+.cmp__err {
+  padding: 14px 16px;
+  background: rgba(244,63,94,0.09);
+  border: 1px solid rgba(244,63,94,0.28);
+  border-radius: 10px;
+  font-size: 12.5px; line-height: 1.6; color: #fecdd3;
+}
+
+.verdict {
+  margin: 14px 22px 20px;
+  padding: 13px 16px;
+  background: rgba(99,102,241,0.09);
+  border: 1px solid rgba(99,102,241,0.26);
+  border-radius: 10px;
+  font-size: 12.5px; line-height: 1.6;
+}
+
+/* ---------- 11. RIGHT-CLICK MENU ---------- */
+.ctx {
+  position: fixed; z-index: 60;
+  min-width: 200px;
+  padding: 5px;
+  background: rgba(22,32,58,0.97);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  animation: ctxIn 0.12s var(--ease);
+}
+@keyframes ctxIn {
+  from { opacity: 0; transform: scale(0.97) translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+.ctx__head {
+  padding: 6px 9px 7px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--muted);
+  border-bottom: 1px solid rgba(38,51,83,0.7);
+  margin-bottom: 4px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ctx__item {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%;
+  padding: 7px 9px;
+  background: none; border: 0; border-radius: 7px;
+  font-size: 12.5px; text-align: left;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.ctx__item:hover { background: var(--surface-2); }
+.ctx__item--danger { color: #fda4af; }
+.ctx__item--danger:hover { background: rgba(244,63,94,0.16); }
+.ctx__ico { width: 15px; text-align: center; font-size: 11.5px; opacity: 0.95; flex: 0 0 auto; }
+.ctx__sep { height: 1px; background: rgba(38,51,83,0.7); margin: 4px 3px; }
+
+
+
+
+/* ---------- 12. EDIT DEVICE DIALOG ----------
+   Poore parde par ek halka blur, beech me card. [hidden] reset upar
+   !important ke saath hai, isliye khulna-band hona pakka kaam karta hai. */
+.modal {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  background: rgba(4,7,18,0.72);
+  backdrop-filter: blur(3px);
+  animation: dropIn 0.16s var(--ease);
+}
+.modal__card {
+  width: min(400px, 100%);
+  max-height: calc(100vh - 40px); overflow-y: auto;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+}
+.modal__head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+}
+.modal__head h2 { font-size: 14px; font-weight: 700; flex: 1; }
+.modal__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+
+.fld { display: grid; grid-template-columns: 116px 1fr; align-items: center; gap: 10px; }
+.fld > span { font-size: 11px; color: var(--muted); font-weight: 600; }
+.fld input, .fld select {
+  width: 100%; padding: 8px 10px;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px;
+  font: inherit; font-size: 12px;
+}
+.fld input:focus, .fld select:focus { outline: none; border-color: var(--accent-2); }
+.fld input:disabled { opacity: 0.5; cursor: not-allowed; }
+.fld__note { font-size: 10.5px; color: var(--muted); line-height: 1.45; }
+
+.modal__err {
+  padding: 8px 10px; border-radius: 8px;
+  background: rgba(244,63,94,0.12); border: 1px solid rgba(244,63,94,0.32);
+  color: #fecdd3; font-size: 11px; line-height: 1.45;
+}
+.modal__foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+
+
+/* ---------- 13. FIREWALL RULES ---------- */
+.modal__card--wide { width: min(520px, 100%); }
+
+.fwlist { display: flex; flex-direction: column; gap: 6px; }
+.fwrule {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 9px; border-radius: 8px;
+  border: 1px solid var(--border); background: rgba(11,16,32,0.5);
+  font-size: 11px;
+}
+.fwrule__n { color: var(--muted); font-size: 10px; min-width: 12px; }
+.fwrule__txt { flex: 1; }
+.fwrule--block { border-left: 3px solid var(--bad); }
+.fwrule--allow { border-left: 3px solid var(--good, #22c55e); }
+
+/* Add-rule row: wrap hone deta hai, kyunki chaar select ek line me
+   sirf chaudi screen par hi aate hain. */
+.fwadd {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
+  padding: 10px; margin-top: 4px;
+  border: 1px dashed var(--border); border-radius: 9px;
+}
+.fwadd select {
+  padding: 6px 8px; font: inherit; font-size: 11px;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 7px;
+}
+.fwadd__lbl { font-size: 10.5px; color: var(--muted); }
+
+/* inspector wali chhoti list */
+.fwmini { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.fwmini__item {
+  padding: 6px 8px; border-radius: 7px; font-size: 10.5px; line-height: 1.4;
+  background: rgba(11,16,32,0.5); border-left: 3px solid var(--border);
+}
+.fwmini__item--block { border-left-color: var(--bad); }
+.fwmini__item--allow { border-left-color: #22c55e; }
+
+/* hub / access point ka samjhaava */
+.notebox {
+  margin-top: 11px; padding: 9px 10px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 8px;
+  font-size: 11px; line-height: 1.5;
+}
+
+.pkt--block .pkt__proto { background: rgba(244,63,94,0.18); color: #fecdd3; }
+.pkt--block { border-color: rgba(244,63,94,0.35); }
+
+/* firewall ki sides — dialog ke upar */
+.zonegrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 4px; }
+.zone {
+  padding: 8px 10px; border-radius: 9px;
+  background: rgba(11,16,32,0.55); border: 1px solid var(--border);
+}
+.zone__name { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.zone__devs { font-size: 10px; color: var(--muted); line-height: 1.5; word-break: break-word; }
+#fwQuick { margin: 2px 0 6px; }
+
+/* Nayi rule ek pal ke liye chamakti hai, taaki "add hua ya nahi" ka
+   sawaal hi na uthe. */
+@keyframes ruleIn {
+  from { background: rgba(99,102,241,0.35); transform: translateX(-4px); }
+  to   { background: rgba(11,16,32,0.5);    transform: none; }
+}
+.fwrule.is-new { animation: ruleIn 0.7s var(--ease); }
+
+
+/* ---------- 14. TOPOLOGY PICKER (phone) ----------
+   Desktop par chips hi rehte hain, isliye ye button wahan chhupa hai.
+   Mobile media query ise flex kar deti hai. */
+.topo-pick { display: none; align-items: center; gap: 8px; font-weight: 700; }
+.topo-pick__ico { font-size: 15px; color: var(--accent-2); }
+.topo-pick__caret { color: var(--muted); font-size: 10px; }
+
+.topolist { display: flex; flex-direction: column; gap: 8px; }
+.topocard {
+  display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start;
+  width: 100%; text-align: left;
+  padding: 11px 12px; border-radius: 11px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  color: var(--text); font: inherit; cursor: pointer;
+}
+.topocard:hover { border-color: var(--accent); }
+.topocard.is-active { border-color: var(--accent); background: rgba(99,102,241,0.14); }
+.topocard__ico {
+  font-size: 19px; line-height: 34px; text-align: center;
+  color: var(--accent-2); background: rgba(11,16,32,0.55);
+  border-radius: 9px; height: 34px;
+}
+.topocard__name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.topocard__blurb { font-size: 11px; color: var(--muted); line-height: 1.45; }
+.topocard__tag {
+  display: inline-block; margin-top: 6px;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em;
+  padding: 2px 7px; border-radius: 999px;
+  background: rgba(34,197,94,0.14); color: #bbf7d0;
+}
+
+
+/* ---------- 15. ADVISOR ----------
+   Bayein taraf sawaal, dayein taraf jawab. Jawab har badlaav par turant
+   dobara nikalta hai, isliye slider ghumate hi ranking hilti dikhti hai. */
+.modal__card--xwide { width: min(880px, 100%); }
+
+.adv { display: grid; grid-template-columns: 250px 1fr; gap: 18px; }
+.adv__form { display: flex; flex-direction: column; gap: 12px; }
+.adv__prefs { display: flex; flex-direction: column; gap: 9px; }
+
+.advpref { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
+.advpref__name { font-size: 11.5px; font-weight: 600; }
+.advpref__hint { font-size: 10px; color: var(--muted); line-height: 1.4; }
+.advpref select {
+  padding: 6px 8px; font: inherit; font-size: 11px;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 7px;
+}
+
+.adv__out { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+.adv__winner {
+  padding: 13px 14px; border-radius: 12px;
+  background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.32);
+}
+.advwin__head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 3px; }
+.advwin__ico { font-size: 19px; color: var(--accent-2); }
+.advwin__name { font-size: 17px; font-weight: 800; }
+.advwin__score { margin-left: auto; font-size: 12px; color: var(--muted); }
+.advwin__score b { font-size: 17px; color: var(--text); }
+.advwin__blurb { font-size: 11.5px; color: var(--muted); margin-bottom: 9px; }
+.advwin__why { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.advwin__why li {
+  font-size: 11px; line-height: 1.5; padding-left: 15px; position: relative;
+}
+.advwin__why li::before { content: '›'; position: absolute; left: 3px; color: var(--accent-2); }
+.advwin__build { margin-top: 11px; width: 100%; justify-content: center; }
+
+.advtable { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+.advtable th {
+  text-align: right; font-weight: 600; color: var(--muted);
+  font-size: 9px; letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 5px 6px; border-bottom: 1px solid var(--border);
+}
+.advtable th:first-child, .advtable td:first-child { text-align: left; }
+.advtable td { padding: 6px; text-align: right; border-bottom: 1px solid rgba(38,51,83,0.4); }
+.advtable tr:last-child td { border-bottom: none; }
+.advtable tr.is-win td { background: rgba(99,102,241,0.1); font-weight: 700; }
+.advtable__bar {
+  display: inline-block; width: 42px; height: 5px; border-radius: 3px;
+  background: var(--surface-2); overflow: hidden; vertical-align: middle; margin-right: 6px;
+}
+.advtable__bar b { display: block; height: 100%; background: var(--accent-2); }
+
+.advtable__note {
+  font-size: 8.5px; color: var(--warn); font-weight: 600;
+  padding: 1px 5px; border-radius: 999px;
+  background: rgba(245,158,11,0.14); white-space: nowrap;
+}
+
+.tbl tr.is-primary td { color: var(--text); font-weight: 600; }
+
+/* ---------- 16. ANALYSIS (max-flow / min-cut / MST) ---------- */
+.analysis { margin-top: 11px; font-size: 11px; line-height: 1.5; }
+.analysis .kv { margin-top: 8px; }
+
+.anly__head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+.anly__big { font-size: 21px; font-weight: 800; line-height: 1; }
+.anly__unit { font-size: 10.5px; color: var(--muted); }
+
+.anly__note {
+  margin-top: 9px; padding: 8px 10px; border-radius: 8px;
+  background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.22);
+  font-size: 10.5px; line-height: 1.5;
+}
+.anly__note--warn { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.26); }
+.anly__note--good { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.24); }
+
+/* min-cut ke cable — canvas wale gulaabi se milta hua */
+.anly__cut { color: #f9a8d4; font-weight: 600; }
+.anly__mst { color: #6ee7b7; font-weight: 600; }
+
+.anly__paths { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-top: 7px; }
+.anly__paths li {
+  font-size: 10px; padding: 5px 7px; border-radius: 6px;
+  background: rgba(11,16,32,0.5); border-left: 2px solid var(--accent-2);
+}
+
+/* ---------- UNDO / REDO ----------
+   stage__bar se bahar, uske theek neeche, dayein kinare par — yani
+   Reset ke seedha neeche. Bar ke andar nahi rakha kyunki wahan wo
+   legend/zoom wale column ka hissa ban jaate aur uski height badha dete.
+
+   `height: 0` hi is poore hisse ki jaan hai.
+
+   Pehle ye ek normal row thi, to do chhote buttons ke liye poori ek line
+   ghir jaati thi — buttons ke bayein taraf ki saari chaudai khaali padi
+   rehti thi aur canvas utna hi chhota ho jaata tha.
+
+   Ab dabba layout me 0 height ka hai: uske neeche canvas turant shuru ho
+   jaata hai aur wahi jagah diagram ko mil jaati hai. Buttons dabbe se
+   BAHAR nikal kar canvas ke upar taerte hain — `position: relative` +
+   `z-index` isliye ki canvas DOM me baad me aata hai aur warna unhe dhak
+   deta.
+
+   `align-items: flex-start` zaroori hai: 0 height wale flex container me
+   default `stretch` bachchon ko bhi 0 height ka bana deta. */
+.stage__history {
+  flex: 0 0 auto;
+  height: 0;
+  position: relative; z-index: 2;
+  display: flex; align-items: flex-start; justify-content: flex-end;
+  gap: 6px;
+  padding: 0 14px;
+}
+.stage__history .btn { margin-top: 6px; }
+
+/* ---------- RESPONSIVE ----------
+
+   Ye hissa file ke SABSE AAKHIR me hai, jaan-boojh ke.
+
+   CSS me barabar specificity wale do rules me BAAD wala jeetta hai —
+   media query hone se koi extra taakat nahi milti. Pehle ye block beech
+   me tha, aur uske neeche naye component ke styles likhe gaye. Nateeja:
+   media query ke andar likhe overrides chupchaap har jaate the (mobile ka
+   topology button kabhi dikha hi nahi, kyunki uska `display: none` neeche
+   likha tha). Naya responsive rule hamesha yahin, sabse neeche aayega. */
+/* Tang jagah me pehle chips ke naam jaate hain, phir brand ka subtitle.
+   Ye hadd 1180 se badha kar 1320 ki gayi: 901-1250 ke beech topbar ka
+   saaman poore 1209px maangta tha, aur chips ke naam hi sabse zyada
+   chaudai khaate hain. */
+@media (max-width: 1320px) {
+  .topo span:not(.topo__ico) { display: none; }
+  .topo { padding: 8px 11px; }
+  .brand p { display: none; }
+  .field--range { min-width: 112px; }
+}
+
+@media (max-width: 1180px) {
+  :root { --panel-l: 226px; --panel-r: 262px; }
+}
+
+@media (max-width: 900px) {
+  body { overflow: auto; height: auto; display: block; }
+  .topbar { padding: 12px; gap: 12px; }
+
+  /* Chips ki jagah ek button — poori list window me khulti hai.
+     Pehle chips ek chhupi hui horizontal scroll-strip me the, jisme sirf
+     do topology dikhti thi aur baaki dhoondhni padti thi. */
+  .topo-bar { display: none; }
+  .topo-pick { display: flex; order: 2; }
+
+  .workspace { grid-template-columns: 1fr; }
+  .panel { max-height: none; overflow: visible; border: none; border-top: 1px solid var(--border); }
+
+  /* Stage bar phone par ek column: banner poori chaudai, uske neeche
+     controls. Desktop wali side-by-side shakal 375px me kat jaati thi —
+     Repair/Reset screen ke bahar chale jaate the. */
+  .stage__bar { flex-wrap: wrap; align-items: stretch; gap: 8px; padding: 10px 12px 0; }
+  .banner { flex: 1 1 100%; min-width: 0; }
+  .stage__controls { width: 100%; margin-left: 0; align-items: stretch; }
+  .stage__controls-row { flex-wrap: wrap; justify-content: center; }
+  .legend { flex-wrap: wrap; justify-content: center; }
+  .zoom, .stage__actions { flex: 0 0 auto; }
+
+  /* Ek column wale layout me chhupane ko panel hi nahi bache. Undo/Redo
+     ab stage me hain, isliye poora block chhupana surakshit hai. */
+  .panel-toggles { display: none; }
+
+  /* Phone par bhi wahi float — par dayein kinare par hi. Beech me rakhte
+     to canvas ke theek upar-beech me aa jaate, jahan diagram ka sabse
+     upar wala device baithta hai. */
+  .stage__history { padding: 0 12px; }
+
+  /* Phone par ye row wrap honi chahiye. Slider + PNG + Advise + Compare
+     ek line me 429px maangte hain, aur phone ke paas 375px hote hain —
+     bina wrap ke Compare screen se bahar latak jaata tha aur poora page
+     side me scroll hone lagta tha. */
+  .topbar__right { flex-wrap: wrap; gap: 10px; }
+
+  /* Chhoti screen par bar aur sendbar kai lines me wrap hote hain. Stage ki
+     height fix rakhte to canvas ke liye kuch bachta hi nahi (0px ho jaata
+     tha). Isliye yahan stage content ke hisaab se badhta hai aur canvas ko
+     apni tय height milti hai — page khud scroll kar leta hai. */
+  .stage { height: auto; order: -1; }
+  #canvas { flex: 0 0 auto; height: 58vh; min-height: 320px; }
+  .compare__body { grid-template-columns: 1fr; }
+  .legend { font-size: 9.5px; gap: 10px; }
+  .zonegrid { grid-template-columns: 1fr; }
+  .adv { grid-template-columns: 1fr; }
+  .advtable { font-size: 9.5px; }
+  .fld { grid-template-columns: 1fr; gap: 5px; }
+  .fld > span { font-size: 10.5px; }
+}
+
+/* ---------- PHONE (620px se neeche) ----------
+
+   Upar wali 900px query tablet ke liye hai aur wahan sab theek baithta
+   hai. Phone alag masla hai: 375px par topbar TEEN row me toot jaata tha
+   (brand, phir slider+PNG+Advise, phir Compare akela, phir topology
+   picker akela) — 206px. Uske neeche stage bar 141px. Yani 812px ki
+   screen me 347px sirf controls, aur diagram uske BAAD shuru hota tha.
+
+   Isliye phone ke liye alag, chhota breakpoint — taaki tablet jaisa hai
+   waisa hi rahe. Yahan sirf teen kaam hote hain: kram theek karo, jo
+   dohra raha hai use hatao, aur naap chhote karo. */
+@media (max-width: 620px) {
+
+  /* Kram: brand aur topology picker ek hi row me. 900px wali query me
+     picker par `order: 2` laga hai, jo use topbar__right ke BAAD dhakel
+     deta tha — isi wajah se wo akela teesri line me baithta tha. */
+  .topo-pick { order: 0; margin-left: auto; }
+  .topbar__right { order: 1; width: 100%; }
+
+  /* Subtitle phone par bekaar hai: wahi chhe naam picker ke andar hain,
+     aur chalu topology uske button par likhi hai. */
+  .brand p { display: none; }
+  .brand { min-width: 0; gap: 9px; }
+  .brand h1 { font-size: 15px; }
+  .brand__logo { font-size: 21px; }
+
+  .topbar { padding: 9px 10px; gap: 9px; }
+  .topbar__right { gap: 8px; }
+
+  /* Slider + PNG + Advise + Compare ek hi row me aa jaayein.
+
+     Slider ki chaudai khud likhni padti hai: input[type=range] apni
+     default ~129px content-width leta hai, aur usi 12px ki wajah se
+     Compare agli line me chala jaata tha. */
+  .topbar__right { gap: 6px; }
+  .topbar__right .btn { padding: 7px 9px; font-size: 11.5px; }
+  .topo-pick { padding: 7px 10px; font-size: 12px; }
+  .field--range { min-width: 0; width: 96px; flex: 0 0 auto; }
+  .field--range > span { font-size: 9.5px; }
+  .field--range input[type=range] { width: 100%; }
+
+  /* Stage bar ke naap chhote — teenon hisse apni line par hi rehte hain,
+     bas har ek patla ho jaata hai. */
+  .stage__bar { padding: 8px 10px 0; gap: 6px; }
+  .banner { padding: 7px 10px; font-size: 11.5px; line-height: 1.4; }
+  .stage__controls { gap: 6px; }
+  .legend { padding: 5px 8px; gap: 8px; font-size: 9px; }
+  .dot { width: 8px; height: 8px; }
+  .stage__controls-row { gap: 6px; }
+  .btn--sm { padding: 6px 8px; font-size: 11px; }
+  .zoom__level { min-width: 38px; font-size: 10px; }
+  .stage__history { padding: 0 10px; }
+
+  /* Send bar bhi thoda patla */
+  .sendbar { padding: 10px; gap: 6px; }
+  .sendbar__row { gap: 8px; }
+}
+
+/* ---------- BAHUT CHHOTI SCREEN (400px se neeche) ----------
+   ARP resolve / Send packet / Collision demo ek 3-column grid me hain
+   (1fr auto 1fr), taaki Send packet theek beech me rahe. 305px par wo
+   teenon ek line me nahi aate aur Collision demo kinare se bahar nikal
+   jaata tha. Itni tang jagah me beech me rakhne se zyada zaroori hai ki
+   sab dikhein — isliye yahan grid chhod kar wrap kar dete hain. */
+@media (max-width: 400px) {
+  .sendbar__row--actions { display: flex; flex-wrap: wrap; justify-content: center; }
+  .sendbar__row--actions > :first-child,
+  .sendbar__row--actions > :last-child { justify-self: auto; }
+}

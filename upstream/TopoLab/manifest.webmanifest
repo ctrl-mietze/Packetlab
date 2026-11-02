@@ -1,0 +1,25 @@
+{
+  "name": "TopoLab — Network Topology Simulator",
+  "short_name": "TopoLab",
+  "description": "Build a computer network, switch between six topologies, route live packets, and break things to see which topology survives.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

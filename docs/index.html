@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0913">
+<meta name="description" content="PaketLab – virtuelles Netzwerklabor für Android. Netzwerk bauen, IPv4/IPv6, DNS, Firewalls, Packet Simulation, Learning Mode, Topologie, CLI und Live-Logs.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PaketLab — Build a network. Understand everything.">
+<meta property="og:description" content="Ein echtes virtuelles Netzwerklabor zum Bauen, Testen, Lernen und Beobachten. Android APK, Source und Übungen.">
+<meta property="og:image" content="https://ctrl-mietze.github.io/Packetlab/assets/app-desktop.png">
+<meta name="twitter:card" content="summary_large_image">
+<title>PaketLab — Network Simulation Studio · by Veyra</title>
+<link rel="icon" type="image/svg+xml" href="assets/paketlab-logo.svg">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<header class="site-header">
+ <nav class="nav shell" aria-label="Hauptnavigation">
+   <a class="brand" href="#start"><span class="brand-mark"><img alt="" src="assets/paketlab-logo.svg"></span><span><strong>Packet<span>Lab</span></strong><small>NETWORK SIMULATION STUDIO</small></span></a>
+   <div class="nav-links" id="menu">
+     <a href="#features" data-de="Funktionen" data-en="Features">Funktionen</a>
+     <a href="#studio">Studio</a>
+     <a href="#learning">Learning</a>
+     <a href="#screenshots" data-de="Screenshots" data-en="Screenshots">Screenshots</a>
+     <a href="#download">Download</a>
+   </div>
+   <div class="nav-right">
+     <div class="language" aria-label="Sprache"><button id="lang-de" class="on">DE</button><button id="lang-en">EN</button></div>
+     <a class="github" href="https://github.com/ctrl-mietze/Packetlab" target="_blank" rel="noopener" aria-label="GitHub Repo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .6a11.4 11.4 0 0 0-3.6 22.3c.56.1.77-.25.77-.56v-2.1c-3.13.68-3.78-1.34-3.78-1.34-.5-1.29-1.25-1.64-1.25-1.64-1.03-.69.08-.68.08-.68 1.14.08 1.74 1.15 1.74 1.15 1.01 1.72 2.65 1.23 3.29.94.1-.73.39-1.22.71-1.5-2.49-.29-5.1-1.24-5.1-5.49 0-1.2.43-2.19 1.15-2.96-.12-.29-.5-1.41.11-2.93 0 0 .95-.3 3.08 1.13a10.7 10.7 0 0 1 5.6 0c2.13-1.43 3.07-1.13 3.07-1.13.62 1.52.24 2.64.12 2.93.72.77 1.14 1.76 1.14 2.96 0 4.26-2.62 5.2-5.13 5.49.4.34.77 1.02.77 2.04v3.04c0 .31.2.66.78.55A11.4 11.4 0 0 0 12 .6Z"/></svg>
+        <span>GitHub</span>
+     </a>
+     <a class="nav-download" href="#download" data-de="App holen" data-en="Get the app">App holen</a>
+     <button id="menu-toggle" class="hamburger" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+   </div>
+ </nav>
+</header>
+<main>
+<section class="hero shell" id="start">
+ <div class="hero-copy">
+   <span class="eyebrow"><i class="spark"></i> VEYRA NETWORK ENGINEERING · V0.6.0</span>
+   <h1 data-de="Baue Netzwerke.<br><em>Verstehe jedes Paket.</em>" data-en="Build networks.<br><em>Understand every packet.</em>">Baue Netzwerke.<br><em>Verstehe jedes Paket.</em></h1>
+   <p class="hero-text" data-de="Dein mobiles Netzwerkstudio: frei verkabeln, Geräte per Terminal konfigurieren, virtuelle Pakete verfolgen, Firewall-Regeln überprüfen und dein Wissen im Network Master testen – alles in einem Workspace." data-en="Your mobile network studio. Wire devices, configure virtual terminals, trace packets, test firewall policies and master networking challenges — all in one workspace.">Dein mobiles Netzwerkstudio: frei verkabeln, Geräte per Terminal konfigurieren, virtuelle Pakete verfolgen, Firewall-Regeln überprüfen und dein Wissen im Network Master testen – alles in einem Workspace.</p>
+   <div class="hero-cta">
+     <a class="btn btn-primary" href="https://github.com/ctrl-mietze/Packetlab/releases/download/v0.6.0/PacketLab-v0.6.0-Android.apk"><span class="btn-symbol">↓</span><span><strong data-de="APK herunterladen" data-en="Download Android APK">APK herunterladen</strong><small>Android 10+ · v0.6.0</small></span></a>
+     <a class="btn btn-outline" href="https://github.com/ctrl-mietze/Packetlab"><span class="btn-symbol">⌘</span><span><strong data-de="Source ansehen" data-en="Explore source">Source ansehen</strong><small>GitHub · Repository</small></span></a>
+   </div>
+   <div class="hero-checks"><span>✓ <span data-de="Offline-Modell" data-en="Offline model">Offline-Modell</span></span><span>✓ <span data-de="Erklärbare Ergebnisse" data-en="Explainable outcomes">Erklärbare Ergebnisse</span></span><span>✓ <span data-de=".pklab-Projekte" data-en=".pklab projects">.pklab-Projekte</span></span></div>
+ </div>
+ <div class="hero-visual">
+   <div class="art-grid"></div>
+   <div class="hero-frame">
+     <div class="frame-title"><span class="pulse"></span><b>PACKETLAB · LIVE TOPOLOGY</b><small>● ● ●</small></div>
+     <div class="art-nodes">
+       <svg class="cables" viewBox="0 0 600 410" aria-hidden="true">
+        <defs><linearGradient id="cable" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#573679"/><stop offset="1" stop-color="#b578ef"/></linearGradient></defs>
+        <path d="M115 90 L300 178 L472 83 M115 90 L122 307 L302 328 L300 178 L475 320 L472 83 M122 307 L300 178" stroke="url(#cable)" stroke-width="3" stroke-dasharray="8 10" fill="none"/>
+        <circle cx="203" cy="133" r="5" fill="#ca9eff" class="packet-dot"/><circle cx="380" cy="128" r="4" fill="#ca9eff" class="packet-dot second"/>
+       </svg>
+       <div class="net-node pc one"><i>▤</i><strong>PC-01</strong><small>192.168.10.20</small></div>
+       <div class="net-node pc two"><i>▤</i><strong>PC-02</strong><small>192.168.10.21</small></div>
+       <div class="net-node switch"><i>▣</i><strong>SW-CORE</strong><small>VLAN 10 / 20</small></div>
+       <div class="net-node firewall"><i>⛨</i><strong>FW-01</strong><small>Rules active</small></div>
+       <div class="net-node server"><i>▥</i><strong>SERVER</strong><small>DNS + DHCP</small></div>
+       <div class="net-node router"><i>⌁</i><strong>RTR-WAN</strong><small>192.168.10.1</small></div>
+     </div>
+     <div class="simulation-line"><span class="sim-live"><i></i> SIMULATION RUNNING</span><span>ARP · ICMP · TCP · UDP</span></div>
+   </div>
+   <div class="mini-packet"><span class="packet-status">✓</span><span><b>Packet delivered</b><small>3 Hops · 12 ms · LAN</small></span></div>
+   <div class="mini-alert"><span>⛨</span><span><b>Firewall</b><small>Rule matched · DROP</small></span></div>
+ </div>
+</section>
+<div class="metric-strip"><div class="shell metric-list"><div><strong>2</strong><small data-de="Arbeitsmodi" data-en="Work modes">Arbeitsmodi</small></div><div><strong>9+</strong><small data-de="Lernübungen" data-en="Learning scenarios">Lernübungen</small></div><div><strong>IPv4/6</strong><small>Routing & DNS</small></div><div><strong>100%</strong><small data-de="Virtuelle Paketwelt" data-en="Virtual packet world">Virtuelle Paketwelt</small></div></div></div>
+<section class="section shell" id="features">
+ <div class="section-title"><div><span class="overline">MORE THAN A DIAGRAM</span><h2 data-de="Nicht nur zeichnen.<br><em>Wirklich simulieren.</em>" data-en="Not just draw.<br><em>Actually simulate.</em>">Nicht nur zeichnen.<br><em>Wirklich simulieren.</em></h2></div><p data-de="Pakete folgen Verbindungen. Regeln entscheiden über Zustellung. Das Gerät sieht die Auswirkungen – und protokolliert, was passiert ist." data-en="Packets follow cables. Rules decide delivery. Devices record the resulting events, successes and blocks.">Pakete folgen Verbindungen. Regeln entscheiden über Zustellung. Das Gerät sieht die Auswirkungen – und protokolliert, was passiert ist.</p></div>
+ <div class="feature-grid">
+  <article><div class="feature-icon">⌘</div><h3>Build a Network</h3><p data-de="Leere Arbeitsfläche statt vorgefertigter Geräte. PCs, Router, Firewalls, Server und Kabel selbst platzieren." data-en="Start from a blank canvas. Add PCs, routers, firewalls, servers and links yourself.">Leere Arbeitsfläche statt vorgefertigter Geräte. PCs, Router, Firewalls, Server und Kabel selbst platzieren.</p></article>
+  <article><div class="feature-icon">➤</div><h3>Packet Console</h3><p data-de="Einklappbar, Quelle und Ziel per Doppeltipp wählen. Protokolle, Ports, Payload-Größe und Paketzahl konfigurieren." data-en="Collapsible controls. Pick source and destination with two taps. Configure protocols, ports, size and count.">Einklappbar, Quelle und Ziel per Doppeltipp wählen. Protokolle, Ports, Payload-Größe und Paketzahl konfigurieren.</p></article>
+  <article><div class="feature-icon">⛨</div><h3>Firewall Engine</h3><p data-de="Eigene Host- und Netzwerk-Firewall-Regeln, Default-Policy, Anti-Spoofing und Überlastfilter – mit Geräte-Logs." data-en="Host and network firewall rules, default policies, spoof detection and rate filters with device logs.">Eigene Host- und Netzwerk-Firewall-Regeln, Default-Policy, Anti-Spoofing und Überlastfilter – mit Geräte-Logs.</p></article>
+  <article><div class="feature-icon">▣</div><h3>Learning & Network Master</h3><p data-de="IPv4/IPv6, DNS, VLAN, Routing, WAN und große Campus-Labs. Live-Fortschritt in Prozent und .pklab-Speicherung." data-en="IPv4/IPv6, DNS, VLAN, routing, WAN and campus challenges with live progress and .pklab projects.">IPv4/IPv6, DNS, VLAN, Routing, WAN und große Campus-Labs. Live-Fortschritt in Prozent und .pklab-Speicherung.</p></article>
+  <article><div class="feature-icon">▤</div><h3>Device Terminal</h3><p data-de="Jedes Gerät besitzt virtuelle Shell-Kommandos für IP, Gateway, Services, Routing und Firewalls." data-en="Virtual CLI commands for device addressing, gateways, services, routing and firewalls.">Jedes Gerät besitzt virtuelle Shell-Kommandos für IP, Gateway, Services, Routing und Firewalls.</p></article>
+  <article><div class="feature-icon">◉</div><h3>Traffic & Transfers</h3><p data-de="Lange Uploads und Downloads mit definierter Rate, Dauer, Bandbreite, Paketverlust und Transferprotokoll." data-en="Long uploads and downloads with configurable rates, duration, link throughput and transfer logs.">Lange Uploads und Downloads mit definierter Rate, Dauer, Bandbreite, Paketverlust und Transferprotokoll.</p></article>
+ </div>
+</section>
+<section class="studio-section" id="studio"><div class="shell studio-layout">
+ <div class="studio-copy"><span class="overline">PACKETLAB STUDIO</span>
+   <h2 data-de="Vom ersten Kabel<br><em>bis zum Traffic-Log.</em>" data-en="From your first cable<br><em>to the traffic log.</em>">Vom ersten Kabel<br><em>bis zum Traffic-Log.</em></h2>
+   <p data-de="Der Netzwerkgraph ist mehr als Dekoration: Das Modell berücksichtigt den Kabelpfad, VLANs, Routing, Firewall-Regeln, Paketgröße und die Bandbreite der vorhandenen Verbindung." data-en="The topology isn't just decoration: the virtual model considers actual cable paths, VLANs, routing, firewalls, packet size and available link capacity.">Der Netzwerkgraph ist mehr als Dekoration: Das Modell berücksichtigt den Kabelpfad, VLANs, Routing, Firewall-Regeln, Paketgröße und die Bandbreite der vorhandenen Verbindung.</p>
+   <div class="studio-facts"><span>✓ BFS & Dijkstra</span><span>✓ ARP & DNS</span><span>✓ Stateful device logs</span><span>✓ Test scenarios</span></div>
+   <a class="text-link" href="https://github.com/ctrl-mietze/Packetlab/tree/main/app/src/main/assets/js" data-de="Simulationsengine ansehen →" data-en="Explore the simulation engine →">Simulationsengine ansehen →</a>
+ </div>
+ <div class="studio-image"><div class="shot-label"><span class="pulse"></span> REAL PACKETLAB INTERFACE <span>0.6.0</span></div><img src="assets/app-desktop.png" alt="Echter PaketLab Desktop-Browser-Screenshot des Netzwerkeditors"></div>
+</div></section>
+<section class="section shell learning-section" id="learning">
+ <div class="learning-copy"><span class="overline">LEARN BY DOING</span><h2 data-de="Lernen, das man<br><em>im Netzplan sieht.</em>" data-en="Learning you can<br><em>see in the topology.</em>">Lernen, das man<br><em>see in the topology.</em></h2>
+ <p data-de="Wechsle bewusst in den Learning Mode: Netzplan sichern oder verwerfen, eine .pklab öffnen oder eine Aufgabe laden. Network Master zeigt Fortschritte und bewertet den Zustand der virtuellen Geräte." data-en="Enter Learning Mode deliberately: save or discard your current workspace, load a .pklab file or start an exercise. Network Master evaluates the state of virtual devices.">Wechsle bewusst in den Learning Mode: Netzplan sichern oder verwerfen, eine .pklab öffnen oder eine Aufgabe laden. Network Master zeigt Fortschritte und bewertet den Zustand der virtuellen Geräte.</p>
+ <div class="learning-tags"><span>IPv4 / Subnetting</span><span>IPv6 / SLAAC</span><span>DNS</span><span>Routing</span><span>Firewall</span><span>Campus</span><span>WAN</span><span>QoS</span></div>
+ </div>
+ <div class="phone-stage">
+  <div class="phone-glow"></div>
+  <div class="phone-display"><img src="assets/app-learning.png" alt="Learning Mode mit Prozentfortschritt und Aufgabenübersicht"></div>
+  <div class="phone-caption"><b>Network Master</b><small>Task-based progress · .pklab compatible</small></div>
+ </div>
+</section>
+<section class="section shell" id="screenshots">
+  <div class="center-heading"><span class="overline">REAL APP · REAL SCREENS</span><h2 data-de="Sieh dir die App an." data-en="See the actual app.">Sieh dir die App an.</h2>
+  <p data-de="Screenshots aus dem laufenden v0.6.0-Build. Keine erfundenen UI-Mockups als angebliche Funktionen." data-en="Screenshots from the running v0.6.0 build, not made-up UI presented as functionality.">Screenshots aus dem laufenden v0.6.0-Build. Keine erfundenen UI-Mockups als angebliche Funktionen.</p></div>
+  <div class="gallery">
+    <figure><button data-image="assets/app-home.png" data-title="Home · Network Builder" class="open-image"><img src="assets/app-home.png" loading="lazy" alt="PaketLab Home Android mit Netzwerkdiagramm"><span>⌕</span></button><figcaption><strong>01 · Network Workspace</strong><small>Build a Network · Live simulation</small></figcaption></figure>
+    <figure><button data-image="assets/app-packets.png" data-title="Packet Console" class="open-image"><img src="assets/app-packets.png" loading="lazy" alt="Aufgeklappte Paketkonsole in PaketLab"><span>⌕</span></button><figcaption><strong>02 · Packet Console</strong><small>TCP · UDP · ICMP · Custom packets</small></figcaption></figure>
+    <figure><button data-image="assets/app-firewall.png" data-title="Firewall Configuration" class="open-image"><img src="assets/app-firewall.png" loading="lazy" alt="PaketLab Firewall-Regeln und Konfiguration"><span>⌕</span></button><figcaption><strong>03 · Firewall</strong><small>Rules · Policy · Anti-Spoofing</small></figcaption></figure>
+    <figure><button data-image="assets/app-learning.png" data-title="Network Master" class="open-image"><img src="assets/app-learning.png" loading="lazy" alt="Network Master Aufgabenfortschritt"><span>⌕</span></button><figcaption><strong>04 · Network Master</strong><small>Learning · Progress · Tasks</small></figcaption></figure>
+  </div>
+</section>
+<section class="download-section" id="download"><div class="shell">
+  <div class="center-heading"><span class="overline">LATEST PUBLIC RELEASE</span><h2 data-de="Dein Netzwerkstudio.<br><em>Bereit zum Installieren.</em>" data-en="Your network studio.<br><em>Ready to install.</em>">Dein Netzwerkstudio.<br><em>Bereit zum Installieren.</em></h2><p data-de="Android-APK, kompletter Source und Prüfsummen gehören zusammen auf die GitHub-Release-Seite." data-en="The Android APK, complete source code and checksums are available together in GitHub Releases.">Android-APK, kompletter Source und Prüfsummen gehören zusammen auf die GitHub-Release-Seite.</p></div>
+  <div class="download-card"><div class="download-icon"><img src="assets/paketlab-logo.svg" alt=""></div><div class="download-copy">
+   <span class="release-label">PACKETLAB 0.6.0 · ANDROID</span><h3>PaketLab <em>Network Studio</em></h3>
+   <p data-de="Offline-Simulation für Android, inklusive Build a Network, Learning Mode, Geräte-Terminals, Paketkonsole und Firewall-Testumgebung." data-en="Offline Android simulation with Build a Network, Learning Mode, device terminals, packet console and firewall testing.">Offline-Simulation für Android, inklusive Build a Network, Learning Mode, Geräte-Terminals, Paketkonsole und Firewall-Testumgebung.</p>
+   <div class="download-notes"><span>Android 10+</span><span>APK</span><span data-de="Offline verwendbar" data-en="Offline capable">Offline verwendbar</span></div>
+  </div><div class="download-buttons"><a class="btn btn-primary" href="https://github.com/ctrl-mietze/Packetlab/releases/download/v0.6.0/PacketLab-v0.6.0-Android.apk">↓ <span data-de="Android-APK herunterladen" data-en="Download Android APK">Android-APK herunterladen</span></a><a class="btn btn-outline" href="https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.6.0" data-de="Releasenotes & SHA-256" data-en="Release notes & SHA-256">Releasenotes & SHA-256</a></div></div>
+  <p class="download-disclaimer" data-de="Alle vulnerabilitäts-, Firewall- und Spoofing-Szenarien sind virtuell. Das Tool sendet keine echten Angriffs-Pakete und ersetzt weder reale Netzwerkhardware noch eine vollständige Cisco-IOS-Emulation." data-en="All vulnerability, firewall and spoofing scenarios are virtual. No real attack packets are transmitted, and this is not a full Cisco IOS or hardware emulator.">Alle vulnerabilitäts-, Firewall- und Spoofing-Szenarien sind virtuell. Das Tool sendet keine echten Angriffs-Pakete und ersetzt weder reale Netzwerkhardware noch eine vollständige Cisco-IOS-Emulation.</p>
+</div></section>
+<section class="section shell faq" id="faq"><div class="section-title"><div><span class="overline">GOOD TO KNOW</span><h2 data-de="Fragen? Antworten." data-en="Questions? Answers.">Fragen? Antworten.</h2></div></div>
+  <details><summary data-de="Ist PaketLab ein echter Netzwerk-Emulator?" data-en="Is PaketLab a physical network emulator?">Ist PaketLab ein echter Netzwerk-Emulator?</summary><p data-de="PaketLab ist eine deterministische, lokale Netzwerk-Simulation. Es bildet Routing, Paketflüsse und Konfigurationen modelliert ab, startet aber keine realen Router-/Linux-Images." data-en="PaketLab is a deterministic local simulator. It models routes and packets, but doesn't execute real router or Linux images.">PaketLab ist eine deterministische, lokale Netzwerk-Simulation. Es bildet Routing, Paketflüsse und Konfigurationen modelliert ab, startet aber keine realen Router-/Linux-Images.</p></details>
+  <details><summary data-de="Gehen Geräte wirklich offline, wenn ein Paket gesendet wird?" data-en="Do normal packets disconnect devices?">Gehen Geräte wirklich offline, wenn ein Paket gesendet wird?</summary><p data-de="Normale Pakete ändern keinen Power-Status. Nur explizit gewählte virtuelle Störungen können einen simulierten Ausfall auslösen. Blockierungen und Ereignisse werden in den zugehörigen Logs gespeichert." data-en="Ordinary packets never shut devices off. Only explicit virtual failure scenarios can simulate downtime. Events are recorded in the relevant logs.">Normale Pakete ändern keinen Power-Status. Nur explizit gewählte virtuelle Störungen können einen simulierten Ausfall auslösen. Blockierungen und Ereignisse werden in den zugehörigen Logs gespeichert.</p></details>
+  <details><summary data-de="Kann ich Projekte zwischen Standard Lab und Network Master austauschen?" data-en="Are Standard Lab and Network Master projects compatible?">Kann ich Projekte zwischen Standard Lab und Network Master austauschen?</summary><p data-de="Ja. Die .pklab-Datei enthält den ursprünglichen Modus, den Graph und die gespeicherten Aufgaben. Beim Laden wird der Modus anhand der Metadaten wiederhergestellt." data-en="Yes. A .pklab file stores its mode, graph and tasks, allowing the editor to restore the corresponding workspace.">Ja. Die .pklab-Datei enthält den ursprünglichen Modus, den Graph und die gespeicherten Aufgaben. Beim Laden wird der Modus anhand der Metadaten wiederhergestellt.</p></details>
+  <details><summary data-de="Wie funktionieren Firewall und Internet in der Simulation?" data-en="How do firewalls and Internet work?">Wie funktionieren Firewall und Internet in der Simulation?</summary><p data-de="Die Host-Firewall filtert Eingänge am jeweiligen Endgerät. Eine dedizierte Firewall muss physisch im virtuellen Kabelpfad liegen. Internet-Zustellung setzt einen konfigurierten, verbundenen WAN-Pfad voraus." data-en="Host firewalls filter their own inbound traffic. Dedicated firewalls must be on the actual cable path. Internet tests require a configured physical virtual uplink.">Die Host-Firewall filtert Eingänge am jeweiligen Endgerät. Eine dedizierte Firewall muss physisch im virtuellen Kabelpfad liegen. Internet-Zustellung setzt einen konfigurierten, verbundenen WAN-Pfad voraus.</p></details>
+</section>
+<section class="opensource shell"><div><span class="overline">BUILT WITH CURIOSITY</span><h2>Open development on GitHub</h2><p data-de="Source-Code, Tests, Release-Prüfsummen, Bugreports und technische Hintergründe an einem Ort." data-en="Source, tests, release checksums, bug reports and technical docs in one place.">Source-Code, Tests, Release-Prüfsummen, Bugreports und technische Hintergründe an einem Ort.</p></div><a class="btn btn-outline" href="https://github.com/ctrl-mietze/Packetlab">GitHub Repository ↗</a></section>
+</main>
+<footer class="footer">
+ <div class="shell footer-top"><div class="footer-brand"><img src="assets/paketlab-logo.svg" alt=""><span><strong>PaketLab</strong><small>By Veyra · Network Simulation Studio</small></span></div><div class="footer-links"><a href="https://github.com/ctrl-mietze/Packetlab">Source</a><a href="https://github.com/ctrl-mietze/Packetlab/releases">Releases</a><a href="https://github.com/ctrl-mietze/Packetlab/issues">Issues</a><a href="#start">↑ Top</a></div></div>
+ <div class="shell footer-bottom"><p>© 2026 PaketLab / ctrl-mietze · Independent virtual networking studio.</p>
+  <details class="upstream-credits"><summary data-de="Herkunft & Credits: TopoLab" data-en="Provenance & credits: TopoLab">Herkunft & Credits: TopoLab</summary><p data-de="PaketLab baut auf TopoLab von Vansh Bhardwaj auf. Der ursprüngliche Graph-/Topologiecode, Projektverweise und Attribution bleiben erhalten. Original: " data-en="PaketLab is derived from TopoLab by Vansh Bhardwaj. Its original topology/graph work and attribution are preserved. Original: ">PaketLab baut auf TopoLab von Vansh Bhardwaj auf. Der ursprüngliche Graph-/Topologiecode, Projektverweise und Attribution bleiben erhalten. Original: </p><a href="https://github.com/vansh231205/TopoLab" target="_blank" rel="noopener">github.com/vansh231205/TopoLab ↗</a></details>
+ </div>
+</footer>
+<dialog id="lightbox"><button id="close-lightbox" aria-label="Schließen">×</button><img id="expanded-image" alt="PaketLab Screenshot"><span id="expanded-caption"></span></dialog>
+<script src="site.js"></script>
+</body>
+</html>

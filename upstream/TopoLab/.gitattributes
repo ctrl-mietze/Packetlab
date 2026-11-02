@@ -1,0 +1,9 @@
+# Sab text files repo me LF ke saath jaayein, chahe Windows par likhi gayi hon.
+# Iske bina git har commit par "LF will be replaced by CRLF" warning deta hai
+# aur Linux/Mac par clone karne wale ko diff me poori file badli hui dikhti hai.
+* text=auto eol=lf
+
+# In par git kabhi line endings na chhede
+*.png binary
+*.jpg binary
+*.ico binary

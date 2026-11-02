@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproduced PacketLab issue
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: App and Android versions
+      placeholder: PacketLab 0.6.0 / Android 16 / landscape
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe what you expected the simulation to do.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Explain the topology, device configuration and outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Build a Network
+        2. Add PC / switch / firewall
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant, sanitized logs or screenshots
+      description: Do not share network passwords, secrets or identifying records.
+  - type: checkboxes
+    id: check
+    attributes:
+      label: Safety and debugging
+      options:
+        - label: I have removed personal information from logs.
+          required: true

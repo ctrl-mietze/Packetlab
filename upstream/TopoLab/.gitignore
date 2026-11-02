@@ -1,0 +1,9 @@
+# Chat history ka poora folder repo se bahar hai.
+#
+# Ye TopoLab ka hissa nahi hai — ye Claude Code ke transcripts ka backup
+# lene wala apna workflow tool hai, jo har project me ek jaisa rehta hai.
+# Public repo me wo sirf shor hai.
+#
+# Transcripts khud to kabhi commit hone hi nahi chahiye: unme deploy logs
+# aur kabhi-kabhi paste ki hui keys hoti hain.
+_chat_history/

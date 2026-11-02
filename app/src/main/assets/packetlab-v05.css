@@ -1,0 +1,198 @@
+/* PacketLab 0.5 – coherent Veyra OLED navigation and touch configuration.
+   No blur, gradients, fake dashboards or font-dependent emoji icons. */
+:root { --v05-aubergine:#342441; --v05-border:#363036; --v05-ink:#e9e1ef; }
+.vr-option-icon svg {display:block;width:22px;height:22px;stroke:#d4b4ef}
+.pl-options>button.vr-option {
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr);
+  grid-template-rows:auto auto;gap:4px 12px;
+  justify-content:stretch;align-content:center;
+  min-height:70px;padding:11px 9px;text-align:left;
+}
+.pl-options>button.vr-option .vr-option-icon {
+  grid-column:1;grid-row:1/3;align-self:center;
+  width:42px;height:42px;display:grid;place-items:center;
+  border:1px solid #383038;background:#242025;
+  border-radius:12px;font-size:0;
+}
+.pl-options>button.vr-option > b {
+  grid-column:2;grid-row:1;align-self:end;
+  display:block;font-size:13px;font-weight:640;line-height:1.3;
+  min-width:0;color:#ededed;overflow-wrap:anywhere;
+}
+.pl-options>button.vr-option > small {
+  grid-column:2;grid-row:2;align-self:start;
+  display:block;min-width:0;font-size:11px;line-height:1.42;
+  overflow-wrap:anywhere;color:#a4a4a4;margin-top:0;
+}
+/* Destructive action genuinely pinned at the bottom of the scrolled sheet. */
+.vr-destructive-action {
+  position:sticky;bottom:-23px;z-index:2;
+  margin-top:16px;padding:13px 0 3px;
+  border-top:1px solid #373037;
+  background:#111;
+}
+.vr-delete-device {
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;min-height:47px;width:100%;font-size:13px;
+  font-weight:670;color:#ffc5cf;
+  background:#2a171c;border:1px solid #663441;
+  border-radius:12px;
+}
+.vr-delete-device svg{width:21px;height:21px;stroke:#fa849b}
+.vr-delete-device:active {background:#46202c;border-color:#975067}
+.vr-delete-confirm {
+  display:flex;flex-direction:column;align-items:center;
+  padding:7px 10px 13px;text-align:center;gap:10px;
+}
+.vr-delete-confirm svg{width:34px;height:34px;stroke:#ff859c}
+.vr-delete-confirm strong{font-size:17px;font-weight:640;color:#f3dde2}
+.vr-delete-confirm p{font-size:12px;line-height:1.55;color:#b7aeb2;max-width:360px;margin:0}
+.vr-delete-buttons {display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:7px}
+.vr-delete-buttons button{min-height:43px;border-radius:10px;
+ border:1px solid #393239;background:#272527;color:#ececec;font-size:12px;font-weight:610}
+.vr-delete-buttons button[data-action="confirm"]{
+ color:#ffc6ce;background:#55232c;border-color:#884151;
+}
+/* Terminal – dense but comfortable keyboard & copy workflow. */
+.pl-terminal-output{height:clamp(180px,35vh,340px);background:#090909;
+ font:12px/1.6 Consolas,"Cascadia Mono",monospace;white-space:pre-wrap;
+ overflow-y:auto;color:#c4decf}
+.pl-terminal-form{
+ display:flex;align-items:center;gap:9px;
+ background:#1b1b1b;border:1px solid #414041;border-radius:12px;
+ padding:6px 7px 6px 12px;margin-top:10px
+}
+.pl-terminal-form>span{font-size:16px;color:#c7a2ec}
+.pl-terminal-form input{background:transparent!important;border:0!important;
+ flex:1;min-width:0;color:#eef0ed;font-size:12px;
+ height:38px}
+.pl-terminal-form button{flex:0 0 auto;height:36px;min-height:36px;padding:5px 9px;font-size:11px}
+.vr-terminal-shortcuts{display:flex;flex-wrap:wrap;gap:6px;padding:10px 0 2px}
+.vr-terminal-shortcuts button {
+ background:#242124;color:#d0c3d8;border:1px solid #3d3740;
+ border-radius:10px;font:11px Consolas,monospace;padding:8px 10px;min-height:32px
+}
+.vr-terminal-shortcuts button:active{background:#35283c}
+/* The active tint covers BOTH icon and text; no clipped oval pseudo-element. */
+@media (max-width:900px){
+  .v-nav, .v-nav.pl-mastermode {
+    display:grid!important;grid-template-rows:minmax(0,1fr);
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    align-items:stretch;justify-content:stretch;gap:3px;
+    min-height:67px;height:67px;flex-basis:67px;
+    padding:5px 6px 4px!important;
+    background:#0b0b0b;border-top:1px solid #292929;
+  }
+  .v-nav.pl-mastermode {grid-template-columns:repeat(5,minmax(0,1fr))}
+  .v-nav button, .v-nav.pl-mastermode button{
+    display:flex!important;min-width:0;max-width:none;
+    width:100%;height:100%;padding:4px 1px 3px!important;
+    flex-direction:column;justify-content:center;align-items:center;
+    gap:4px!important;border-radius:13px;
+    background:transparent;color:#a29ca4;font-size:11px;
+    font-weight:550;overflow:hidden;
+  }
+  .v-nav button::before,.v-nav button.is-active::before{
+    display:none!important;content:none!important;
+  }
+  .v-nav button.is-active,.v-nav.pl-mastermode button.is-active{
+    background:var(--v05-aubergine)!important;
+    color:#ead5fb!important;font-weight:680;
+  }
+  .v-nav button svg,.v-nav.pl-mastermode button svg{
+    width:21px!important;height:21px!important;flex:0 0 21px;
+    color:inherit;position:static!important;
+  }
+  .v-nav button span,.v-nav.pl-mastermode button span{
+    max-width:100%;min-width:0;display:block;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;text-align:center;
+    line-height:13px;font-size:10.5px;
+  }
+  .v-nav.pl-mastermode button span{font-size:10px}
+  .v-nav button:focus-visible{outline:2px solid #b792e7;outline-offset:-2px}
+  .v-nav button:active:not(.is-active){background:#242025}
+  .vr-destructive-action{bottom:-20px}
+}
+/* A dedicated touch-first cable stepper below the drawing. */
+.vr-wiring-bar[hidden]{display:none!important}
+.vr-wiring-bar {
+  display:flex;align-items:center;gap:8px;min-height:47px;
+  flex:0 0 47px;width:100%;min-width:0;
+  background:#151219;border-top:1px solid #554161;
+  border-bottom:1px solid #433349;padding:5px 11px;
+}
+.vr-wiring-glyph{width:28px;height:29px;display:grid;place-items:center;flex:0 0 28px;
+ color:#d8b9f8}
+.vr-wiring-glyph svg{width:23px;height:23px}
+.vr-wiring-copy{display:flex;flex-direction:column;flex:1;gap:2px;min-width:0}
+.vr-wiring-copy strong{font-size:11px;color:#e7d3fa;white-space:nowrap;
+ text-overflow:ellipsis;overflow:hidden;font-weight:650}
+.vr-wiring-copy small{font-size:10px;color:#b2a1bb;white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis}
+.vr-wiring-bar button{
+ min-width:0;flex:0 0 auto;background:#2b2232;border:1px solid #65506e;
+ border-radius:9px;color:#eddef8;font-weight:610;font-size:11px;
+ min-height:33px;padding:6px 11px
+}
+.vr-wiring-bar #vr-wire-close{font-size:20px;font-weight:400;
+ width:34px;min-width:34px;padding:2px}
+.vr-wiring-active #pl-place,.vr-wiring-active .pl-selected{display:none!important}
+.vr-wire-intro strong{font-size:15px;font-weight:640;color:#e9e3f0}
+.vr-wire-intro p{font-size:12px;line-height:1.5;color:#b3abb8;margin:6px 0 15px}
+.vr-wire-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+ gap:10px;margin:9px 0 14px}
+.vr-wire-form label{display:flex;flex-direction:column;gap:7px;min-width:0}
+.vr-wire-form label span{font-size:11px;color:#aaa}
+.vr-wire-form select{
+ min-height:43px;min-width:0;width:100%;border-radius:10px;
+ background:#232323;border:1px solid #454045;color:#ddd;font-size:12px;
+ padding:6px 9px;appearance:none;-webkit-appearance:none;
+}
+.vr-wire-medium{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;padding:12px 0;border-top:1px solid #323032;
+ border-bottom:1px solid #323032;font-size:12px;color:#aaa}
+.vr-wire-medium strong{color:#e3c9fa;text-align:right;font-weight:600}
+.vr-wire-buttons{display:flex;gap:8px;margin-top:16px}
+.vr-wire-buttons button{height:41px;flex:1;border-radius:10px;
+ background:#282528;border:1px solid #403941;color:#eee;font-size:12px;font-weight:620}
+.vr-wire-buttons button[data-vr-connect="apply"]{
+ background:#c8a2f4;color:#261335;border-color:#c8a2f4}
+@media(max-width:900px) and (orientation:landscape) and (max-height:550px){
+ .v-nav,.v-nav.pl-mastermode{
+   position:fixed!important;bottom:8px!important;left:50%!important;
+   transform:translateX(-50%)!important;
+   width:min(570px,calc(100% - 30px))!important;
+   min-height:48px!important;height:48px!important;
+   flex-basis:48px!important;padding:4px 6px!important;
+   border-radius:26px!important;border:1px solid #383038!important;
+   background:#161416!important;
+ }
+ .v-nav button,.v-nav.pl-mastermode button{
+  flex-direction:row!important;gap:6px!important;
+  min-width:0;padding:3px 4px!important;
+  border-radius:23px!important;
+ }
+ .v-nav button svg{width:18px!important;height:18px!important;flex-basis:18px}
+ .v-nav button span,.v-nav.pl-mastermode button span{font-size:10px!important;line-height:14px}
+ .vr-wiring-bar{grid-column:1;grid-row:2;align-self:end;z-index:3;
+   flex:0 0 auto;min-height:40px;height:40px;padding:4px 6px;max-width:100%}
+ .vr-wiring-bar .vr-wiring-glyph{display:none}
+ .vr-wiring-bar button{min-height:30px;padding:4px 8px;font-size:10px}
+ .vr-wiring-copy strong{font-size:10px}
+ .vr-wiring-copy small{font-size:9px}
+ .vr-wire-form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .vr-destructive-action{bottom:0}
+ .pl-terminal-output{height:clamp(110px,29vh,190px)}
+}
+@media(max-width:380px){
+  .v-nav button span{font-size:10px}
+  .v-nav.pl-mastermode button span{font-size:9.5px}
+  .vr-wiring-bar{gap:5px;padding:4px 7px}
+  .vr-wiring-glyph{width:23px;flex-basis:23px}
+  .vr-wiring-bar button{padding:5px 7px;font-size:10px}
+  .vr-wire-form{grid-template-columns:1fr}
+  .pl-options>button.vr-option {grid-template-columns:38px minmax(0,1fr);gap:4px 10px}
+  .pl-options>button.vr-option .vr-option-icon{width:38px;height:38px}
+}

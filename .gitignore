@@ -1,0 +1,39 @@
+# Platform build and local Gradle state
+.gradle/
+build/
+app/build/
+local.properties
+*.apk
+*.aab
+*.zip
+*.log
+*.keystore
+*.jks
+*.p12
+*.pfx
+.env
+.env.*
+node_modules/
+__pycache__/
+*.pyc
+
+# Root-level generated screenshot captures are copied to docs/assets
+/preview*.png
+/v04-*.png
+/layout-*.png
+/mobile-preview.png
+
+# Local old development patch scripts remain in original local snapshot,
+# but the public repo contains only current sources and test scripts.
+/*.py
+!/smoke_v06.py
+!/smoke_v06_extended.py
+
+# Files not part of public product source
+/CODEX_V03_TASK.txt
+/.idea/
+.idea/
+.DS_Store
+
+# Github release files live as release assets; metadata is committed.
+/releases/PacketLab-v*.apk
