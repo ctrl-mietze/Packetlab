@@ -153,9 +153,9 @@ function presetSelect(){
  choice=Number(N.lab.presetSize)||countOf()||8;
  if(choice<3)choice=8;
  const current=chosen();
- N.open('Topologie & Größe',
-   '<div class="v112-preset-header"><div><strong>Was möchtest du aufbauen?</strong>'+
-   '<small>Alle 18 Netzwerkvorlagen. Die Gerätezahl gilt für die gewählte Vorlage, nicht nur für Random World.</small></div>'+
+ N.open('Netzwerkvorlage',
+   '<div class="v112-preset-header"><div><strong>Vorlage auswählen</strong>'+
+   '<small>18 Vorlagen für freie Lab-Netzwerke. Die Gerätezahl kannst du oben festlegen.</small></div>'+
    '<div class="v112-preset-current">'+svg(lookup.get(current)?.icon||'network')+
      '<span>Aktuell: '+esc(lookup.get(current)?.label||current)+'</span></div></div>'+
    '<label class="v112-size"><span>Gerätezahl</span>'+
@@ -166,7 +166,9 @@ function presetSelect(){
      (x===8?'Klein':x===16?'Mittel':x===24?'Groß':'Mega')+' · '+x+'</button>').join('')+'</div>'+
    '<div class="v112-preset-caption">Gewählte Größe: <strong id="v112-count-preview">'+choice+' Geräte</strong>'+
    ' · Der Netzplan wird anschließend automatisch eingepasst.</div>'+
-   '<div class="v112-preset-grid">'+entries.map(([key,name,desc,ico])=>
+   '<div class="v112-preset-grid">'+entries.map(([key,name,desc,ico],i)=>
+     (i===0?'<div class="v113-preset-section"><span>Grundformen</span><small>7 Vorlagen</small></div>':
+      i===7?'<div class="v113-preset-section"><span>Szenarien</span><small>11 Vorlagen</small></div>':'')+
      '<button type="button" data-v112-topo="'+key+'" class="v112-topo-option '+(key===current?'active':'')+'">'+
      '<span class="v112-topo-icon">'+svg(ico)+'</span><span><strong>'+esc(name)+'</strong>'+
      '<small>'+esc(desc)+'</small></span><span class="v112-topo-arrow">'+svg('arrow')+'</span></button>').join('')+
@@ -198,7 +200,7 @@ function replaceIcons(){
  const badge=$('v8-app-version');
  if(badge){
    badge.remove();
-   const h=document.querySelector('.brand h1');if(h)h.title='Veyra PacketLab · v0.11.1';
+   const h=document.querySelector('.brand h1');if(h)h.title='Veyra PacketLab · v0.11.2';
  }
  const book=$('v9-book');
  if(book){

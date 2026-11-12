@@ -84,3 +84,10 @@ __pycache__/
 /v111-browser.log
 /v111-gradle.log
 /packetlab-v111-smoke-report.json
+
+# PacketLab v0.11.2 local visual QA
+/edge-v112-smoke/
+/v112-*.png
+/v112-smoke-browser.log
+/v112-gradle.log
+/packetlab-v112-smoke-report.json
