@@ -4,14 +4,14 @@
 
 # PacketLab
 
-### Veyra Network Simulation Studio · v0.9.0
+### Veyra Network Simulation Studio · v0.10.0
 
 **Build a Network. Send packets. Understand the consequences.**
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [⬇ Android APK](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇩🇪 Deutsche README](README.de.md) · [🛠 Issues](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Platform-Android%2010+-9469d6?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.9.0-bf83ef?style=for-the-badge" alt="Version 0.9.0">
+<img src="https://img.shields.io/badge/Version-0.10.0-bf83ef?style=for-the-badge" alt="Version 0.10.0">
 <img src="https://img.shields.io/badge/Network%20Model-Offline-5f9c78?style=for-the-badge" alt="Offline simulation">
 <img src="https://img.shields.io/badge/Projects-.pklab%20v3-7241aa?style=for-the-badge" alt=".pklab v3">
 
@@ -27,6 +27,17 @@
 
 > [!IMPORTANT]
 > PacketLab is an **offline virtual network simulator**. Its hosts, routers, services, vulnerability tests, CLI, firewalls and packets are **models**, not actual Linux VMs, Cisco IOS binaries or Internet connections. Threat, spoofing, firewall bypass, traffic flood, outage and simulated compromise features never send real attacks or change any external devices.
+
+## PacketLab v0.10.0 — Net@Lab V2 Interactive Academy
+
+The Net@Lab network handbook is now a truly interactive VeyraLabs learning experience: **62 full-length German chapters**, categorized navigation, readable lessons, search, bookmarks, learning goals, curated visuals, device inspection and animated step-by-step packet-path selection.
+
+Every chapter features a self-contained educational network. Select a PC, router, server or switch to inspect its **read-only** IPv4/IPv6 addresses, subnet, gateway, MAC, interface, service, firewall and event data. Select "Mein Lab" to inspect the existing virtual PacketLab graph without changing it.
+
+[Net@Lab V2 technical documentation](docs/NETATLAB_V2.md) · [Release notes](releases/v0.10.0.md)
+
+![Net@Lab V2 Library](docs/assets/netatlab-v2-library.png)
+![Read-only Network Example](docs/assets/netatlab-v2-topology.png)
 
 ## PacketLab v0.9.0 — Network Lab, Training and Net@Lab
 
@@ -89,12 +100,12 @@ This release concentrates on **trustworthy simulation behavior**, **mobile usabi
 
 | Android | Details |
 | :-- | :-- |
-| **Current** | **PacketLab v0.9.0** |
+| **Current** | **PacketLab v0.10.0** |
 | **Package** | \`ctrl.mietze.veyrapacketlab\` |
 | **Platform** | Android 10+ (\`minSdk 29\`) |
 | **Format** | Installable APK |
-| **Where** | [GitHub Release v0.9.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.9.0) |
-| **Direct APK** | [PacketLab-v0.9.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.9.0/PacketLab-v0.9.0-Android.apk) |
+| **Where** | [GitHub Release v0.10.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.10.0) |
+| **Direct APK** | [PacketLab-v0.10.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.10.0/PacketLab-v0.10.0-Android.apk) |
 
 Release assets include **\`SHA256SUMS.txt\`** to verify that your download matches the published file.
 

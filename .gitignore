@@ -63,3 +63,10 @@ __pycache__/
 /v09-gradle.log
 /v09-java-compile.log
 /packetlab-v09-smoke-report.json
+
+# v0.10 Net@Lab screen captures and smoke output
+/edge-v10-smoke/
+/v10-netatlab-*.png
+/v10-browser-run.log
+/packetlab-v10-smoke-report.json
+/packetlab-v10-gradle.log

@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.10.0] — 2026-11-12
+
+### Net@Lab V2 interactive education
+
+- Rebuilt the offline networking handbook as a structured 62-chapter VeyraLabs learning academy with 15 topics, category navigation, search, reading history and bookmarks.
+- Added per-chapter learning goals, well-spaced technical explanations, quick visual reference cards, command examples, typical failure analysis and related chapters.
+- Contextual read-only example networks for subnetting, IPv6, DHCP, DNS, VLAN switching, ARP, routing, NAT, firewall, WLAN, Linux, Windows and Cisco IOS.
+- Click PC/router/switch/server/phone examples to inspect IP configuration, interfaces, MAC addresses, subnet masks, gateways, DNS, routes, firewall rules, services and model logs without editing.
+- Multi-step packet flow with highlighted physical links and contextual layer descriptions.
+- Read-only "Mein Lab" option to inspect existing virtual graph state without modifying any world data.
+- Reworked responsive OLED reading UI and touch controls, removed native Android select dependency in the handbook.
+- Preserved legacy Net@Lab reading progress/bookmarks, existing PacketLab user worlds and network engine.
+
+### Validation
+
+- 21 mobile Chromium UI/regression checks including rendering all 62 lessons and verifying demo/live views cannot modify the lab.
+- Existing 12+18 network model suites and Gradle Android debug build.
+
+
 ## [0.9.0] — 2026-11-12
 
 ### Added
