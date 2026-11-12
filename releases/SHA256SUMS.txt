@@ -5,3 +5,4 @@ e6ffb57578b83c8cdde35a28e5ef67db8c955f7948bec070d3bb2582159d8598  PacketLab-v0.8
 81e1748849486152470f457b2384dd3d5d405b7ed10da43e99aa006e535bfeb8  PacketLab-v0.9.0-Android.apk
 ef5bd5755998ab3c3831a7b36524f619eda03f39de031789e2ea150f43ad939d  PacketLab-v0.10.0-Android.apk
 f9cc80fefef3d0e17d48f402b60011eca2cbb0de7e4126e74c78a62ea9074c09  PacketLab-v0.11.0-Android.apk
+7aaf6efe045998bb83ab3c12345ec6e4201f1af3ce38ace4158a3d8ee52df527  PacketLab-v0.11.1-Android.apk

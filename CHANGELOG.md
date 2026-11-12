@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.11.1] — 2026-11-12
+
+### Fixed
+- Building mode at end of devices list, disabled on app launch and saved-world load.
+- All 18 templates accessible through one top picker with working device size and auto-fit.
+- Selected topology name correctly follows extended templates, including save/load.
+- Replaced overlapping book/version label and duplicated lightning glyphs with stable SVGs.
+- Preserved existing virtual network, learning and storage modules.
+
+### Verification
+- 40 mobile Chromium UI/regression checks, 12 core and 18 network-model tests, successful Android Gradle build.
+
+
 ## [0.11.0] — 2026-11-12
 
 ### Training & Net@Lab

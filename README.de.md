@@ -4,14 +4,14 @@
 
 # PaketLab
 
-### Veyra Network Simulation Studio · v0.11.0
+### Veyra Network Simulation Studio · v0.11.1
 
 **Netzwerke bauen. Pakete senden. Folgen verstehen.** 💜
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [📦 APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇬🇧 English](README.md) · [🛠 Fehler melden](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Android-10%2B-9b69d9?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.11.0-c391f0?style=for-the-badge" alt="Version 0.11.0">
+<img src="https://img.shields.io/badge/Version-0.11.1-c391f0?style=for-the-badge" alt="Version 0.11.1">
 <img src="https://img.shields.io/badge/Simulation-Lokal-6baf8a?style=for-the-badge" alt="Lokal">
 
 <br><br>
@@ -25,6 +25,14 @@
 
 > [!IMPORTANT]
 > PaketLab ist ein **virtueller, lokaler Netzwerk-Simulator**. Router, PCs, virtuelle Exploits, Linux-/Cisco-Kommandos und Pakete werden modelliert. Es laufen keine echten IOS-Images, keine Linux-VMs und keine Angriffe auf reale Geräte oder Netzwerke. Ein simulierter Ausfall ist kein echter Geräteausfall.
+
+## PacketLab 0.11.1: Topologien, Gebäude und Icons
+
+Der Gebäudemodus befindet sich ganz unten in der Geräteliste und ist beim Start ausgeschaltet. Die obere Auswahl enthält alle 18 Topologien mit einer gemeinsamen Gerätezahl, Größen-Schnellwahl und Auto-Fit. Die gewählte Topologie bleibt auch nach Speichern und Laden korrekt angezeigt. Das überlappende Buchsymbol und doppelte Blitz-Icons sind behoben.
+
+[Release Notes](releases/v0.11.1.md) · [Technische Beschreibung](docs/PACKETLAB_TOPOLOGY_UI_V0111.md)
+
+![Alle Topologien](docs/assets/app-v111-topologies.png)
 
 ## PacketLab 0.11.0 — Training Academy und Bedienungsfix
 
@@ -120,15 +128,15 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 
 ## 📥 Download
 
-**[PaketLab 0.11.0 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.11.0/PacketLab-v0.11.0-Android.apk)**
+**[PaketLab 0.11.1 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.11.1/PacketLab-v0.11.1-Android.apk)**
 
 | Angabe | Wert |
 | :-- | :-- |
 | Anwendung | PaketLab / Veyra PacketLab |
 | Paket-ID | `ctrl.mietze.veyrapacketlab` |
-| Version | `0.11.0` |
+| Version | `0.11.1` |
 | Plattform | Android 10 oder neuer |
-| Download | [GitHub Release v0.11.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.0) |
+| Download | [GitHub Release v0.11.1](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.1) |
 | Prüfsummen | `SHA256SUMS.txt` im Release |
 
 Wenn eine selbst erstellte APK anders signiert ist als die bisher installierte App, lässt Android kein direktes Update zu. Vor einer Deinstallation unbedingt `.pklab`-Projekte und relevante App-Daten sichern.

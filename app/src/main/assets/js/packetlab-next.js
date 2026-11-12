@@ -391,7 +391,7 @@ function presetBuild(kind,count=8,options={}){
   if(kind==='empty'){C.empty();lab.preset='empty';lab.title='Leeres Lab';renderStatus();close();startVS();return}
   const originalPresets=Topologies.KINDS;
   if(originalPresets.includes(kind)){
-    C.regenerate(kind,Math.max(3,Math.min(count,24)),{fly:false});
+    C.regenerate(kind,Math.max(3,Math.min(count,40)),{fly:false});
     lab.preset=kind;lab.title=Topologies.META[kind].name+' Lab';
     close();return;
   }
