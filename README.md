@@ -4,14 +4,14 @@
 
 # PacketLab
 
-### Veyra Network Simulation Studio · v0.11.0
+### Veyra Network Simulation Studio · v0.11.1
 
 **Build a Network. Send packets. Understand the consequences.**
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [⬇ Android APK](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇩🇪 Deutsche README](README.de.md) · [🛠 Issues](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Platform-Android%2010+-9469d6?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.11.0-bf83ef?style=for-the-badge" alt="Version 0.11.0">
+<img src="https://img.shields.io/badge/Version-0.11.1-bf83ef?style=for-the-badge" alt="Version 0.11.1">
 <img src="https://img.shields.io/badge/Network%20Model-Offline-5f9c78?style=for-the-badge" alt="Offline simulation">
 <img src="https://img.shields.io/badge/Projects-.pklab%20v3-7241aa?style=for-the-badge" alt=".pklab v3">
 
@@ -27,6 +27,14 @@
 
 > [!IMPORTANT]
 > PacketLab is an **offline virtual network simulator**. Its hosts, routers, services, vulnerability tests, CLI, firewalls and packets are **models**, not actual Linux VMs, Cisco IOS binaries or Internet connections. Threat, spoofing, firewall bypass, traffic flood, outage and simulated compromise features never send real attacks or change any external devices.
+
+## PacketLab v0.11.1: building and topology UI fixes
+
+Building mode is opt-in and moved to the bottom of the device library. The top topology picker now offers all 18 templates with configurable size, auto-fit and a correct selected name. The book and studio icons are stable, consistent SVGs without overlapping badges.
+
+[Release notes](releases/v0.11.1.md) · [Technical details](docs/PACKETLAB_TOPOLOGY_UI_V0111.md)
+
+![Topology picker](docs/assets/app-v111-topologies.png)
 
 ## PacketLab v0.11.0 — Training Academy and Touch Fix
 
@@ -113,12 +121,12 @@ This release concentrates on **trustworthy simulation behavior**, **mobile usabi
 
 | Android | Details |
 | :-- | :-- |
-| **Current** | **PacketLab v0.11.0** |
+| **Current** | **PacketLab v0.11.1** |
 | **Package** | \`ctrl.mietze.veyrapacketlab\` |
 | **Platform** | Android 10+ (\`minSdk 29\`) |
 | **Format** | Installable APK |
-| **Where** | [GitHub Release v0.11.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.0) |
-| **Direct APK** | [PacketLab-v0.11.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.11.0/PacketLab-v0.11.0-Android.apk) |
+| **Where** | [GitHub Release v0.11.1](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.1) |
+| **Direct APK** | [PacketLab-v0.11.1-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.11.1/PacketLab-v0.11.1-Android.apk) |
 
 Release assets include **\`SHA256SUMS.txt\`** to verify that your download matches the published file.
 

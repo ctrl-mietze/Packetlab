@@ -610,7 +610,7 @@ const newPresets=[
  ['branch','Branch Office','Zweigstellen und WAN-Router','◇'],
  ['school','Schulnetz','Arbeitsplätze, WLAN und Server','▦']
 ];
-function buildExtraPreset(key){
+function buildExtraPreset(key,size){
   const typeConversions={
     home:['router','ap','phone','iot','camera','pc','laptop','nas'],
     dmz:['firewall','router','server','server','switch','pc','dns','ids','cloud'],
@@ -620,8 +620,9 @@ function buildExtraPreset(key){
     school:['router','switch','switch','pc','pc','laptop','laptop','ap','server','printer','wlc']
   };
   const mapping=typeConversions[key];
-  if(!mapping){N.presetBuild(key,key==='random'?24:undefined);return}
-  N.presetBuild('hybrid',Math.max(8,mapping.length),{});
+  const requested=Math.max(3,Math.min(40,Math.round(Number(size)||mapping?.length||8)));
+  if(!mapping){N.presetBuild(key,requested,{skipDraft:true});return}
+  N.presetBuild('hybrid',requested,{skipDraft:true});
   for(let i=0;i<S.devices.length;i++){
     const d=S.devices[i],kind=mapping[i%mapping.length];
     if(!Topologies.TYPES[kind])continue;
@@ -685,6 +686,7 @@ function buildExtraPreset(key){
   C.refresh();
 }
 function openPresets(){
+  if(window.PacketLabV111Topology?.openPresets)return window.PacketLabV111Topology.openPresets();
   const current=N.lab.preset;
   N.open('Netzwerkvorlagen · Presets',
     '<div class="v07-hero"><b>Welches Netzwerk möchtest du bauen?</b>'+
@@ -979,7 +981,7 @@ document.querySelector('.v-nav')?.addEventListener('click',e=>{
     if(tab==='inspect')openInspector();else openAnalysis();
   }
 },true);
-window.PacketLabV07={openGuide,openPresets,openInspector,openAnalysis,
+window.PacketLabV07={openGuide,openPresets,buildExtraPreset,openInspector,openAnalysis,
   openStudio,openFirewallAdvanced,openModules,openSmartphone,maskPrefix,
   validMask,inside,networkCheck,settings};
 console.info('PacketLab 0.7 Mobile Studio: guide, inspector, analysis, modules, presets and touch additions ready');

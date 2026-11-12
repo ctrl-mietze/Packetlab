@@ -14,6 +14,8 @@ const types={
   corridor:{title:'Flur',w:270,h:55},
   stairs:{title:'Treppe',w:95,h:95}
 };
+// All newly opened sessions and loaded projects begin with building mode OFF.
+if(N.lab)N.lab.v9Building=false;
 const enabled=()=>window.PacketLabV09Training?.role()==='network'&&N.lab.v9Building===true;
 let pending=null,activeDrag=null;
 const stage=document.querySelector('.stage'),side=document.querySelector('#vr-device-browser')||document.querySelector('.panel--left');
@@ -28,7 +30,8 @@ const svg=$('v9-building-svg');
 const toggle=document.createElement('button');toggle.id='v9-building-toggle';toggle.type='button';
 toggle.innerHTML='<span>▦</span><span><b>Gebäudemodus</b><small>Räume, Treppen, Etagen und Grundrisse</small></span>';
 toggle.className='v9-building-toggle';
-if(side)side.insertBefore(toggle,side.firstElementChild?.nextSibling||null);
+// Optional tool belongs after all device and infrastructure entries.
+if(side)side.append(toggle);
 const floorShortcut=document.createElement('button');floorShortcut.id='v9-building-shortcut';floorShortcut.type='button';
 floorShortcut.className='v-fab v9-building-shortcut';floorShortcut.innerHTML='▦ <span>Gebäude</span>';
 floorShortcut.onclick=editPage;
@@ -144,9 +147,16 @@ svg.addEventListener('pointermove',e=>{
 function stopDrag(){activeDrag=null}
 svg.addEventListener('pointerup',stopDrag);
 svg.addEventListener('pointercancel',stopDrag);
-window.addEventListener('veyra-project-loaded',()=>setTimeout(draw,120));
+window.addEventListener('veyra-project-loaded',()=>setTimeout(()=>{
+  if(N.lab)N.lab.v9Building=false;
+  draw();
+},120));
 window.addEventListener('veyra:graphchange',()=>{if(layer.hidden&&!enabled())return;
  if(!activeDrag)draw()});
+window.addEventListener('packetlab:v09-role-change',()=>{
+  if(window.PacketLabV09Training?.role()!=='network'&&N.lab)N.lab.v9Building=false;
+  draw();
+});
 document.querySelector('.v-nav')?.addEventListener('click',()=>setTimeout(draw,0));
 window.PacketLabV09Building={toggle:toggleMode,draw,editPage,get enabled(){return enabled()}};
 draw();

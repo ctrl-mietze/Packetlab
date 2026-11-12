@@ -1,0 +1,92 @@
+/* PacketLab 0.11.1: neutral icon consistency, all-topology picker, optional building mode.
+ * Adds to existing Veyra OLED design; no redesign of core network canvas.
+ */
+#v8-app-version{display:none!important}
+#v9-book{position:relative!important;z-index:1!important;isolation:isolate!important;
+ overflow:hidden!important;box-sizing:border-box!important}
+#v9-book::before,#v9-book::after{content:none!important;display:none!important}
+#v9-book svg{width:20px!important;height:20px!important;flex:0 0 20px!important;
+ position:static!important;display:block!important;pointer-events:none!important}
+#v9-book>span{display:none!important}
+.topo-pick{display:inline-flex!important;align-items:center!important;
+ flex:0 1 auto!important;min-width:0!important;max-width:min(35vw,148px)!important;
+ overflow:hidden!important;gap:5px!important;padding:7px 9px!important}
+#topoPickIco{width:19px!important;min-width:19px!important;height:19px!important;
+ display:grid!important;place-items:center!important;flex:0 0 19px!important;
+ font-size:0!important;color:#ddbcf1!important}
+#topoPickIco svg{display:block!important;width:18px!important;height:18px!important}
+#topoPickName{display:block!important;flex:1 1 auto!important;min-width:0!important;
+ overflow:hidden!important;white-space:nowrap!important;text-overflow:ellipsis!important;
+ line-height:1.3!important}
+.topo-pick__caret{flex-shrink:0!important;margin:0!important;color:#cba7e5!important}
+#pl-morepresets.v112-icon-clean,#pl-simtool.v112-icon-clean{display:grid!important;place-items:center!important;
+ min-width:35px!important;min-height:35px!important;color:#e5c3f5!important;font-size:0!important}
+.v112-icon-clean svg{width:20px!important;height:20px!important;display:block!important}
+.v112-building-symbol{display:grid;place-items:center}
+.v112-building-symbol svg{width:24px;height:24px;color:#d9afea}
+/* Building tool is a consciously enabled optional device-list tool at the very bottom. */
+#v9-building-toggle{order:9999!important;margin:28px 8px 8px!important;
+ border:1px solid #42314d!important;border-radius:11px!important;
+ background:#17111e!important;color:#d9c6e9!important;
+ box-shadow:none!important;min-height:61px!important;width:calc(100% - 16px)!important;
+ max-width:none!important;display:flex!important}
+#v9-building-toggle:not(.is-on){opacity:.78}
+#v9-building-toggle.is-on{background:#342344!important;
+ border-color:#b486d6!important;opacity:1!important}
+#v9-building-toggle[hidden]{display:none!important}
+#v9-building-shortcut svg{width:19px;height:19px;flex:0 0 19px}
+#v9-building-shortcut[hidden]{display:none!important}
+.v112-preset-header{display:flex;flex-direction:column;gap:11px;
+ padding:15px;background:#2b2037;border:1px solid #543e68;border-radius:13px}
+.v112-preset-header>div:first-child{display:flex;flex-direction:column;gap:7px}
+.v112-preset-header strong{font-size:15px;color:#f7e7ff;font-weight:850}
+.v112-preset-header small{font-size:11px;color:#c4b0d2;line-height:1.55}
+.v112-preset-current{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
+ border-radius:9px;background:#3b2a4a;border:1px solid #5c4270;
+ color:#ddc0f1;font-size:11px;font-weight:800;padding:8px 10px}
+.v112-preset-current svg{width:18px;height:18px;color:#d6b0ef}
+.v112-size{display:flex;align-items:center;justify-content:space-between;
+ gap:10px;margin:14px 0 8px;font-size:12px;font-weight:820;color:#e7d2f6}
+.v112-size>div{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.v112-size button{display:grid;place-items:center;width:35px;height:35px;min-width:35px;
+ border:1px solid #604675;border-radius:9px;background:#332541;color:#e2b9fc}
+.v112-size button svg{width:16px;height:16px}
+.v112-size input{background:#21192b!important;color:#f3e2fc!important;
+ border:1px solid #6d5081!important;width:65px!important;min-width:65px!important;
+ padding:7px 5px!important;border-radius:9px!important;
+ min-height:35px!important;text-align:center!important;font-size:14px!important;
+ font-weight:830!important}
+.v112-sizes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0}
+.v112-sizes button{border-radius:9px;background:#281d34;
+ border:1px solid #493753;min-height:43px;padding:8px 4px;
+ font-size:10px;font-weight:750;color:#cdb4de}
+.v112-sizes button.active{background:#52356a;border-color:#ab7fd6;color:#f5dfff}
+.v112-preset-caption{font-size:11px;color:#bda6cb;line-height:1.55;margin:11px 2px}
+.v112-preset-caption strong{color:#e7c1fa}
+.v112-preset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:8px;margin-top:11px;padding-bottom:5px}
+.v112-topo-option{position:relative;display:flex;align-items:center;gap:10px;
+ text-align:left;min-width:0;min-height:84px;background:#20172a;
+ color:#eedef8;border:1px solid #433250;border-radius:12px;padding:11px 10px}
+.v112-topo-option:hover{border-color:#9d74c1;background:#30233e}
+.v112-topo-option.active{border-color:#b58adc;background:#3b2750}
+.v112-topo-icon{display:grid;place-items:center;flex:0 0 35px;width:35px;height:35px;
+ border-radius:10px;border:1px solid #5a3f70;background:#39274b;color:#e0b8f5}
+.v112-topo-icon svg{width:21px;height:21px}
+.v112-topo-option>span:nth-child(2){display:flex;min-width:0;flex:1;
+ flex-direction:column;gap:5px}
+.v112-topo-option strong{font-size:12px;line-height:1.35;font-weight:830;color:#f4e5ff}
+.v112-topo-option small{font-size:10px;line-height:1.5;color:#bbaaC8}
+.v112-topo-arrow svg{width:15px;height:15px;color:#c298df}
+@media(max-width:600px){
+ .v112-preset-grid{grid-template-columns:1fr}
+ .v112-topo-option{min-height:62px}
+ .v112-sizes button{font-size:9px;white-space:nowrap}
+}
+@media(max-width:420px){
+ .topo-pick{max-width:min(31vw,118px)!important;padding:7px 5px!important;gap:3px!important}
+ #topoPickIco{min-width:16px!important;flex-basis:16px!important;width:16px!important}
+ #topoPickIco svg{width:16px!important;height:16px!important}
+ #v9-book{min-width:34px!important;flex-basis:34px!important}
+ .v112-size{font-size:11px}
+}
