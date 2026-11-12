@@ -52,6 +52,29 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  await shot('v07-smoke-inspector.png');
  await test('analysis',function(){PacketLabV07.openAnalysis();return {title:document.querySelector('.pl-head strong')?.textContent,score:document.querySelector('.v07-score-line')?.textContent,issues:document.querySelectorAll('.v07-issue').length}});
  await test('modules',function(){const d=VeyraCore.state.devices.find(x=>x.type==='pc')||VeyraCore.state.devices[0];PacketLabV07.openModules(d.id);return {title:document.querySelector('.pl-head strong')?.textContent,count:document.querySelectorAll('[data-v07-module]').length}});
+ await test('deviceMenuLayout071',async function(){
+   const d=VeyraCore.state.devices.find(x=>x.type==='pc');
+   VeyraNext.showDeviceActions(d.id);
+   await new Promise(resolve=>setTimeout(resolve,80)); // shared icon decorator
+   const rows=[...document.querySelectorAll('#pl-sheet .pl-options > button')];
+   const fixed=rows.filter(b=>b.matches('.v07-device-entry,.v07-firewall-row'));
+   if(fixed.length!==4)throw new Error('Expected 4 new menu rows, got '+fixed.length);
+   return fixed.map(b=>{
+      const css=getComputedStyle(b), icons=b.querySelectorAll(':scope > .vr-option-icon');
+      if(icons.length!==1)throw new Error('Double or missing icon: '+b.textContent);
+      if(!b.querySelector(':scope > b')||!b.querySelector(':scope > small'))
+        throw new Error('Invalid nested row layout: '+b.textContent);
+      if(css.display!=='grid')throw new Error('Row not a grid: '+css.display);
+      if(css.borderTopWidth!=='0px'||css.borderLeftWidth!=='0px')
+        throw new Error('Unexpected border: '+css.border);
+      return {label:b.querySelector(':scope > b').textContent,
+        icons:icons.length,display:css.display,background:css.backgroundColor,
+        columns:css.gridTemplateColumns,borderLeft:css.borderLeftWidth};
+   });
+ });
+ await send('Emulation.setDeviceMetricsOverride',{width:414,height:1194,deviceScaleFactor:1,mobile:true});
+ await shot('v071-smoke-device-menu.png');
+ await send('Emulation.setDeviceMetricsOverride',{width:414,height:896,deviceScaleFactor:1,mobile:true});
  await test('mobilePhone',function(){const d=VeyraCore.state.devices.find(x=>x.type==='phone');if(!d)return {exists:false};PacketLabV07.openSmartphone(d.id);return {title:document.querySelector('.pl-head strong')?.textContent,os:document.querySelector('#v07-mobile-os')?.value}});
  await test('firewall',function(){const d=VeyraCore.state.devices.find(x=>x.type==='pc')||VeyraCore.state.devices[0];PacketLabV07.openFirewallAdvanced(d.id);return {title:document.querySelector('.pl-head strong')?.textContent,ruleForm:!!document.querySelector('#v07-rule-source'),max:document.querySelectorAll('[data-v07-rule]').length}});
  await test('ruleRangesCIDR',function(){const d=VeyraCore.state.devices.find(x=>x.type==='pc')||VeyraCore.state.devices[0];const root=document.querySelector('#pl-sheet');if(!root.querySelector('#v07-rule-source'))return 'no form';

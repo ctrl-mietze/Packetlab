@@ -36,6 +36,11 @@ function decorateCurrentSheet(){
       master:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/>',
       file:'<path d="M4 6h7l2 2h7v12H4z"/>',
       network:'<circle cx="12" cy="4" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M11 6l-5 11M13 6l5 11M7 19h10"/>',
+      shield:'<path d="M12 2 20 6v6c0 5-3.6 8-8 10-4.4-2-8-5-8-10V6z"/><path d="m9 12 2 2 4-4"/>',
+      module:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h3v4H7zM14 10h3M14 14h3M7 3v3M17 3v3M7 18v3M17 18v3"/>',
+      move:'<path d="M12 2v20M2 12h20M8 6l4-4 4 4M8 18l4 4 4-4M6 8l-4 4 4 4M18 8l4 4-4 4"/>',
+      phone:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+      service:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M7 7h10M7 11h10M7 15h10M8 18h2"/>',
       device:'<rect x="4" y="3" width="16" height="15" rx="2"/><path d="M8 21h8M12 18v3"/>'
     };
     const iconKey=/terminal|konsole/.test(name)?'terminal':
@@ -44,6 +49,11 @@ function decorateCurrentSheet(){
       /einschalten|ausschalten|power/.test(name)?'power':
       /master|aufgabe/.test(name)?'master':
       /datei|projekt|ordner/.test(name)?'file':
+      /firewall|schutz/.test(name)?'shield':
+      /hardware|module/.test(name)?'module':
+      /verschieb/.test(name)?'move':
+      /android|ios|smartphone/.test(name)?'phone':
+      /dienste|server/.test(name)?'service':
       /netzwerk|standard/.test(name)?'network':'device';
     ico.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"'+
       ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[iconKey]+'</svg>';

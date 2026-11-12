@@ -4,14 +4,14 @@
 
 # PacketLab
 
-### Veyra Network Simulation Studio · v0.7.0
+### Veyra Network Simulation Studio · v0.7.1
 
 **Build a Network. Send packets. Understand the consequences.**
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [⬇ Android APK](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇩🇪 Deutsche README](README.de.md) · [🛠 Issues](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Platform-Android%2010+-9469d6?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.7.0-bf83ef?style=for-the-badge" alt="Version 0.7.0">
+<img src="https://img.shields.io/badge/Version-0.7.1-bf83ef?style=for-the-badge" alt="Version 0.7.1">
 <img src="https://img.shields.io/badge/Network%20Model-Offline-5f9c78?style=for-the-badge" alt="Offline simulation">
 <img src="https://img.shields.io/badge/Projects-.pklab%20v3-7241aa?style=for-the-badge" alt=".pklab v3">
 
@@ -27,6 +27,12 @@
 
 > [!IMPORTANT]
 > PacketLab is an **offline virtual network simulator**. Its hosts, routers, services, vulnerability tests, CLI, firewalls and packets are **models**, not actual Linux VMs, Cisco IOS binaries or Internet connections. Threat, spoofing, firewall bypass, traffic flood, outage and simulated compromise features never send real attacks or change any external devices.
+
+## v0.7.1 — Device menu hotfix
+
+The device menu now uses consistent OLED list rows. Removed the unintended violet tiles, double icons and the colored Software Firewall outline. Existing device actions and all simulator functions remain available.
+
+![Fixed Android device menu](docs/assets/app-v071-device-menu.png)
 
 ## New in v0.7.0
 
@@ -59,12 +65,12 @@ This release concentrates on **trustworthy simulation behavior**, **mobile usabi
 
 | Android | Details |
 | :-- | :-- |
-| **Current** | **PacketLab v0.7.0** |
+| **Current** | **PacketLab v0.7.1** |
 | **Package** | \`ctrl.mietze.veyrapacketlab\` |
 | **Platform** | Android 10+ (\`minSdk 29\`) |
 | **Format** | Installable APK |
-| **Where** | [GitHub Release v0.7.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.7.0) |
-| **Direct APK** | [PacketLab-v0.7.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.7.0/PacketLab-v0.7.0-Android.apk) |
+| **Where** | [GitHub Release v0.7.1](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.7.1) |
+| **Direct APK** | [PacketLab-v0.7.1-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.7.1/PacketLab-v0.7.1-Android.apk) |
 
 Release assets include **\`SHA256SUMS.txt\`** to verify that your download matches the published file.
 
