@@ -231,7 +231,15 @@ const Render = (() => {
     cloud:{r:24,accent:'#cdb5ff'}
   });
   Object.assign(ICONS, {
-    phone:ICONS.laptop,camera:ICONS.pc,iot:ICONS.ap,plc:ICONS.server,
+    phone(ctx,a) {
+      // Independent smartphone glyph: rounded frame, screen, status speaker.
+      box3d(ctx,-8,-14,16,28,3,3,a);
+      ctx.fillStyle=shade(a,-.68);ctx.fillRect(-6.5,-11.5,13,22.1);
+      ctx.fillStyle=shade(a,.55);
+      ctx.beginPath();ctx.roundRect(-5.7,-10.6,11.4,19.8,1.4);ctx.fill();
+      ctx.fillStyle='#e7cbff';ctx.fillRect(-2.8,-12.3,5.6,1);
+      ctx.fillStyle='#d1a4f6';ctx.beginPath();ctx.arc(0,11.2,.9,0,Math.PI*2);ctx.fill();
+    },camera:ICONS.pc,iot:ICONS.ap,plc:ICONS.server,
     dns:ICONS.server,dhcp:ICONS.server,modem:ICONS.router,
     loadbalancer:ICONS.switch,cloud:ICONS.router
   });

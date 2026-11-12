@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.7.0] — 2026-11-12
+
+### Added
+
+- Touch-safe placement and explicit move mode; optional series placement, conservative scroll gestures and Android WebView zoom restrictions outside canvas.
+- Network Studio, 18 topology presets, task-to-topology picker, Network Guide with IPv4 subnetting calculator.
+- Device module manager; Android/iOS profiles; virtual root/repeater only with Crazy Mode.
+- Firewall Studio PRO: CIDR, port ranges, rule ordering, rate/burst/inspection, logs.
+- Inspector, diagnostic Analysis, OSI/PDU hop trace and filterable event logs.
+- Virtual OS-specific command aliases for Cisco IOS, Windows, Android and iOS.
+- Quick send with collapsed packet console; top-right Play/Stop without displayed timer; safe back/exit.
+- Optional benign periodic ICMP communication, never autonomous security tests.
+
+### Correctness / Compatibility
+
+- Contiguous netmask and gateway checks; per-device hardware/interface transmission constraints.
+- Smartphone symbols distinct from laptops; mobile preset uses AP wireless links, not phones as transit routers.
+- Preserves existing v0.6/TopoLab source files, network controls and .pklab v3 world format.
+- Android v0.6/v0.7 debug signing certificate digests match.
+- Cisco feature comparison documents supported, partial and unsupported simulation features.
+
+### Verification
+
+- 12 core tests; 18 v0.6 model tests; 26 mobile Chromium UI smoke checks with zero JavaScript exceptions; Gradle Android build.
+
+
 ## [0.6.0] — 2026-11-02
 
 ### Added

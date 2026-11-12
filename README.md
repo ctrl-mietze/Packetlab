@@ -4,14 +4,14 @@
 
 # PacketLab
 
-### Veyra Network Simulation Studio · v0.6.0
+### Veyra Network Simulation Studio · v0.7.0
 
 **Build a Network. Send packets. Understand the consequences.**
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [⬇ Android APK](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇩🇪 Deutsche README](README.de.md) · [🛠 Issues](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Platform-Android%2010+-9469d6?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.6.0-bf83ef?style=for-the-badge" alt="Version 0.6.0">
+<img src="https://img.shields.io/badge/Version-0.7.0-bf83ef?style=for-the-badge" alt="Version 0.7.0">
 <img src="https://img.shields.io/badge/Network%20Model-Offline-5f9c78?style=for-the-badge" alt="Offline simulation">
 <img src="https://img.shields.io/badge/Projects-.pklab%20v3-7241aa?style=for-the-badge" alt=".pklab v3">
 
@@ -28,6 +28,23 @@
 > [!IMPORTANT]
 > PacketLab is an **offline virtual network simulator**. Its hosts, routers, services, vulnerability tests, CLI, firewalls and packets are **models**, not actual Linux VMs, Cisco IOS binaries or Internet connections. Threat, spoofing, firewall bypass, traffic flood, outage and simulated compromise features never send real attacks or change any external devices.
 
+## New in v0.7.0
+
+PacketLab adds a touch-first editor, deliberate device movement, 18 curated topology presets, a Network Guide with IPv4 subnet calculator, detailed per-device Inspector, diagnostic Analysis, PDU hop/OSI Inspector and event explorer. Device-specific modules, virtual Android/iOS and IOS/Windows terminals, expanded CIDR/port-range firewall rules and a safer Android exit menu are included.
+
+Basic traffic is simulated locally; security scenarios only run on explicit user action. Older features and .pklab v3 compatibility are preserved.
+
+[Feature comparison with Cisco Packet Tracer 9](docs/CISCO_PACKET_TRACER_9_FEATURE_MATRIX.md) · [Release notes](releases/v0.7.0.md)
+
+<table>
+<tr>
+<td width="33%" align="center"><img src="docs/assets/app-v07-studio.png" width="100%" alt="PacketLab Studio on Android portrait viewport"><b>Studio & Presets</b></td>
+<td width="33%" align="center"><img src="docs/assets/app-v07-inspector.png" width="100%" alt="PacketLab device inspector with logs"><b>Inspector</b></td>
+<td width="33%" align="center"><img src="docs/assets/app-v07-pdu.png" width="100%" alt="PDU hop inspector"><b>PDU Inspector</b></td>
+</tr>
+</table>
+
+
 ## Welcome to PacketLab 💜
 
 **PacketLab** is a hands-on computer networking studio designed to make more of the packet journey visible: you can build a topology, wire devices, configure simulated network systems, generate traffic, inspect what traversed each node and see why a firewall, route or host accepted or blocked it.
@@ -42,12 +59,12 @@ This release concentrates on **trustworthy simulation behavior**, **mobile usabi
 
 | Android | Details |
 | :-- | :-- |
-| **Current** | **PacketLab v0.6.0** |
+| **Current** | **PacketLab v0.7.0** |
 | **Package** | \`ctrl.mietze.veyrapacketlab\` |
 | **Platform** | Android 10+ (\`minSdk 29\`) |
 | **Format** | Installable APK |
-| **Where** | [GitHub Release v0.6.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.6.0) |
-| **Direct APK** | [PacketLab-v0.6.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.6.0/PacketLab-v0.6.0-Android.apk) |
+| **Where** | [GitHub Release v0.7.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.7.0) |
+| **Direct APK** | [PacketLab-v0.7.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.7.0/PacketLab-v0.7.0-Android.apk) |
 
 Release assets include **\`SHA256SUMS.txt\`** to verify that your download matches the published file.
 

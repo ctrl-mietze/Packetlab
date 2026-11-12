@@ -175,6 +175,9 @@ public final class MainActivity extends Activity {
     }
 
     public final class NativeBridge {
+        @JavascriptInterface public void finishApp() {
+            runOnUiThread(() -> MainActivity.this.finish());
+        }
         @JavascriptInterface public void savePng(String dataUrl) {
             if (dataUrl == null || !dataUrl.startsWith("data:image/png;base64,") || dataUrl.length() > 24_000_000) {
                 toast("Ungültiges PNG");
