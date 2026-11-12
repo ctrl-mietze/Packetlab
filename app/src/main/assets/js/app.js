@@ -331,7 +331,12 @@
         const local=view.toLocal({clientX:startX,clientY:startY});
         const device=view.hitDevice(state.devices,local.x,local.y);
         const wire=device?null:view.hitLink(state.links,state.devices,local.x,local.y);
-        if(!device&&!wire&&window.PacketLabV09QuickEdit?.openAt?.(startX,startY,local))return;
+        if(!device&&!wire){
+          // Quick Edit is free-Network-Lab only. Nothing opens on empty
+          // builder/training canvas and the old Canvas menu is retired.
+          window.PacketLabV09QuickEdit?.openAt?.(startX,startY,local,{pointerId:e.pointerId});
+          return;
+        }
         openMenuAt(startX, startY);
       }, 720) };
     }
@@ -433,6 +438,9 @@
       return;
     }
 
+    // After long-press opens Quick Edit, pointer capture remains on canvas.
+    // Stop canvas panning while the finger moves across the radial menu.
+    if(window.PacketLabV09QuickEdit?.isOpen)return;
     const p = view.toLocal(e);
 
     /* Ungli thodi si bhi hili to wo long-press nahi, drag hai */
@@ -511,6 +519,10 @@
 
   window.addEventListener('pointerup', (e) => {
     endPointer(e);
+    if(window.PacketLabV09QuickEdit?.isOpen){
+      state.panning=null;state.pendingPlacement=null;state.dragging=null;
+      state.linkFrom=null;state.linkPreview=null;return;
+    }
     if (state.panning) {
       const pan=state.panning;
       if (!pan.moved && state.tool === 'select') {
@@ -869,7 +881,11 @@
       window.VeyraRefine.showCableActions(l.id); return;
     }
     else if (l) openCtx(clientX, clientY, cableTitle(l), cableMenu(l, p));
-    else        openCtx(clientX, clientY, 'Canvas', canvasMenu(p));
+    else if(window.PacketLabV09Training?.role?.()==='network'){
+      window.PacketLabV09QuickEdit?.openAt?.(clientX,clientY,p,{mouse:true});
+      // Never reveal the obsolete CANVAS context menu on empty free-lab space.
+    } // Empty-space context menus are disabled in Training/Builder.
+    // All free-lab Quick Edit actions live in the gesture controller.
   }
 
   canvas.addEventListener('contextmenu', (e) => {

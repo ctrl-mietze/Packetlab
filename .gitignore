@@ -70,3 +70,10 @@ __pycache__/
 /v10-browser-run.log
 /packetlab-v10-smoke-report.json
 /packetlab-v10-gradle.log
+
+# v0.11 generated test artifacts
+/edge-v11-smoke/
+/v11-*.png
+/v11-browser-run.log
+/v11-gradle.log
+/packetlab-v11-smoke-report.json

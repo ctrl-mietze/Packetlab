@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.11.0] — 2026-11-12
+
+### Training & Net@Lab
+- One playable, simulated exercise for each Net@Lab chapter, with course overview, intentional Start and four difficulties.
+- Difficulty-adjusted baseline configurations: one to four independent goals and zero to three hints per task.
+- The book icon opens objectives and mini tips in a running training; the encyclopedia remains separately accessible.
+- 20 Fundamentals and 20 IPv4 articles, including complete worked subnetting and VLSM examples. Total: 90 chapters.
+
+### Touch and navigation fixes
+- Removed the additional fifth bottom tab: stable single four-tab row in Network, Builder and Training.
+- Removed legacy CANVAS menu on empty canvas.
+- Replaced free-lab long-press Quick Edit with a compact, deliberate move/dwell/release gesture that cannot select before finger movement.
+- Preserved device/cable context menus and existing .worklab/.pklab libraries.
+
+### Verification
+- Original core/model test suites, mobile Chromium chapter/training/gesture/geometry tests and Android debug build.
+
+
 ## [0.10.0] — 2026-11-12
 
 ### Net@Lab V2 interactive education

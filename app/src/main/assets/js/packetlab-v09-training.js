@@ -55,13 +55,12 @@ function storeRole(r){
  document.body.dataset.labRole=r;
  window.PacketLabV09Building?.draw?.();
  window.dispatchEvent(new Event('packetlab:v09-role-change'));
+ // Exactly four bottom navigation tabs in all modes. The book at the top
+ // provides the task sheet in training; no 5th item can wrap onto row two.
  const nav=document.querySelector('.v-nav');
- let tab=nav?.querySelector('[data-tab="v9training"]');
- if(r==='network'){tab?.remove();return}
- if(nav&&!tab){tab=document.createElement('button');tab.dataset.tab='v9training';tab.type='button';
-  tab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h4"/></svg><span>Aufgaben</span>';
-  nav.append(tab);}
- tab.onclick=e=>{e.preventDefault();e.stopImmediatePropagation();r==='builder'?builderPage():playerPage()};
+ nav?.querySelectorAll('[data-tab="v9training"]').forEach(tab=>tab.remove());
+ nav?.classList.remove('pl-mastermode','v11-five-tabs');
+ nav?.classList.add('v11-four-tabs');
 }
 function library(){
  try{const db=JSON.parse(localStorage.getItem(K)||'{}');
@@ -330,7 +329,7 @@ function openWorklab(data,opts={}){
  if(opts.save!==false)
    libraryPut('training',work.title,JSON.stringify(work),work.id,{state:'ready',kind:'worklab'});
  N.close();
- setTimeout(()=>playerPage(true),120);
+ setTimeout(()=>{if(window.PacketLabV11Training?.taskBook)PacketLabV11Training.taskBook(true);else playerPage(true)},120);
  notify('Network Lab Training: '+work.title);
 }
 function scoreReport(){
@@ -404,7 +403,7 @@ function showShelf(kind){
  const items=library()[kind];
  N.open(TITLES[kind]+' · Bibliothek',
   '<div class="v9-header"><b>'+TITLES[kind]+'</b><small>Alle gespeicherten Labs dieser Kategorie: Öffnen, umbenennen, löschen, importieren und exportieren.</small></div>'+
-  '<div class="v9-actions">'+button('new','Neues Lab','v9-primary')+
+  '<div class="v9-actions">'+button('new',kind==='training'?'Training öffnen':'Neues Lab','v9-primary')+
    button('import','Datei importieren')+'</div>'+
   '<div class="v9-library-list">'+(items.length?items.map(item=>
    '<article class="v9-library-item"><div><strong>'+esc(item.title)+'</strong>'+
@@ -419,7 +418,8 @@ function showShelf(kind){
  root=>{
   const lookup=id=>library()[kind].find(x=>x.id===id);
   root.querySelector('[data-v9="home"]').onclick=modePage;
-  root.querySelector('[data-v9="new"]').onclick=()=>kind==='training'?trainingTemplates():createLab(kind);
+  root.querySelector('[data-v9="new"]').onclick=()=>kind==='training'?
+   (window.PacketLabV11Training?.openCatalog?.()||trainingTemplates()):createLab(kind);
   root.querySelector('[data-v9="import"]').onclick=importFile;
   root.querySelectorAll('[data-v9-open]').forEach(b=>b.onclick=()=>{
    const item=lookup(b.dataset.v9Open);if(!item)return;
@@ -455,6 +455,7 @@ function cloneWorklab(work){
  notify('Bearbeitungskopie erstellt. Original bleibt unverändert.');
 }
 function trainingTemplates(){
+ if(window.PacketLabV11Training?.openCatalog)return window.PacketLabV11Training.openCatalog();
  N.open('Fertige Network Trainings',
   '<div class="v9-header"><b>Training starten</b><small>Wähle eine spielbereite Lernaufgabe oder importiere eine .worklab-Datei.</small></div>'+
   '<div class="v9-menu-list">'+TEMPLATES.map(([key,title,desc,tasks])=>
@@ -532,7 +533,9 @@ N.load=function(raw){const value=originalOpen(raw);storeRole(role());return valu
 const book=$('v9-book');
 if(book)book.addEventListener('click',e=>{
  if(role()!=='training')return;
- e.preventDefault();e.stopImmediatePropagation();playerPage();
+ e.preventDefault();e.stopImmediatePropagation();
+ if(window.PacketLabV11Training?.taskBook)PacketLabV11Training.taskBook();
+ else playerPage();
 },true);
 document.querySelector('.brand__logo')?.addEventListener('click',e=>{
  e.preventDefault();e.stopImmediatePropagation();modePage();
