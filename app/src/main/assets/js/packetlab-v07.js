@@ -280,8 +280,10 @@ N.showDeviceActions=function(id){
   const d=dev(id),root=$('pl-sheet')?.querySelector('.pl-options');
   if(!root||!d)return;
   const b=(name,title,sub,handler)=>{
-    const e=make('button','vr-option v07-device-entry',
-      '<span class="v07-device-symbol">◇</span><span><b>'+esc(title)+'</b><small>'+esc(sub)+'</small></span>');
+    // Let the established v0.5 device-row decorator provide the ONE icon.
+    // Nested custom spans caused its CSS grid to create empty purple tiles.
+    const e=make('button','v07-device-entry',
+      '<b>'+esc(title)+'</b><small>'+esc(sub)+'</small>');
     e.type='button';e.dataset.v07Entry=name;e.onclick=handler;root.append(e);
   };
   b('modules','Hardware & Module','Netzwerkadapter, Funk, SFP und Schnittstellen',()=>openModules(id));
@@ -399,9 +401,9 @@ N.showDeviceActions=function(id){
   priorDevicePro(id);
   const d=dev(id),box=$('pl-sheet')?.querySelector('.pl-options');
   if(box&&d&&(E.isHost(d)||E.isFirewall(d))){
-    const b=make('button','vr-option v07-device-entry',
-      '<span class="v07-device-symbol">◇</span><span><b>Firewall Studio PRO</b>'+
-      '<small>CIDR, Portbereiche, Regelreihenfolge, Lastschutz & Logging</small></span>');
+    const b=make('button','v07-device-entry',
+      '<b>Firewall Studio PRO</b>'+
+      '<small>CIDR, Portbereiche, Regelreihenfolge, Lastschutz & Logging</small>');
     b.type='button';b.onclick=()=>openFirewallAdvanced(id);
     box.append(b);
   }

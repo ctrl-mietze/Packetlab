@@ -32,9 +32,11 @@
      box.querySelectorAll('[data-action="easy"],[data-action="more"]').forEach(b=>b.remove());
    }else if(E.isHost(device)||E.isFirewall(device)){
      const fw=document.createElement('button');
-     fw.type='button';fw.className='v06-firewall-entry';
-     fw.innerHTML=ICON.shield+'<span><b>'+(E.isHost(device)?'Software-Firewall konfigurieren':'Netzwerk-Firewall konfigurieren')+
-       '</b><small>Regeln, Default-Policy, Prüfung, Lastschutz und Logs</small></span>';
+     // Standard menu row: no special violet background/border or double icon.
+     // The shared device-row decorator inserts the shield exactly once.
+     fw.type='button';fw.className='v07-firewall-row';
+     fw.innerHTML='<b>'+(E.isHost(device)?'Software-Firewall konfigurieren':'Netzwerk-Firewall konfigurieren')+
+       '</b><small>Regeln, Default-Policy, Prüfung, Lastschutz und Logs</small>';
      fw.onclick=()=>openFirewall(id);
      const term=box.querySelector('[data-action="term"]');
      if(term)term.insertAdjacentElement('afterend',fw);else box.append(fw);

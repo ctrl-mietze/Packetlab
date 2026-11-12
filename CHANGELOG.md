@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.1] — 2026-11-12
+
+### Fixed
+
+- Device action rows: corrected conflict between the v0.5 grid decorator and v0.7 nested flex layout. No more empty purple rectangles, double icons, or displaced labels.
+- Software Firewall: removed special colored background/outline in favor of the same neutral list-row styling as Terminal and Device Log.
+- Added matching icons for firewall, module, services, phone and move actions.
+- Regression test validates each new menu row has exactly one icon, correct grid structure, no extra border and transparent background.
+
+
 ## [0.7.0] — 2026-11-12
 
 ### Added

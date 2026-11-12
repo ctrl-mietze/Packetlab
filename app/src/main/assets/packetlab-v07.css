@@ -96,11 +96,21 @@ button,select,input,textarea{ -webkit-tap-highlight-color:transparent }
 .v07-guide-list summary span{font-size:17px;color:#ca9aed}
 .v07-guide-list details[open] summary{border-bottom:1px solid var(--v07-line)}
 .v07-guide-list details p{font-size:12px;line-height:1.7;color:var(--v07-muted);padding:8px 0 13px}
-.v07-device-entry{display:flex!important;align-items:center;gap:14px;text-align:left!important}
-.v07-device-entry>span:last-child{display:flex;flex-direction:column;gap:5px;flex:1}
-.v07-device-entry b{font-size:13px}.v07-device-entry small{color:#c2b4d0;font-size:11px;line-height:1.4}
-.v07-device-symbol{display:grid;place-items:center;flex:0 0 45px;height:45px;
- border-radius:12px;border:1px solid var(--v07-line);background:#2d223b;color:#dbb1f7;font-size:21px}
+/* v0.7.1: device actions use the same two-column grid as legacy rows.
+   Do not force flex or add a second icon inside a row. */
+.pl-options>button.v07-device-entry.vr-option,
+.pl-options>button.v07-firewall-row.vr-option {
+  border:0;
+  border-bottom:1px solid #303030;
+  border-radius:0;
+  background:transparent;
+  color:#ededed;
+  min-height:70px;
+}
+.pl-options>button.v07-device-entry.vr-option:hover,
+.pl-options>button.v07-firewall-row.vr-option:hover {
+  background:#1e1e1e;
+}
 .v07-phone{display:flex;align-items:center;gap:15px;background:#251d31;border:1px solid var(--v07-line);
  border-radius:15px;padding:17px;margin:12px 0}
 .v07-phone>span{font-size:48px;color:#d3afff;line-height:1}

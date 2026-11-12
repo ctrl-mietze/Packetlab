@@ -4,14 +4,14 @@
 
 # PaketLab
 
-### Veyra Network Simulation Studio · v0.7.0
+### Veyra Network Simulation Studio · v0.7.1
 
 **Netzwerke bauen. Pakete senden. Folgen verstehen.** 💜
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [📦 APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇬🇧 English](README.md) · [🛠 Fehler melden](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Android-10%2B-9b69d9?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.7.0-c391f0?style=for-the-badge" alt="Version 0.7.0">
+<img src="https://img.shields.io/badge/Version-0.7.1-c391f0?style=for-the-badge" alt="Version 0.7.1">
 <img src="https://img.shields.io/badge/Simulation-Lokal-6baf8a?style=for-the-badge" alt="Lokal">
 
 <br><br>
@@ -25,6 +25,12 @@
 
 > [!IMPORTANT]
 > PaketLab ist ein **virtueller, lokaler Netzwerk-Simulator**. Router, PCs, virtuelle Exploits, Linux-/Cisco-Kommandos und Pakete werden modelliert. Es laufen keine echten IOS-Images, keine Linux-VMs und keine Angriffe auf reale Geräte oder Netzwerke. Ein simulierter Ausfall ist kein echter Geräteausfall.
+
+## Bugfix v0.7.1 — Gerätemenüs
+
+Die versehentlich erzeugten lila Rechtecke, doppelten Symbole und die farbige Umrandung der Software-Firewall wurden entfernt. Die Menüaktionen sind jetzt wieder einheitliche OLED-Zeilen wie Terminal und Geräte-Log. Alle Funktionen bleiben erhalten.
+
+![Korrigiertes Gerätemenü](docs/assets/app-v071-device-menu.png)
 
 ## Neu in v0.7.0
 
@@ -66,7 +72,7 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 
 ## 📥 Download
 
-**[PaketLab 0.7.0 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.7.0/PacketLab-v0.7.0-Android.apk)**
+**[PaketLab 0.7.1 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.7.1/PacketLab-v0.7.1-Android.apk)**
 
 | Angabe | Wert |
 | :-- | :-- |
@@ -74,7 +80,7 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 | Paket-ID | \`ctrl.mietze.veyrapacketlab\` |
 | Version | \`0.6.0\` |
 | Plattform | Android 10 oder neuer |
-| Download | [GitHub Release v0.7.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.7.0) |
+| Download | [GitHub Release v0.7.1](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.7.1) |
 | Prüfsummen | \`SHA256SUMS.txt\` im Release |
 
 Wenn eine selbst erstellte APK anders signiert ist als die bisher installierte App, lässt Android kein direktes Update zu. Vor einer Deinstallation unbedingt \`.pklab\`-Projekte und relevante App-Daten sichern.
