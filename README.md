@@ -4,14 +4,14 @@
 
 # PacketLab
 
-### Veyra Network Simulation Studio · v0.10.0
+### Veyra Network Simulation Studio · v0.11.0
 
 **Build a Network. Send packets. Understand the consequences.**
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [⬇ Android APK](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇩🇪 Deutsche README](README.de.md) · [🛠 Issues](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Platform-Android%2010+-9469d6?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.10.0-bf83ef?style=for-the-badge" alt="Version 0.10.0">
+<img src="https://img.shields.io/badge/Version-0.11.0-bf83ef?style=for-the-badge" alt="Version 0.11.0">
 <img src="https://img.shields.io/badge/Network%20Model-Offline-5f9c78?style=for-the-badge" alt="Offline simulation">
 <img src="https://img.shields.io/badge/Projects-.pklab%20v3-7241aa?style=for-the-badge" alt=".pklab v3">
 
@@ -27,6 +27,19 @@
 
 > [!IMPORTANT]
 > PacketLab is an **offline virtual network simulator**. Its hosts, routers, services, vulnerability tests, CLI, firewalls and packets are **models**, not actual Linux VMs, Cisco IOS binaries or Internet connections. Threat, spoofing, firewall bypass, traffic flood, outage and simulated compromise features never send real attacks or change any external devices.
+
+## PacketLab v0.11.0 — Training Academy and Touch Fix
+
+The **Network Lab Training** catalog contains a playable challenge for every Net@Lab chapter. Each lesson has a compact preview, four difficulties, an independent virtual lab and a taskbook that shows difficulty-adjusted mini tips. The top book button opens the taskbook during a lesson, with a separate link to the reference handbook.
+
+The expanded Net@Lab now contains **20 Fundamentals** and **20 IPv4** articles, including step-by-step CIDR, binary mask and VLSM calculations.
+
+The four-button bottom navigation no longer wraps in Training. Quick Edit only runs in free Network Lab and requires long press, movement, brief category/submenu dwell and release. The obsolete CANVAS menu no longer appears.
+
+[Implementation documentation](docs/NETWORK_LAB_TRAINING_V011.md) · [Release notes](releases/v0.11.0.md)
+
+![Training catalog](docs/assets/app-v11-training-catalog.png)
+![Training taskbook](docs/assets/app-v11-training-taskbook.png)
 
 ## PacketLab v0.10.0 — Net@Lab V2 Interactive Academy
 
@@ -100,12 +113,12 @@ This release concentrates on **trustworthy simulation behavior**, **mobile usabi
 
 | Android | Details |
 | :-- | :-- |
-| **Current** | **PacketLab v0.10.0** |
+| **Current** | **PacketLab v0.11.0** |
 | **Package** | \`ctrl.mietze.veyrapacketlab\` |
 | **Platform** | Android 10+ (\`minSdk 29\`) |
 | **Format** | Installable APK |
-| **Where** | [GitHub Release v0.10.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.10.0) |
-| **Direct APK** | [PacketLab-v0.10.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.10.0/PacketLab-v0.10.0-Android.apk) |
+| **Where** | [GitHub Release v0.11.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.0) |
+| **Direct APK** | [PacketLab-v0.11.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.11.0/PacketLab-v0.11.0-Android.apk) |
 
 Release assets include **\`SHA256SUMS.txt\`** to verify that your download matches the published file.
 
