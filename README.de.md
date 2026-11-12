@@ -4,14 +4,14 @@
 
 # PaketLab
 
-### Veyra Network Simulation Studio · v0.7.1
+### Veyra Network Simulation Studio · v0.8.0
 
 **Netzwerke bauen. Pakete senden. Folgen verstehen.** 💜
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [📦 APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇬🇧 English](README.md) · [🛠 Fehler melden](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Android-10%2B-9b69d9?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.7.1-c391f0?style=for-the-badge" alt="Version 0.7.1">
+<img src="https://img.shields.io/badge/Version-0.8.0-c391f0?style=for-the-badge" alt="Version 0.8.0">
 <img src="https://img.shields.io/badge/Simulation-Lokal-6baf8a?style=for-the-badge" alt="Lokal">
 
 <br><br>
@@ -25,6 +25,16 @@
 
 > [!IMPORTANT]
 > PaketLab ist ein **virtueller, lokaler Netzwerk-Simulator**. Router, PCs, virtuelle Exploits, Linux-/Cisco-Kommandos und Pakete werden modelliert. Es laufen keine echten IOS-Images, keine Linux-VMs und keine Angriffe auf reale Geräte oder Netzwerke. Ein simulierter Ausfall ist kein echter Geräteausfall.
+
+## Neu in v0.8.0 — Einheitliches OLED-Design und virtuelle Betriebssysteme
+
+Das Gerätemenü wurde als eine eigenständige Android-Komponente erneuert. Alte CSS-Dekoratoren können keine lila Platzhalter oder doppelten Icons mehr hinzufügen. PC, Laptop, Router, Server und Smartphone erhalten weiterhin alle bisherigen Aktionen.
+
+Neu sind virtuelle Linux-/Windows-/Android-/iOS-/Cisco-Konsolen mit gerätespezifischen Dateien, Verzeichnissen, Paket-/Diensteverwaltung, Kommandoverlauf und persistenter Konfiguration. Die Dateien gehören ausschließlich zur Simulation und werden mit der `.pklab`-Welt gespeichert. Auf dem echten Android-Handy werden keine Shell-Befehle ausgeführt.
+
+[Virtual OS Dokumentation](docs/VIRTUAL_OS_AND_DESIGN_V08.md) · [Release Notes](releases/v0.8.0.md)
+
+![Neues Gerätemenü](docs/assets/app-v08-device.png) ![Virtuelle Windows-Konsole](docs/assets/app-v08-terminal-windows.png)
 
 ## Bugfix v0.7.1 — Gerätemenüs
 
@@ -72,18 +82,18 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 
 ## 📥 Download
 
-**[PaketLab 0.7.1 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.7.1/PacketLab-v0.7.1-Android.apk)**
+**[PaketLab 0.8.0 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.8.0/PacketLab-v0.8.0-Android.apk)**
 
 | Angabe | Wert |
 | :-- | :-- |
 | Anwendung | PaketLab / Veyra PacketLab |
-| Paket-ID | \`ctrl.mietze.veyrapacketlab\` |
-| Version | \`0.6.0\` |
+| Paket-ID | `ctrl.mietze.veyrapacketlab` |
+| Version | `0.6.0` |
 | Plattform | Android 10 oder neuer |
-| Download | [GitHub Release v0.7.1](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.7.1) |
-| Prüfsummen | \`SHA256SUMS.txt\` im Release |
+| Download | [GitHub Release v0.8.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.8.0) |
+| Prüfsummen | `SHA256SUMS.txt` im Release |
 
-Wenn eine selbst erstellte APK anders signiert ist als die bisher installierte App, lässt Android kein direktes Update zu. Vor einer Deinstallation unbedingt \`.pklab\`-Projekte und relevante App-Daten sichern.
+Wenn eine selbst erstellte APK anders signiert ist als die bisher installierte App, lässt Android kein direktes Update zu. Vor einer Deinstallation unbedingt `.pklab`-Projekte und relevante App-Daten sichern.
 
 ## 📸 Screenshots
 
@@ -127,7 +137,7 @@ Im Firewall Studio sind unter anderem Default-Allow/-Deny, Regelreihenfolge, Pro
 
 Zusätzliche virtuelle Terminalbefehle:
 
-\`\`\`text
+```text
 firewall status
 firewall enable
 firewall default deny
@@ -135,7 +145,7 @@ firewall allow tcp 443
 firewall deny udp 53
 firewall log
 firewall reset
-\`\`\`
+```
 
 Auch beim Senden aus dem ursprünglichen Vurnabil-Paketmenü verwendet v0.6.0 den gemeinsamen simulierten Paketpfad.
 
@@ -143,11 +153,11 @@ Auch beim Senden aus dem ursprünglichen Vurnabil-Paketmenü verwendet v0.6.0 de
 
 Beim Betreten des Learning Mode wird zunächst gefragt, was mit deinem bisherigen Netzplan geschehen soll:
 
-- Als **\`.pklab\` exportieren**.
+- Als **`.pklab` exportieren**.
 - Als **lokalen Entwurf sichern**.
 - Den bisherigen Stand **ohne neue Sicherung verwerfen**.
 
-Danach kannst du eine vorhandene \`.pklab\` öffnen, lokale Projekte laden, eine neue Aufgabe erstellen oder aus Lernvorlagen wählen.
+Danach kannst du eine vorhandene `.pklab` öffnen, lokale Projekte laden, eine neue Aufgabe erstellen oder aus Lernvorlagen wählen.
 
 ### Vorhandene Lernvorlagen
 
@@ -169,9 +179,9 @@ Die Fortschrittsanzeige wertet den **aktuellen virtuellen Zustand** aus und zeig
 
 **Standard Lab:** Easy Edit, Edit More und alle bisherigen Funktionen bleiben erhalten. Zusätzlich gibt es das Firewall-Konfigurationsmenü.
 
-### \`.pklab\`-Kompatibilität
+### `.pklab`-Kompatibilität
 
-Das Projektformat speichert den Netzplan, Gerätekonfigurationen, Simulationsparameter, Aufgaben und den Modus \`standard\` oder \`master\`. Standard-Labs lassen sich über denselben Projektmanager wieder öffnen. Beim Laden wird der gespeicherte Modus wiederhergestellt.
+Das Projektformat speichert den Netzplan, Gerätekonfigurationen, Simulationsparameter, Aufgaben und den Modus `standard` oder `master`. Standard-Labs lassen sich über denselben Projektmanager wieder öffnen. Beim Laden wird der gespeicherte Modus wiederhergestellt.
 
 ## ⚙️ Simulation und Logs
 
@@ -194,7 +204,7 @@ Die neue Engine zeichnet auf:
 
 Die ursprünglichen Graphalgorithmen, Renderer, Topologie-Generatoren, Gerätedarstellungen und weitere Bestandteile sind weiterhin im Source. Dazu gehören BFS, Dijkstra, Tarjan, Edmonds-Karp, Kruskal und die ursprüngliche Ausfallsicherheitsanalyse.
 
-Eine Originalkopie liegt zudem unter [\`upstream/TopoLab/\`](upstream/TopoLab/). Die Attribution und TopoLab-Verweise werden nicht aus dem Projekt entfernt.
+Eine Originalkopie liegt zudem unter [`upstream/TopoLab/`](upstream/TopoLab/). Die Attribution und TopoLab-Verweise werden nicht aus dem Projekt entfernt.
 
 ## ✅ Getestet
 
@@ -214,27 +224,27 @@ Benötigt: JDK 17, Android SDK 35 und Gradle Wrapper.
 
 Unter Windows:
 
-\`\`\`powershell
+```powershell
 git clone https://github.com/ctrl-mietze/Packetlab.git
 cd Packetlab
 .\gradlew.bat :app:assembleDebug
-\`\`\`
+```
 
-Ausgabe: \`app/build/outputs/apk/debug/app-debug.apk\`
+Ausgabe: `app/build/outputs/apk/debug/app-debug.apk`
 
 Kernmodelltests:
 
-\`\`\`powershell
+```powershell
 node tests_packetlab_core.js
 node tests_packetlab_v06.js
-\`\`\`
+```
 
 UI-Smoke-Tests benötigen Python/Playwright und Edge Chromium:
 
-\`\`\`powershell
+```powershell
 python smoke_v06.py
 python smoke_v06_extended.py
-\`\`\`
+```
 
 ## 🔐 Sicherheit & Datenschutz
 
@@ -260,7 +270,7 @@ Weitere Einzelheiten stehen in der [englischen Dokumentation](README.md) und auf
 
 **Originalprojekt:** [TopoLab von Vansh Bhardwaj](https://github.com/vansh231205/TopoLab).
 
-PaketLab verwendet Bestandteile der ursprünglichen TopoLab-Topologie- und Netzwerk-Analyseengine. Kommentare, Algorithmen, Herkunftsinformationen und der ursprüngliche Projektstand bleiben erhalten. Der Original-Source ist unter [\`upstream/TopoLab/\`](upstream/TopoLab/) enthalten.
+PaketLab verwendet Bestandteile der ursprünglichen TopoLab-Topologie- und Netzwerk-Analyseengine. Kommentare, Algorithmen, Herkunftsinformationen und der ursprüngliche Projektstand bleiben erhalten. Der Original-Source ist unter [`upstream/TopoLab/`](upstream/TopoLab/) enthalten.
 
 Das öffentliche TopoLab-Repository enthält derzeit keine eindeutige SPDX-Lizenzdatei. Daraus folgt nicht automatisch, dass fremde Personen die Originalbestandteile beliebig weiterverwenden oder selbst neu lizenzieren dürfen. Die Rechte des Originalautors bleiben bestehen.
 

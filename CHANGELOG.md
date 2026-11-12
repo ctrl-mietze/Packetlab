@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.8.0] — 2026-11-12
+
+### Changed
+- The device sheet is now owned by a single DOM component with independent icons, rows and action handlers, so legacy menu decorators cannot draw placeholder tiles.
+- Cohesive OLED design language across sheets, navigation, simulator controls, inspector and terminal.
+
+### Added
+- Per-device OS selector: Windows, Linux/OpenWrt, Android, iOS and Cisco IOS models.
+- Stateful virtual OS file trees with bounded file creation/read/write/copy/move/delete, directories and process listings.
+- Service model with Start/Stop/Status wired to existing virtual service flags.
+- Virtual Android package/settings commands; virtual iOS sysctl/network commands; Cisco version/NVRAM commands.
+- Per-OS virtual terminals with context prompts, quick commands, local output and command history.
+- Separate per-OS virtual filesystems saved to the existing .pklab project format.
+
+### Tests
+- Original 12+18 model tests remain successful.
+- New responsive browser tests verify the new device menu, each supported OS and world-file persistence.
+- Android Gradle APK build verified.
+
+
 ## [0.7.1] — 2026-11-12
 
 ### Fixed

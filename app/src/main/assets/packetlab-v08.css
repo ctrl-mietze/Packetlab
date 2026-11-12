@@ -1,0 +1,200 @@
+/* PacketLab 0.8 — unified, sober OLED design system for the simulator.
+   New device menus are isolated from legacy .pl-options decorators.
+   No decorative gradient, glass overlay, fake technical dashboards or
+   colored borders on ordinary action rows.
+*/
+:root{
+ --v8-black:#08070c;--v8-surface:#141219;--v8-raised:#1c1923;
+ --v8-panel:#15131a;--v8-border:#302b38;--v8-soft:#201a2a;
+ --v8-text:#f3eff8;--v8-sub:#ac9fb9;--v8-purple:#bd8de8;
+ --v8-on:#b0dcbf;--v8-red:#ecb6c3;
+ font-family:Inter,Roboto,"Noto Sans",system-ui,sans-serif;
+ color-scheme:dark;
+}
+html,body{background:var(--v8-black);color:var(--v8-text)}
+button,select,input,textarea{font-family:inherit;-webkit-tap-highlight-color:transparent}
+button:focus-visible,select:focus-visible,input:focus-visible{
+ outline:2px solid var(--v8-purple);outline-offset:2px
+}
+button:disabled{opacity:.44;cursor:not-allowed}
+#pl-sheet{background:var(--v8-panel)!important;border:0!important;
+ border-radius:23px 23px 0 0!important;box-shadow:0 -20px 55px rgba(0,0,0,.55)!important}
+#pl-sheet .pl-head{background:var(--v8-surface);border-bottom:1px solid var(--v8-border);
+ min-height:67px;padding:14px 20px}
+#pl-sheet .pl-head strong{font-size:19px;font-weight:760;letter-spacing:-.02em}
+#pl-sheet .pl-head small{font-size:10px;color:var(--v8-sub);letter-spacing:.03em}
+#pl-sheet .pl-body{padding:16px 17px 26px;color:var(--v8-text);
+ overscroll-behavior:contain;touch-action:pan-y}
+#pl-sheet .pl-icon{background:#29252e;border:none;color:#f4ecfc;
+ width:44px;height:44px;border-radius:50%;display:grid;place-items:center}
+#pl-sheet .pl-icon:active{background:#40354b}
+.v8-device-sheet{display:flex;flex-direction:column;gap:13px}
+.v8-device-meta{display:flex;align-items:center;gap:12px;padding:13px 14px;
+ border-radius:13px;background:#211b29;border:1px solid var(--v8-border)}
+.v8-device-icon{width:44px;height:44px;flex:0 0 44px;
+ display:grid;place-items:center;border-radius:11px;background:#30223b;
+ color:#dbb2f8}
+.v8-device-icon svg{width:24px;height:24px}
+.v8-device-summary{flex:1;display:flex;flex-direction:column;gap:4px;
+ min-width:0;overflow-wrap:anywhere}
+.v8-device-summary>span{font-size:10px;color:var(--v8-sub);font-weight:700;letter-spacing:.04em}
+.v8-device-summary strong{font-size:15px;color:var(--v8-text);line-height:1.25}
+.v8-device-summary small{font-size:11px;color:#bcafc9}
+.v8-device-status{font-size:10px;background:#23392b;color:#b0e2bd;
+ border-radius:8px;padding:5px 7px;flex:0 0 auto}
+.v8-device-status.is-offline{background:#38232d;color:#eeb3c2}
+.v8-menu-group{display:flex;flex-direction:column;gap:5px}
+.v8-menu-group>h3{border:0!important;margin:5px 0 3px!important;padding:4px 3px!important;
+ color:#b1a2c2!important;font-size:10px!important;font-weight:800!important;
+ text-transform:uppercase;letter-spacing:.10em}
+.v8-menu-rows{background:var(--v8-surface);border:1px solid #27222e;
+ border-radius:14px;overflow:hidden;display:flex;flex-direction:column;gap:0}
+.v8-action{display:grid;grid-template-columns:43px minmax(0,1fr) 17px;
+ gap:12px;align-items:center;min-height:69px;padding:10px 12px;
+ background:transparent!important;border:0!important;border-bottom:1px solid #29252e!important;
+ border-radius:0!important;text-align:left;width:100%;box-shadow:none!important;
+ color:var(--v8-text);cursor:pointer;touch-action:manipulation}
+.v8-action:last-child{border-bottom:none!important}
+.v8-action:hover{background:#211b29!important}
+.v8-action:active{background:#32283d!important}
+.v8-action-icon{width:42px;height:42px;display:grid;place-items:center;
+ background:#26202f;color:#d0a8ed;border:1px solid #3b3346;border-radius:12px}
+.v8-action-icon svg{width:21px;height:21px}
+.v8-action-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.v8-action-copy strong{font-size:13px;font-weight:740;line-height:1.35;
+ color:var(--v8-text);overflow-wrap:anywhere}
+.v8-action-copy small{font-size:11px;line-height:1.4;color:var(--v8-sub);
+ overflow-wrap:anywhere}
+.v8-chevron{width:16px;height:16px;color:#85788f}
+.v8-danger-section{margin:4px 0 0}
+.v8-danger-section>.v8-action{background:#251820!important;border:1px solid #563039!important;
+ border-radius:12px!important}
+.v8-action-danger .v8-action-icon{background:#33222b;color:#f1b4c3;border-color:#583944}
+.v8-action-danger .v8-action-copy strong{color:#f2c0cb}
+.v8-action-danger .v8-chevron{color:#ca7f91}
+.v8-delete-prompt{text-align:center;display:flex;align-items:center;
+ flex-direction:column;gap:12px;padding:16px}
+.v8-delete-prompt svg{width:35px;height:35px;color:var(--v8-red)}
+.v8-delete-prompt strong{font-size:17px}
+.v8-delete-prompt p{font-size:12px;line-height:1.6;color:var(--v8-sub)}
+.v8-bottom-actions{display:flex;gap:9px;margin-top:14px;
+ padding-top:15px;border-top:1px solid var(--v8-border)}
+.v8-bottom-actions>button{flex:1;min-height:45px;padding:9px 12px;
+ color:var(--v8-text);background:#30273c;border:1px solid #4a3c56;
+ border-radius:11px;font-weight:700;font-size:12px}
+.v8-bottom-actions>button:last-child{color:#201229;background:#c79aeb;border-color:#c79aeb}
+.v8-bottom-actions>button.v8-confirm-danger{color:#ffd9e2;background:#572b3a;border-color:#784454}
+.v8-modal-intro{padding:16px;background:#241d2e;border:1px solid #342a3f;border-radius:13px}
+.v8-modal-intro b{font-size:16px}
+.v8-modal-intro p{font-size:12px;color:var(--v8-sub);line-height:1.55;margin-top:8px}
+.v8-os-choices,.v8-services{display:grid;gap:7px;margin:13px 0}
+.v8-os-choice,.v8-service{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ min-height:52px;padding:10px 13px;background:#201b29;border:1px solid #36303f;
+ border-radius:10px;font-size:13px;color:var(--v8-text)}
+.v8-os-choice input,.v8-service input{width:19px;height:19px;accent-color:#c58af2}
+.v8-service>span{display:flex;flex-direction:column;gap:4px;font-size:12px}
+.v8-service small{color:var(--v8-sub);font-size:10px}
+.v8-hint{font-size:12px;line-height:1.55;color:var(--v8-sub)}
+/* Ensure v0.7.1 legacy device rows remain neutral if visited by an older handler. */
+#pl-sheet .pl-options>button.v07-device-entry,
+#pl-sheet .pl-options>button.v07-firewall-row,
+#pl-sheet .pl-options>button.v06-firewall-entry{
+ background:transparent!important;border:0!important;border-bottom:1px solid #29252e!important;
+ box-shadow:none!important;border-radius:0!important
+}
+/* Major navigation surfaces share one OLED elevation and one selection language. */
+.v-nav{background:#100e14!important;border-top:1px solid #28232e!important;
+ gap:5px;padding:7px 8px!important}
+.v-nav button{border-radius:12px!important;color:#988caa!important;
+ background:transparent!important;border:0!important}
+.v-nav button.is-active{background:#31213e!important;color:#ead5ff!important}
+.v-nav button svg{width:23px;height:23px}
+.v-float{background:var(--v8-surface)!important;border-color:#2b2632!important}
+.v-float .v-fab,.v-float .pl-tool{border:0!important;background:transparent!important;
+ box-shadow:none!important;color:#d6bded!important}
+.v-float .v-fab--main{border-radius:12px!important;background:#31233d!important}
+.v06-action-rail.v07-replaced-rail{display:none!important}
+.v06-sendbar{background:var(--v8-surface)!important;border-color:#30283d!important;
+ box-shadow:0 -5px 18px #0007!important}
+.v06-sendhead>button:first-child{background:#282032!important;
+ border-color:#46364f!important;border-radius:12px!important}
+.v07-quick-send{background:#ca96ee!important;color:#17101d!important;
+ border:0!important;border-radius:11px!important;min-height:43px}
+#v06-sim-state.v07-sim-top{border:1px solid #3c4b41!important;background:#1f3025!important;
+ font-size:11px;color:#acd7b6!important}
+#v06-sim-state.v07-sim-top.paused{background:#292133!important;
+ border-color:#4b3b5a!important;color:#e0b6f3!important}
+.v07-top-guide{border:1px solid #34303a!important;background:#201923!important;
+ color:#d7bee8!important}
+#pl-sheet .v07-hero,#pl-sheet .v06-hero-card{background:#231c2b!important;
+ border:1px solid #373043!important;box-shadow:none!important;border-radius:13px}
+#pl-sheet .v07-hero b{font-weight:800;color:var(--v8-text)}
+#pl-sheet .v07-row,#pl-sheet .v07-preset-grid button,
+#pl-sheet .v07-device-tile{background:#211b29!important;
+ border-color:#38303f!important;box-shadow:none!important;border-radius:12px}
+#pl-sheet .v07-row:hover,#pl-sheet .v07-preset-grid button:hover{
+ background:#32253d!important}
+#pl-sheet .v07-action,#pl-sheet .v07-field input,#pl-sheet .v07-field select{
+ border-color:#43384b!important;background:#292231!important;box-shadow:none!important}
+#pl-sheet .v07-rule{background:#211b29!important;border-color:#3b3144!important}
+#pl-sheet .v07-issue{background:#302229!important}
+@media(max-width:650px){
+ .v8-device-meta{padding:11px}
+ .v8-device-icon{width:39px;height:39px;flex-basis:39px}
+ .v8-action{grid-template-columns:40px minmax(0,1fr) 14px;
+  min-height:66px;gap:11px;padding:10px}
+ .v8-action-icon{width:40px;height:40px}
+ .v8-device-summary small{font-size:10px}
+ .v8-device-status{font-size:9px}
+}
+@media(max-width:365px){
+ .v8-action{gap:8px}
+ .v8-device-status{display:none}
+}
+
+/* Veyra Virtual OS Terminal — context-rich, entirely simulated */
+.v8-terminal{display:flex;flex-direction:column;gap:12px;min-width:0}
+.v8-terminal-head{display:flex;align-items:center;gap:11px;
+ background:#221c2b;border:1px solid #34303e;border-radius:13px;padding:12px}
+.v8-terminal-head>div{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.v8-terminal-head strong{font-size:13px;font-weight:820;color:#f1e8f8}
+.v8-terminal-head small{font-size:10px;line-height:1.4;color:#b8a8c6}
+.v8-terminal-uptime{font-size:10px;color:#96c7a9;font-variant-numeric:tabular-nums}
+.v8-terminal-led{width:9px;height:9px;background:#8ed4a9;
+ border-radius:50%;box-shadow:0 0 0 3px #274433}
+.v8-terminal-tools{display:flex;gap:7px;flex-wrap:wrap}
+.v8-terminal-tools button{font-size:11px;font-weight:750;padding:8px 10px;
+ background:#27222e;color:#d3c2df;border:1px solid #37303f;border-radius:8px}
+.v8-terminal-output{display:block;overflow-x:auto;overflow-y:auto;
+ min-height:220px;max-height:min(45dvh,435px);background:#090b0e;
+ border:1px solid #2b2b36;border-radius:12px;padding:15px;
+ color:#d8e2d5;font:500 12px/1.65 ui-monospace,"Cascadia Code",Consolas,Monaco,monospace!important;
+ margin:0;white-space:pre-wrap;overflow-wrap:anywhere;touch-action:pan-y;
+ -webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.v8-terminal-shortcuts{display:flex;gap:6px;overflow-x:auto;
+ padding:3px 0 8px;scroll-snap-type:x proximity;overscroll-behavior:contain}
+.v8-terminal-shortcuts button{white-space:nowrap;font:650 11px/1.3 ui-monospace,monospace;
+ color:#d7b9ed;background:#30243a;border:1px solid #4b3c55;border-radius:9px;
+ padding:9px 12px;min-height:38px;scroll-snap-align:start}
+.v8-terminal-command{display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+ background:#17151c;border:1px solid #4d3c58;border-radius:12px;padding:9px}
+.v8-terminal-command span{flex:0 1 auto;font:700 11px/1.3 ui-monospace,monospace;
+ color:#ce91ee;max-width:65%;overflow-wrap:anywhere}
+.v8-terminal-command input{flex:1 1 145px;min-width:0;background:#1d1a24;
+ border:0!important;color:#f5ecff;outline:0;padding:10px 8px;
+ font:500 12px/1.4 ui-monospace,monospace}
+.v8-terminal-command button{background:#c994f1;border:0;border-radius:9px;
+ font-size:11px;font-weight:850;color:#1b0e25;min-height:41px;padding:9px 13px}
+@media(max-width:440px){
+ .v8-terminal-command{gap:7px}
+ .v8-terminal-command span{flex:0 0 100%;max-width:100%}
+ .v8-terminal-command input{flex:1 1 160px}
+ .v8-terminal-output{font-size:11px!important}
+}
+
+/* Version is visible inside the app so older installed APKs are identifiable. */
+#v8-app-version{display:inline-block;vertical-align:middle;margin-left:6px;
+ font-size:9px;font-weight:800;letter-spacing:0;color:#c8a4e9;
+ border:1px solid #42334d;background:#261d30;border-radius:5px;
+ padding:3px 5px;line-height:1.1;white-space:nowrap}
+@media(max-width:420px){#v8-app-version{font-size:8px;padding:2px 4px;margin-left:4px}}

@@ -48,3 +48,10 @@ __pycache__/
 # v0.7.1 visual smoke capture
 /v071-smoke-*.png
 /smoke_v071-run.log
+
+# v0.8 generated smoke output and local browser profile
+/edge-v08-smoke/
+/v08-*.png
+/packetlab-v08-smoke-report.json
+/v08-ui-test.log
+/packetlab-v08-gradle.log
