@@ -4,14 +4,14 @@
 
 # PacketLab
 
-### Veyra Network Simulation Studio · v0.11.1
+### Veyra Network Simulation Studio · v0.11.2
 
 **Build a Network. Send packets. Understand the consequences.**
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [⬇ Android APK](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇩🇪 Deutsche README](README.de.md) · [🛠 Issues](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Platform-Android%2010+-9469d6?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.11.1-bf83ef?style=for-the-badge" alt="Version 0.11.1">
+<img src="https://img.shields.io/badge/Version-0.11.2-bf83ef?style=for-the-badge" alt="Version 0.11.2">
 <img src="https://img.shields.io/badge/Network%20Model-Offline-5f9c78?style=for-the-badge" alt="Offline simulation">
 <img src="https://img.shields.io/badge/Projects-.pklab%20v3-7241aa?style=for-the-badge" alt=".pklab v3">
 
@@ -27,6 +27,14 @@
 
 > [!IMPORTANT]
 > PacketLab is an **offline virtual network simulator**. Its hosts, routers, services, vulnerability tests, CLI, firewalls and packets are **models**, not actual Linux VMs, Cisco IOS binaries or Internet connections. Threat, spoofing, firewall bypass, traffic flood, outage and simulated compromise features never send real attacks or change any external devices.
+
+## PacketLab v0.11.2 — Material refinement
+
+A consistent, native-inspired OLED design for the entire app: cleaner typographic hierarchy, neutral surfaces, calmer lavender accents and compact grouped rows instead of endless purple bordered cards. Topology selection, device settings, Firewall Studio, training and Net@Lab keep their functionality.
+
+[Release notes](releases/v0.11.2.md)
+
+![Clean topology picker](docs/assets/app-v112-topology-list.png)
 
 ## PacketLab v0.11.1: building and topology UI fixes
 
@@ -125,8 +133,8 @@ This release concentrates on **trustworthy simulation behavior**, **mobile usabi
 | **Package** | \`ctrl.mietze.veyrapacketlab\` |
 | **Platform** | Android 10+ (\`minSdk 29\`) |
 | **Format** | Installable APK |
-| **Where** | [GitHub Release v0.11.1](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.1) |
-| **Direct APK** | [PacketLab-v0.11.1-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.11.1/PacketLab-v0.11.1-Android.apk) |
+| **Where** | [GitHub Release v0.11.2](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.2) |
+| **Direct APK** | [PacketLab-v0.11.2-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.11.2/PacketLab-v0.11.2-Android.apk) |
 
 Release assets include **\`SHA256SUMS.txt\`** to verify that your download matches the published file.
 

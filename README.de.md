@@ -4,14 +4,14 @@
 
 # PaketLab
 
-### Veyra Network Simulation Studio · v0.11.1
+### Veyra Network Simulation Studio · v0.11.2
 
 **Netzwerke bauen. Pakete senden. Folgen verstehen.** 💜
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [📦 APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇬🇧 English](README.md) · [🛠 Fehler melden](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Android-10%2B-9b69d9?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.11.1-c391f0?style=for-the-badge" alt="Version 0.11.1">
+<img src="https://img.shields.io/badge/Version-0.11.2-c391f0?style=for-the-badge" alt="Version 0.11.2">
 <img src="https://img.shields.io/badge/Simulation-Lokal-6baf8a?style=for-the-badge" alt="Lokal">
 
 <br><br>
@@ -25,6 +25,14 @@
 
 > [!IMPORTANT]
 > PaketLab ist ein **virtueller, lokaler Netzwerk-Simulator**. Router, PCs, virtuelle Exploits, Linux-/Cisco-Kommandos und Pakete werden modelliert. Es laufen keine echten IOS-Images, keine Linux-VMs und keine Angriffe auf reale Geräte oder Netzwerke. Ein simulierter Ausfall ist kein echter Geräteausfall.
+
+## PacketLab v0.11.2 — OLED-Feinschliff
+
+Die App verwendet einen ruhigeren Android-Stil mit echten schwarzen Flächen, dezenten Veyra-Akzenten und klareren Listen. Die Topologien sind jetzt in **Grundformen** und **Szenarien** unterteilt statt in viele große lila Karten. Geräte, Firewall, Training, Paketkonsole und Net@Lab haben denselben Feinschliff erhalten. Die vorhandenen Funktionen bleiben erhalten.
+
+[Release Notes](releases/v0.11.2.md)
+
+![Neue Topologie-Liste](docs/assets/app-v112-topology-list.png)
 
 ## PacketLab 0.11.1: Topologien, Gebäude und Icons
 
@@ -136,7 +144,7 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 | Paket-ID | `ctrl.mietze.veyrapacketlab` |
 | Version | `0.11.1` |
 | Plattform | Android 10 oder neuer |
-| Download | [GitHub Release v0.11.1](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.1) |
+| Download | [GitHub Release v0.11.2](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.11.2) |
 | Prüfsummen | `SHA256SUMS.txt` im Release |
 
 Wenn eine selbst erstellte APK anders signiert ist als die bisher installierte App, lässt Android kein direktes Update zu. Vor einer Deinstallation unbedingt `.pklab`-Projekte und relevante App-Daten sichern.

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.2] — 2026-11-12
+
+### Visual refinement
+- Replaced repeated purple card-based topology choices with a grouped, compact Android-inspired list and calmer color hierarchy.
+- Reduced colored surfaces, excessive borders, gradients and oversized radii throughout the app.
+- Improved typography, list density, forms, firewall controls, packet composer and training navigation.
+- Retained genuine purple Veyra identity, all commands, all modules, user worlds and Net@Lab interactive knowledge content.
+
+### Verification
+- Mobile Chromium UI, 12 core and 18 network model regression tests, Android APK build and emulator smoke test.
+
+
 ## [0.11.1] — 2026-11-12
 
 ### Fixed
