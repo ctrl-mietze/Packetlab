@@ -4,14 +4,14 @@
 
 # PaketLab
 
-### Veyra Network Simulation Studio · v0.9.0
+### Veyra Network Simulation Studio · v0.10.0
 
 **Netzwerke bauen. Pakete senden. Folgen verstehen.** 💜
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [📦 APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇬🇧 English](README.md) · [🛠 Fehler melden](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Android-10%2B-9b69d9?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.9.0-c391f0?style=for-the-badge" alt="Version 0.9.0">
+<img src="https://img.shields.io/badge/Version-0.10.0-c391f0?style=for-the-badge" alt="Version 0.10.0">
 <img src="https://img.shields.io/badge/Simulation-Lokal-6baf8a?style=for-the-badge" alt="Lokal">
 
 <br><br>
@@ -25,6 +25,17 @@
 
 > [!IMPORTANT]
 > PaketLab ist ein **virtueller, lokaler Netzwerk-Simulator**. Router, PCs, virtuelle Exploits, Linux-/Cisco-Kommandos und Pakete werden modelliert. Es laufen keine echten IOS-Images, keine Linux-VMs und keine Angriffe auf reale Geräte oder Netzwerke. Ein simulierter Ausfall ist kein echter Geräteausfall.
+
+## PaketLab v0.10.0 — Net@Lab V2
+
+Net@Lab ist jetzt eine **interaktive Netzwerk-Lernakademie**: 62 Fachkapitel mit gut lesbarem Text, Themenwelten, Suche, Lesezeichen, fachlichen Visualisierungen, Lernzielen, echten Konfigurationsbeispielen und einem Schritt-für-Schritt-Paketweg.
+
+Jedes Kapitel besitzt ein eigenes schreibgeschütztes Lehrnetzwerk. Durch Antippen eines PCs, Switches, Routers oder Servers öffnet sich die IP-/Schnittstellen-Ansicht samt Routing, Diensten, Firewall und Logs. Über "Mein Lab" lässt sich auch die aktuelle virtuelle PacketLab-Welt ansehen, **ohne sie zu bearbeiten oder zu überschreiben**.
+
+[Technische Dokumentation](docs/NETATLAB_V2.md) · [Release Notes](releases/v0.10.0.md)
+
+![Net@Lab V2 Bibliothek](docs/assets/netatlab-v2-library.png)
+![Interaktives Lehrnetz](docs/assets/netatlab-v2-topology.png)
 
 ## PaketLab 0.9.0 — Network Lab, Training und Net@Lab
 
@@ -96,15 +107,15 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 
 ## 📥 Download
 
-**[PaketLab 0.9.0 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.9.0/PacketLab-v0.9.0-Android.apk)**
+**[PaketLab 0.10.0 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.10.0/PacketLab-v0.10.0-Android.apk)**
 
 | Angabe | Wert |
 | :-- | :-- |
 | Anwendung | PaketLab / Veyra PacketLab |
 | Paket-ID | `ctrl.mietze.veyrapacketlab` |
-| Version | `0.6.0` |
+| Version | `0.10.0` |
 | Plattform | Android 10 oder neuer |
-| Download | [GitHub Release v0.9.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.9.0) |
+| Download | [GitHub Release v0.10.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.10.0) |
 | Prüfsummen | `SHA256SUMS.txt` im Release |
 
 Wenn eine selbst erstellte APK anders signiert ist als die bisher installierte App, lässt Android kein direktes Update zu. Vor einer Deinstallation unbedingt `.pklab`-Projekte und relevante App-Daten sichern.
