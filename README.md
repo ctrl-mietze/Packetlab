@@ -4,14 +4,14 @@
 
 # PacketLab
 
-### Veyra Network Simulation Studio · v0.8.0
+### Veyra Network Simulation Studio · v0.9.0
 
 **Build a Network. Send packets. Understand the consequences.**
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [⬇ Android APK](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇩🇪 Deutsche README](README.de.md) · [🛠 Issues](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Platform-Android%2010+-9469d6?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.8.0-bf83ef?style=for-the-badge" alt="Version 0.8.0">
+<img src="https://img.shields.io/badge/Version-0.9.0-bf83ef?style=for-the-badge" alt="Version 0.9.0">
 <img src="https://img.shields.io/badge/Network%20Model-Offline-5f9c78?style=for-the-badge" alt="Offline simulation">
 <img src="https://img.shields.io/badge/Projects-.pklab%20v3-7241aa?style=for-the-badge" alt=".pklab v3">
 
@@ -27,6 +27,20 @@
 
 > [!IMPORTANT]
 > PacketLab is an **offline virtual network simulator**. Its hosts, routers, services, vulnerability tests, CLI, firewalls and packets are **models**, not actual Linux VMs, Cisco IOS binaries or Internet connections. Threat, spoofing, firewall bypass, traffic flood, outage and simulated compromise features never send real attacks or change any external devices.
+
+## PacketLab v0.9.0 — Network Lab, Training and Net@Lab
+
+Three workspaces and separate local libraries: **Network Lab** (free simulated topology), **Network Training Builder** (author multi-level learning tasks) and **Network Lab Training** (play read-only-in-UI .worklab challenges and grade results). The builder exports both editable .pklab projects and .worklab start snapshots with goals.
+
+**Net@Lab by VeyraLabs** includes 62 original searchable offline chapters with bookmarks covering IPv4 and IPv6, subnetting, Linux, Windows, routing, switching, server services, firewalls and troubleshooting.
+
+The new Packet Composer uses one Veyra styled selection interface rather than a native Android radio-choice popup. Firewall editor, Inspector, Analysis, building floors and press-and-hold Quick Edit have been reorganized. The opt-in Building Agent asks Android for local Wi-Fi information and mDNS services only when explicitly started; it is available in the free Network Lab only.
+
+The existing graph engine, package ID and .pklab format remain compatible. This is an educational network simulator, not full Cisco IOS, Windows or Linux emulation.
+
+[Release notes](releases/v0.9.0.md)
+
+<table><tr><td width="33%"><img src="docs/assets/app-v09-netatlab.png" alt="Net@Lab offline handbook"></td><td width="33%"><img src="docs/assets/app-v09-firewall.png" alt="Firewall configuration"></td><td width="33%"><img src="docs/assets/app-v09-training.png" alt="Network Lab Training"></td></tr></table>
 
 ## v0.8.0 — Unified OLED Studio & Virtual Operating Systems
 
@@ -75,12 +89,12 @@ This release concentrates on **trustworthy simulation behavior**, **mobile usabi
 
 | Android | Details |
 | :-- | :-- |
-| **Current** | **PacketLab v0.8.0** |
+| **Current** | **PacketLab v0.9.0** |
 | **Package** | \`ctrl.mietze.veyrapacketlab\` |
 | **Platform** | Android 10+ (\`minSdk 29\`) |
 | **Format** | Installable APK |
-| **Where** | [GitHub Release v0.8.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.8.0) |
-| **Direct APK** | [PacketLab-v0.8.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.8.0/PacketLab-v0.8.0-Android.apk) |
+| **Where** | [GitHub Release v0.9.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.9.0) |
+| **Direct APK** | [PacketLab-v0.9.0-Android.apk](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.9.0/PacketLab-v0.9.0-Android.apk) |
 
 Release assets include **\`SHA256SUMS.txt\`** to verify that your download matches the published file.
 

@@ -75,7 +75,7 @@ function load(raw){
   } finally {restoring=false}
   updateMode();renderStatus();renderVirtualLog();drawPlan();
   if(!lab.manualPaused)startVS();
-  notice('Projekt geladen ('+(lab.mode==='master'?'Network Master':'Standard Lab')+')');
+  notice('Projekt geladen ('+(lab.mode==='master'?'Network Training Builder':'Network Lab')+')');
   return true;
 }
 original.dump=pack;
@@ -154,7 +154,7 @@ function updateMode(){
 function switchMode(mode,options={}){
   if(mode!==lab.mode){if(!options.skipDraft)saveDraft('Moduswechsel');lab.mode=mode;autosave()}
   updateMode();close();
-  if(mode==='master')masterPage();else notice('Standard Lab');
+  if(mode==='master')masterPage();else notice('Network Lab');
 }
 function modeMenu(){
   open('Arbeitsmodus','<div class="pl-options">'+

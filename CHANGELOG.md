@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.9.0] — 2026-11-12
+
+### Added
+
+- Network Lab, Network Training Builder and Network Lab Training, each with a separate local library and project import/export, open, delete and clone-to-edit for authored training files.
+- Multi-level training builder with expected device state, captured baseline, goal comparison, point-based grading and templates ready to edit or play.
+- Editable .pklab plus read-only-in-UI .worklab dual export, initial taskbook overlay, clone-for-editing workflow.
+- Net@Lab by VeyraLabs: 62 original offline networking chapters, category search, read progress and bookmarks.
+- Unified packet composer with custom Veyra dropdown and direct source/target selection, old duplicate route/source rows removed.
+- Redesigned first firewall configurator with ordered CIDR, protocol and port-range rules, rate/burst settings, logs and editing.
+- Distinct Device Inspector and Network Analysis pages for per-device activity and global faults/statistics.
+- Haptic feedback for navigation, confirmation and sheet closing.
+- Free-lab-only touch hold Quick Edit with device categories, Repair Network, staged Smart Fix and Building Agent submenus.
+- Native Android opt-in Wi-Fi/mDNS discovery of current network, nearby Wi-Fi and advertised local services. No background IP sweeps.
+- 2D room/floor editor with room resizing, hallways, staircases and floor arrows. No fake 3D.
+
+### Compatibility
+
+- Existing TopoLab/PacketLab graph, saved .pklab project format, virtual terminals and device configuration remain available.
+- Educational simulator only: no real Cisco IOS, Linux, Windows, Android or iOS OS execution.
+- Passive discovery does not guarantee a full physical device inventory.
+- App package ID and debug certificate remain consistent with 0.8.0.
+
+### Validation
+
+- Original 12 core tests and 18 v0.6 model tests.
+- Mobile Chromium workflows covering packet controls, handbook, firewall, inspector/analysis, dual export, worklab playback/clone, Quick Edit scope, building floor and scanner consent.
+- Native Android Java compile and Gradle debug APK build.
+
+
 ## [0.8.0] — 2026-11-12
 
 ### Changed
