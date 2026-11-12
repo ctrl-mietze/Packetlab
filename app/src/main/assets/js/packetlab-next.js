@@ -179,7 +179,8 @@ function filesPage(){
     '<div class="pl-actions">'+btn('noop','Datei öffnen')+btn('noop','Als .pklab sichern')+'</div>'+
     '<p class="pl-help">Beim Presetwechsel sichern wir deine alte Topologie 7 Tage. Entwürfe bleiben lokal auf diesem Gerät.</p>'+
     '<div id="pl-draftlist" class="pl-list">'+(drafts.length?drafts.map(d=>
-      '<article class="pl-file"><div><b>'+esc(d.title||'Netzwerk')+'</b><small>'+esc(d.reason)+' · '+esc(fmt(d.time))+'<br>'+esc(d.preset)+' · '+(d.mode==='master'?'Master':'Standard')+'</small></div>'+
+      '<article class="pl-file"><div><b>'+esc(d.title||'Netzwerk')+'</b><small>'+esc(d.reason)+' · '+esc(fmt(d.time))+'<br>'+esc(d.preset)+' · '+(d.mode==='master'?'Master':'Standard')+
+      ' · Laufzeit '+timertext((()=>{try{return JSON.parse(d.data).studio?.clock||0}catch(_){return 0}})())+'</small></div>'+
       '<div>'+btn('restore:'+d.id,'Öffnen')+btn('del:'+d.id,'×','pl-danger')+'</div></article>').join(''):
       '<div class="pl-empty">Noch keine zwischengespeicherten Entwürfe</div>')+'</div>',
   box=>{
@@ -298,8 +299,8 @@ function externalScenario(target,type) {
   }
   const virtual=Topologies.device('pc','EXTERNAL WAN',ingress.tx-120,ingress.ty-100,{
     ip:'203.0.113.99',ips:['203.0.113.99'],
-    mac:'02:00:5E:00:53:99',gateway:ingress.ip,
-    vprofile:{ipv4:'203.0.113.99',gateway:ingress.ip,security:100}
+    mac:'02:00:5E:00:53:99',gateway:'203.0.113.1',
+    vprofile:{ipv4:'203.0.113.99',gateway:'203.0.113.1',subnet:'255.255.255.0',security:100}
   });
   const link=Topologies.link(virtual,ingress,'line',{medium:'cable'});
   return P.send({devices:S.devices.concat([virtual]),links:S.links.concat([link])},
@@ -318,6 +319,12 @@ function askAttack(){
         let success=0,blocked=0;for(let i=0;i<Math.min(10,+v.strength*2);i++){
           const r=v.origin==='external'?externalScenario(v.target,v.attackType):P.send(S,lab,v.origin,v.target,v.attackType);r.ok?success++:blocked++;
         }
+        // Propagation is restricted to the explicitly triggered scenario.
+        // It must NEVER keep attacking automatically during ordinary VS operation.
+        if(lab.spread===true) {
+          lab.scenarioRunning=true;
+          try {P.tick(S,lab,5)} finally {lab.scenarioRunning=false}
+        }
         event('security','Szenario '+v.attackType+': '+success+' zugestellt / '+blocked+' abgewehrt',[v.origin,v.target]);
         close();notice('Szenario abgeschlossen: '+blocked+' blockiert');
       };
@@ -330,7 +337,7 @@ function simMenu() {
       '<button class="pl-row pl-selectrow" data-page="audit"><b>Netzwerk-Audit</b><small>Geräte, Routing, DHCP, DNS, Security</small></button>'+
       '<button class="pl-row pl-selectrow" data-page="attack"><b>Attack Simulator</b><small>Virtueller Schutztest und Ausbreitung</small></button>'+
       '<button class="pl-row pl-selectrow" data-page="log"><b>Ereignisprotokoll</b><small>Alle Geräte und Traffic-Filter</small></button></div>'+
-      toggle('spread','Vulnerabilitäts-Ausbreitung bei VS aktiv',lab.spread),root=>{
+      toggle('spread','Ausbreitung nur während bewusst gestarteter Sicherheitstests',lab.spread),root=>{
         root.querySelector('[data-action="start"]').onclick=()=>{startVS();close()};
         root.querySelector('[data-action="stop"]').onclick=()=>{lab.manualPaused=true;stopVS();close()};
         root.querySelector('[data-action="reset"]').onclick=()=>{stopVS();lab.clock=0;renderStatus();simMenu()};
@@ -396,7 +403,7 @@ function presetBuild(kind,count=8,options={}){
     for(const d of b.devices){d.x+=850;d.tx+=850;}
     const rA=Topologies.device('router','WAN-A',610,90,{subnet:1});
     const rB=Topologies.device('router','WAN-B',1450,90,{subnet:2});
-    [rA,rB].forEach((d,i)=>{d.mac=Topologies.macFor(d.id);d.ip='10.10.'+(i+1)+'.1';d.ips=[d.ip];d.gateway=undefined});
+    [rA,rB].forEach((d,i)=>{d.mac=Topologies.macFor(d.id);d.ip='192.168.'+(i+1)+'.1';d.ips=[d.ip];d.gateway=undefined});
     const nodes=[...a.devices,...b.devices,rA,rB];
     const links=[...a.links,...b.links,
       Topologies.link(a.devices.find(d=>d.type==='switch')||a.devices[0],rA),

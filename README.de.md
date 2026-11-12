@@ -4,14 +4,14 @@
 
 # PaketLab
 
-### Veyra Network Simulation Studio · v0.6.0
+### Veyra Network Simulation Studio · v0.7.0
 
 **Netzwerke bauen. Pakete senden. Folgen verstehen.** 💜
 
 [🌐 Website](https://ctrl-mietze.github.io/Packetlab/) · [📦 APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/latest) · [🇬🇧 English](README.md) · [🛠 Fehler melden](https://github.com/ctrl-mietze/Packetlab/issues)
 
 <img src="https://img.shields.io/badge/Android-10%2B-9b69d9?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-<img src="https://img.shields.io/badge/Version-0.6.0-c391f0?style=for-the-badge" alt="Version 0.6.0">
+<img src="https://img.shields.io/badge/Version-0.7.0-c391f0?style=for-the-badge" alt="Version 0.7.0">
 <img src="https://img.shields.io/badge/Simulation-Lokal-6baf8a?style=for-the-badge" alt="Lokal">
 
 <br><br>
@@ -25,6 +25,28 @@
 
 > [!IMPORTANT]
 > PaketLab ist ein **virtueller, lokaler Netzwerk-Simulator**. Router, PCs, virtuelle Exploits, Linux-/Cisco-Kommandos und Pakete werden modelliert. Es laufen keine echten IOS-Images, keine Linux-VMs und keine Angriffe auf reale Geräte oder Netzwerke. Ein simulierter Ausfall ist kein echter Geräteausfall.
+
+## Neu in v0.7.0
+
+- Mobile Touch-Bedienung mit verbessertem Scrollen, Platzieren, bewusstem Verschieben und optionaler Serienplatzierung.
+- 18 Netzvorlagen, Netzwerk-Studio, Guide mit Subnetzrechner und Topologiewahl beim Erstellen eigener Aufgaben.
+- Getrennter Inspector und Analyse: Einzelgeräte, Logs und Hardware einerseits, Fehler, Statistik und Optimierung andererseits.
+- PDU Inspector und Event Explorer: virtuelles Routing Hop für Hop, OSI-Einordnung, Filter und Ereignisprotokolle.
+- Subnetz- und Gatewayprüfung, virtuelle Module für einzelne Gerätetypen, Smartphone-Profile mit Android/iOS sowie optionaler Crazy Mode.
+- Firewall Studio PRO mit CIDR, Portbereichen, Regelreihenfolge, Rate-/Burst-Limits, Anti-Spoofing und Prüfprotokollen.
+- Play/Stop rechts oben, direkt mehrfach sendbare Pakete auch bei geschlossener Konsole und ein Speichern-/Beenden-Dialog.
+- Virtuelle Konsolenkommandos für mehrere OS-Modelle; keine echten Betriebssystem-Images, Angriffe oder Host-Root-Berechtigungen.
+
+Alle bisherigen Werkzeuge bleiben erhalten. [Vergleich mit Cisco Packet Tracer 9](docs/CISCO_PACKET_TRACER_9_FEATURE_MATRIX.md) · [Release Notes](releases/v0.7.0.md)
+
+<table>
+<tr>
+<td width="33%" align="center"><img src="docs/assets/app-v07-studio.png" width="100%" alt="PacketLab Studio on Android portrait viewport"><b>Studio & Presets</b></td>
+<td width="33%" align="center"><img src="docs/assets/app-v07-inspector.png" width="100%" alt="PacketLab device inspector with logs"><b>Inspector</b></td>
+<td width="33%" align="center"><img src="docs/assets/app-v07-pdu.png" width="100%" alt="PDU hop inspector"><b>PDU Inspector</b></td>
+</tr>
+</table>
+
 
 ## 💜 Willkommen bei PaketLab
 
@@ -44,7 +66,7 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 
 ## 📥 Download
 
-**[PaketLab 0.6.0 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.6.0/PacketLab-v0.6.0-Android.apk)**
+**[PaketLab 0.7.0 — Android-APK herunterladen](https://github.com/ctrl-mietze/Packetlab/releases/download/v0.7.0/PacketLab-v0.7.0-Android.apk)**
 
 | Angabe | Wert |
 | :-- | :-- |
@@ -52,7 +74,7 @@ Mit v0.6.0 wurden vor allem folgende Bereiche verbessert:
 | Paket-ID | \`ctrl.mietze.veyrapacketlab\` |
 | Version | \`0.6.0\` |
 | Plattform | Android 10 oder neuer |
-| Download | [GitHub Release v0.6.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.6.0) |
+| Download | [GitHub Release v0.7.0](https://github.com/ctrl-mietze/Packetlab/releases/tag/v0.7.0) |
 | Prüfsummen | \`SHA256SUMS.txt\` im Release |
 
 Wenn eine selbst erstellte APK anders signiert ist als die bisher installierte App, lässt Android kein direktes Update zu. Vor einer Deinstallation unbedingt \`.pklab\`-Projekte und relevante App-Daten sichern.

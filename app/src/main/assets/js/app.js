@@ -296,6 +296,7 @@
   function abandonSinglePointerGesture() {
     state.panning = null;
     state.dragging = null;
+    state.pendingPlacement = null;
     state.linkFrom = null;
     state.linkPreview = null;
     cancelLongPress();
@@ -328,7 +329,7 @@
         longPress = null;
         abandonSinglePointerGesture();
         openMenuAt(startX, startY);
-      }, 500) };
+      }, 720) };
     }
 
     const p = view.toLocal(e);
@@ -349,7 +350,7 @@
        hai. Pan screen pixels me hota hai, world me nahi — isliye toScreen. */
     if (e.button === 1 || (state.tool === 'select' && !d && !l)) {
       const s = view.toScreen(e);
-      state.panning = { x: s.x, y: s.y, moved: false };
+      state.panning = { x: s.x, y: s.y, originX:s.x, originY:s.y, moved: false };
       canvas.style.cursor = 'grabbing';
       e.preventDefault();
       return;
@@ -357,6 +358,15 @@
 
     if (state.tool === 'select') {
       if (d) {
+        // Touch: wait for a confirmed tap. A swipe on a device pans the canvas.
+        // The explicit move action still unlocks device dragging.
+        if (e.pointerType === 'touch' && window.PacketLabUX?.moveArmed !== d.id) {
+          const s = view.toScreen(e);
+          state.panning = {x:s.x,y:s.y,originX:s.x,originY:s.y,
+                           originDevice:d.id,moved:false};
+          e.preventDefault();
+          return;
+        }
         state.selected = d.id;
         state.dragging = { id: d.id, dx: d.x - p.x, dy: d.y - p.y };
         renderInspector();
@@ -378,6 +388,11 @@
       } else if (l) {
         // seedha cable par click — device usi cable me tap ho jaata hai
         addDeviceOnLink(state.addType, l, p);
+      } else if (e.pointerType === 'touch') {
+        // Place on release, not pointerdown: scrolling must never create devices.
+        const s = view.toScreen(e);
+        state.pendingPlacement = {type:state.addType,downX:e.clientX,downY:e.clientY};
+        state.panning = {x:s.x,y:s.y,originX:s.x,originY:s.y,moved:false};
       } else {
         addDevice(state.addType, p.x, p.y);
       }
@@ -424,7 +439,10 @@
     if (state.panning) {
       const s = view.toScreen(e);
       view.panBy(s.x - state.panning.x, s.y - state.panning.y);
-      state.panning = { x: s.x, y: s.y, moved: true };
+      state.panning = {...state.panning, x:s.x,y:s.y,
+        moved:state.panning.moved ||
+          Math.hypot(s.x-(state.panning.originX ?? state.panning.x),
+                     s.y-(state.panning.originY ?? state.panning.y))>8};
       userMovedView = true;
       renderScene(performance.now());
       return;
@@ -490,14 +508,21 @@
   window.addEventListener('pointerup', (e) => {
     endPointer(e);
     if (state.panning) {
-      // ghaseeta nahi, sirf click kiya — matlab selection hatana chahta tha
-      if (!state.panning.moved && state.tool === 'select') {
-        state.selected = null;
+      const pan=state.panning;
+      if (!pan.moved && state.tool === 'select') {
+        state.selected = pan.originDevice || null;
         renderInspector();
       }
       state.panning = null;
       canvas.style.cursor = 'grab';
+      if (state.pendingPlacement && !pan.moved &&
+          Math.hypot(e.clientX-state.pendingPlacement.downX,
+                     e.clientY-state.pendingPlacement.downY)<12) {
+        const p=view.toLocal(e);
+        addDevice(state.pendingPlacement.type,p.x,p.y);
+      }
     }
+    state.pendingPlacement=null;
 
     if (state.linkFrom) {
       const p = view.toLocal(e);
@@ -512,6 +537,8 @@
       state.linkFrom = null;
       state.linkPreview = null;
     }
+    if (state.dragging && window.PacketLabUX?.moveArmed === state.dragging.id)
+      window.PacketLabUX.moveArmed = null;
     state.dragging = null;
   });
 
@@ -951,15 +978,22 @@
     if (ports < used) return editError(`${used} cables are already plugged in, so this cannot go below ${used} ports.`);
 
     pushHistory();
+    const maskInput=document.getElementById('v07-ed-subnet');
+    if(maskInput){
+      d.vprofile=d.vprofile||{};
+      d.vprofile.subnet=maskInput.value.trim();
+    }
     const oldLabel = d.label;
     d.label = name;
     d.mac   = mac.replace(/-/g, ':');
     d.ports = ports;
     d.gateway = gw || undefined;
+    if(d.vprofile) d.vprofile.gateway = gw || '';
 
     if (!$('edIp').disabled) {
       d.ip  = ip;
       d.ips = [ip];
+      if(d.vprofile)d.vprofile.ipv4 = ip;
       const octet = +IPV4.exec(ip)[3];
       d.subnet = octet;                 // 192.168.X.n -> subnet X
     }

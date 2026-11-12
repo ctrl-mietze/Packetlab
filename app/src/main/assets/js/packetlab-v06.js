@@ -470,7 +470,7 @@
  function updateStatus(){
    observe();
    if($('v06-sim-state')){
-     $('v06-sim-state').textContent=(N.running?'● SIM LIVE':'Ⅱ SIM PAUSED')+' · '+(lab().clock||0)+'s';
+     $('v06-sim-state').textContent=N.running?'■ Stop':'▶ Play';
      $('v06-sim-state').classList.toggle('paused',!N.running);
    }
    if(panel){

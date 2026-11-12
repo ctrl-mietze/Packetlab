@@ -97,6 +97,7 @@ $('pl-logfilter')?.setAttribute('aria-label','Log-Filter');
 document.addEventListener('pointerdown',ev=>{
   const sel=ev.target?.closest?.('select');
   if(!sel||sel.disabled||sel.classList.contains('pl-native-hidden'))return;
+  if(ev.pointerType==='touch')return; // Wait for click, allow natural scroll.
   ev.preventDefault();ev.stopImmediatePropagation();
   showPicker(sel);
 },true);
@@ -149,7 +150,7 @@ function putPlace(kind){
   document.querySelector('.v-nav [data-tab="workspace"]')?.click();
   N.syncPlace();
   // The legacy toolbar stays functional; the new list only changes its presentation.
-  setTimeout(()=>document.getElementById('pl-place')?.scrollIntoView({block:'nearest',inline:'nearest'}),10);
+  // No forced scroll/focus during device placement; user controls viewport.
 }
 const left=document.querySelector('.panel--left');
 const deviceBrowser=document.createElement('section');deviceBrowser.id='vr-device-browser';

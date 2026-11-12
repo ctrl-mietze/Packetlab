@@ -346,7 +346,7 @@ const PacketLabCore = (() => {
         }
       }
       // Explicitly opt-in vulnerability propagation on network edges only.
-      if(lab.spread&&lab.clock%5===0){
+      if(lab.spread===true&&lab.scenarioRunning===true&&lab.clock%5===0){
         const infected=state.devices.filter(d=>!d.dead&&d.vprofile?.infection).slice(0,18);
         for(const d of infected){
           const neighbors=state.links.filter(l=>!l.dead&&(l.a===d.id||l.b===d.id))

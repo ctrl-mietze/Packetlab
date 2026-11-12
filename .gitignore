@@ -37,3 +37,10 @@ __pycache__/
 
 # Github release files live as release assets; metadata is committed.
 /releases/PacketLab-v*.apk
+
+# v0.7 test artifacts (test runner itself is committed)
+/edge-v07-smoke/
+/v07-smoke-*.png
+/packetlab-v07-smoke-report.json
+/smoke_v07-run.log
+/packetlab-v07-gradle.log

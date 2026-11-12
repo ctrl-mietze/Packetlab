@@ -34,13 +34,36 @@ const PacketLabV06 = (() => {
    p.rules=Array.isArray(raw.rules)?raw.rules.slice(0,80).map(x=>({
      action:['allow','deny','log'].includes(x.action)?x.action:'deny',
      protocol:['any','icmp','tcp','udp','dns','http','https','ssh'].includes(x.protocol)?x.protocol:'any',
-     port:x.port==='any'||x.port===undefined?'any':cap(x.port,0,65535,0),
+     port:(()=>{
+       if(x.port==='any'||x.port===undefined)return 'any';
+       if(typeof x.port==='string'&&/^\d{1,5}-\d{1,5}$/.test(x.port)){
+         const a=x.port.split('-').map(Number);
+         if(a[0]<=a[1]&&a[1]<=65535)return x.port;
+       }
+       return cap(x.port,0,65535,0);
+     })(),
      source:clean(x.source||'any'),target:clean(x.target||'any'),
      zone:['any','lan','wan'].includes(x.zone)?x.zone:'any'
    })):[];
    return p;
  }
  const event=(lab,state,message,kind,ids)=>core.createEvent(lab,state.devices,message,kind,[...new Set(ids.filter(Boolean))]);
+ function matchAddress(pattern,d){
+   const effectiveIp=d.vprofile?.ipv4||d.ip;
+   if(pattern==='any'||pattern===d.id||pattern===effectiveIp)return true;
+   if(!String(pattern).includes('/'))return false;
+   const bits=String(pattern).split('/');
+   if(bits.length!==2||!core.v4(bits[0])||!/^(?:[0-9]|[12][0-9]|3[012])$/.test(bits[1])||!core.v4(effectiveIp))return false;
+   const n=Number(bits[1]),mask=n===0?0:(0xffffffff <<(32-n))>>>0;
+   const value=ip=>ip.split('.').reduce((a,b)=>((a<<8)|Number(b))>>>0,0);
+   return ((value(effectiveIp)&mask)>>>0)===((value(bits[0])&mask)>>>0);
+ }
+ function matchPort(rule,port){
+   if(rule==='any')return true;
+   const bits=String(rule).split('-').map(Number);
+   if(bits.length===2)return port>=bits[0]&&port<=bits[1];
+   return bits.length===1&&bits[0]===port;
+ }
  function policyCheck(state,lab,src,dst,route,spec){
    const passed=[],blocked=[];
    const port=cap(spec.port,0,65535,0);
@@ -61,10 +84,10 @@ const PacketLabV06 = (() => {
      let decision=fw.policy,matching=null;
      for(const rule of fw.rules){
        if(rule.protocol!=='any' && rule.protocol!==protocol)continue;
-       if(rule.port!=='any' && +rule.port!==port)continue;
+       if(!matchPort(rule.port,port))continue;
        if(rule.zone!=='any' && rule.zone!==networkType)continue;
-       if(rule.source!=='any' && rule.source!==source.id && rule.source!==source.ip)continue;
-       if(rule.target!=='any' && rule.target!==target.id && rule.target!==target.ip)continue;
+       if(!matchAddress(rule.source,source))continue;
+       if(!matchAddress(rule.target,target))continue;
        matching=rule;decision=rule.action;break;
      }
      if(matching?.action==='log')decision=fw.policy;
