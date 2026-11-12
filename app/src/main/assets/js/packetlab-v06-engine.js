@@ -255,7 +255,7 @@ const PacketLabV06 = (() => {
      let passed=false;
      if(t.kind==='topology')passed=state.devices.length>0&&state.links.length>=cap(t.expected,0,800,1);
      if(t.kind==='link')passed=!!d&&!!target&&state.links.some(l=>!l.dead&&((l.a===d.id&&l.b===target.id)||(l.a===target.id&&l.b===d.id)));
-     if(t.kind==='service')passed=!!d&&!!d.vprofile?.virtualServices?.[t.expected];
+     if(t.kind==='service')passed=!!d&&!!(d.vprofile?.virtualServices?.[t.expected]||d.vprofile?.enabledServices?.[t.expected]);
      if(t.kind==='wan')passed=!!d&&!!d.vprofile?.internet &&!!d.vprofile?.wanPort;
      if(t.kind==='transfer')passed=(lab.flows||[]).some(f=>f.status==='complete');
      if(t.kind==='route')passed=!!d&&!!target&&core.evaluate(state,lab,d.id,target.id,'icmp').ok;

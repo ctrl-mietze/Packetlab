@@ -399,7 +399,7 @@ const PacketLabCore = (() => {
         case 'online':passed=!d.dead;break;
         case 'hardening':passed=p.patched&&p.security>=70;break;
         case 'ping':passed=evaluate(state,lab,d.id,task.target,'icmp').ok;break;
-        case 'firewall':passed=p.firewallEnabled&&p.blockThreats;break;
+        case 'firewall':passed=p.firewallEnabled&&(p.blockThreats||p.fwPolicy?.enabled);break;
         default:passed=false;
       }
       return {...task,passed,details:passed?'Erfüllt':'Noch nicht erfüllt'};

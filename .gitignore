@@ -55,3 +55,11 @@ __pycache__/
 /packetlab-v08-smoke-report.json
 /v08-ui-test.log
 /packetlab-v08-gradle.log
+
+# PacketLab v0.9 visual/browser test artifacts
+/edge-v09-smoke/
+/v09-*.png
+/v09-browser-run.log
+/v09-gradle.log
+/v09-java-compile.log
+/packetlab-v09-smoke-report.json

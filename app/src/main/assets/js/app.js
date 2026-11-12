@@ -328,6 +328,10 @@
       longPress = { x: startX, y: startY, timer: setTimeout(() => {
         longPress = null;
         abandonSinglePointerGesture();
+        const local=view.toLocal({clientX:startX,clientY:startY});
+        const device=view.hitDevice(state.devices,local.x,local.y);
+        const wire=device?null:view.hitLink(state.links,state.devices,local.x,local.y);
+        if(!device&&!wire&&window.PacketLabV09QuickEdit?.openAt?.(startX,startY,local))return;
         openMenuAt(startX, startY);
       }, 720) };
     }
